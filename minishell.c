@@ -6,17 +6,17 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/14 14:10:34 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/14 14:33:44 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char *prompt_making()
+static char	*prompt_making()
 {
-	char *cwd;
-	char *tmp;
-	char *prompt;
+	char	*cwd;
+	char	*tmp;
+	char	*prompt;
 	
 	cwd = getcwd(NULL, 0);
 	tmp = ft_strjoin(cwd, " >");
@@ -28,15 +28,21 @@ char *prompt_making()
 
 /* FONCTION D'INITIALISATION DE STRUCTURE */
 
-
-int main(int ac, char **av, char **envp)
+static int	init_shell(t_shell *shell, char **envp)
 {
-	char *prompt;
-	char *line;
+	shell->env = envp;
+	shell->exit_status = 0;
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	char	*prompt;
+	char	*line;
+	t_shell	*shell;
+
 	(void)ac;
 	(void)av;
-	(void)envp;
-	
+	init_shell(&shell, envp);
 	while (1)
 	{
 		prompt = prompt_making(); /* on cree notre ligne fixe "minishell >$"*/
