@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/14 13:32:34 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/14 14:10:34 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ char *prompt_making()
 	
 	cwd = getcwd(NULL, 0);
 	tmp = ft_strjoin(cwd, " >");
-	prompt = ft_strjoin(tmp, "$");
+	prompt = ft_strjoin(tmp, "$ ");
 	free(cwd);
 	free(tmp);
 	return (prompt);
 }
 
 /* FONCTION D'INITIALISATION DE STRUCTURE */
+
 
 int main(int ac, char **av, char **envp)
 {
@@ -41,9 +42,9 @@ int main(int ac, char **av, char **envp)
 		prompt = prompt_making(); /* on cree notre ligne fixe "minishell >$"*/
 		line = readline(prompt); /* on affiche la ligne fixe et on attend une commande*/
 		free(prompt);
-		if (*line)
-			add_history(line); /* on ajoute la ligne a notre historique de ligne */
-		if (line)
-			printf("%s\n", line); /* si la ligne existe on printf son contenu */		
+		// if (*line)
+		// 	add_history(line); /* on ajoute la ligne a notre historique de ligne */
+		if (parsing(line))
+			printf("%s\n", line);/* si la ligne existe on printf son contenu */		
 	}
 }
