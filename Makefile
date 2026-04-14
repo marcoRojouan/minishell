@@ -5,7 +5,9 @@ LDFLAGS = -L./libft -lft -lreadline
 NAME = minishell
 LIBFT = libft/libft.a
 
-SRCS = minishell.c
+SRCS =	minishell.c \
+		parsing/parsing.c
+		
 OBJS = $(SRCS:.c=.o)
 
 all: $(LIBFT) $(NAME)
