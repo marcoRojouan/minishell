@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/14 14:37:28 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/15 10:46:34 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ static int	init_shell(t_shell *shell, char **envp)
 {
 	shell->env = envp;
 	shell->exit_status = 0;
+	return (1);
 }
 
 int	main(int ac, char **av, char **envp)
 {
 	char	*prompt;
 	char	*line;
-	t_shell	*shell;
+	t_shell	shell;
 
 	(void)ac;
 	(void)av;
