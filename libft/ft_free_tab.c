@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/15 12:09:04 by mrojouan         ###   ########.fr       */
+/*   Created: 2026/04/15 11:58:49 by mrojouan          #+#    #+#             */
+/*   Updated: 2026/04/15 12:07:10 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <libft.h>
 
-/* FONCTION PRINCIPALE DE PARSING POUR RECEVOIR LA LIGNE */
-int	parsing(char *line)
+void	ft_free_tab(char **tab)
 {
-	char	**split_line;
-	int		i;
-	
-	split_line = ft_split_space(line);
-	if (!split_line)
-		return (0);
+	int	i;
+
 	i = 0;
-	while (split_line[i])
+	while (tab[i])
 	{
-		printf("%s\n", split_line[i]);
+		free(tab[i]);
 		i++;
 	}
-	return (1);
+	free(tab);
 }

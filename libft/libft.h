@@ -31,6 +31,7 @@ int					ft_isprint(int c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 size_t				ft_strlen(const char *str);
+void				ft_free_tab(char **tab);
 void				ft_bzero(void *s, size_t n);
 void				ft_putstr_fd(char *str, int fd);
 void				ft_putchar_fd(char c, int fd);
@@ -51,6 +52,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
 char				**ft_split(char const *s, char c);
+char				**ft_split_space(char *str);
 int					ft_atoi(const char *str);
 char				*ft_itoa(int nbr);
 char				*ft_strnstr(const char *str, const char *to_find,
