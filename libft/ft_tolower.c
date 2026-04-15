@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/14 14:37:34 by mrojouan         ###   ########.fr       */
+/*   Created: 2025/10/13 17:37:19 by mrojouan          #+#    #+#             */
+/*   Updated: 2025/11/08 11:02:29 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-
-/* FONCTION PRINCIPALE DE PARSING POUR RECEVOIR LA LIGNE */
-int	parsing(char *line)
+int	ft_tolower(int c)
 {
-	if (!ft_isalnum(line[0]))
-		return (0);
-	return (1);
+	if (c >= 'A' && c <= 'Z')
+		c += 32;
+	return (c);
 }

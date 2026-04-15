@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/14 14:37:34 by mrojouan         ###   ########.fr       */
+/*   Created: 2025/10/14 13:25:47 by mrojouan          #+#    #+#             */
+/*   Updated: 2025/10/24 14:19:19 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
-/* FONCTION PRINCIPALE DE PARSING POUR RECEVOIR LA LIGNE */
-int	parsing(char *line)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	if (!ft_isalnum(line[0]))
-		return (0);
-	return (1);
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
+	return (dest);
 }

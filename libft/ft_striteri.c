@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/14 14:37:34 by mrojouan         ###   ########.fr       */
+/*   Created: 2025/10/16 16:45:10 by mrojouan          #+#    #+#             */
+/*   Updated: 2025/10/23 11:47:49 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-
-/* FONCTION PRINCIPALE DE PARSING POUR RECEVOIR LA LIGNE */
-int	parsing(char *line)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	if (!ft_isalnum(line[0]))
-		return (0);
-	return (1);
+	int	i;
+
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		f(i, s + i);
+		i++;
+	}
 }

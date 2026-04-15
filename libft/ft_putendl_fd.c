@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/14 14:37:34 by mrojouan         ###   ########.fr       */
+/*   Created: 2025/10/15 14:20:27 by mrojouan          #+#    #+#             */
+/*   Updated: 2025/10/23 11:37:33 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
-/* FONCTION PRINCIPALE DE PARSING POUR RECEVOIR LA LIGNE */
-int	parsing(char *line)
+void	ft_putendl_fd(char *s, int fd)
 {
-	if (!ft_isalnum(line[0]))
-		return (0);
-	return (1);
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+	write(fd, "\n", 1);
 }
