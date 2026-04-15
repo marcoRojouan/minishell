@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/15 14:02:04 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/15 15:41:58 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ typedef struct s_cmd
 	char			*infile;
 	char			*outfile;
 	char			*delimiter;
+	
 	int 			heredoc;
-	int				append;
+	int				insert;
 	
 	struct s_cmd	*next;
 }	t_cmd;
