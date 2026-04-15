@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/15 11:50:20 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/15 13:54:37 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static char	*prompt_making()
 	free(tmp);
 	return (prompt);
 }
-
-/* FONCTION D'INITIALISATION DE STRUCTURE */
 
 static int	init_shell(t_shell *shell, char **envp)
 {
@@ -51,7 +49,7 @@ int	main(int ac, char **av, char **envp)
 		free(prompt);
 		// if (*line)
 		// 	add_history(line); /* on ajoute la ligne a notre historique de ligne */
-		if (parsing(line))
-			printf("%s\n", line);/* si la ligne existe on printf son contenu */		
+		if (!parsing(line))
+			printf("problems");		
 	}
 }
