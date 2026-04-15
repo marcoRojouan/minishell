@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/15 13:54:37 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/15 14:00:54 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static char	*prompt_making()
 
 static int	init_shell(t_shell *shell, char **envp)
 {
+	shell->cmds = NULL;
 	shell->env = envp;
 	shell->exit_status = 0;
 	return (0);
@@ -49,7 +50,7 @@ int	main(int ac, char **av, char **envp)
 		free(prompt);
 		// if (*line)
 		// 	add_history(line); /* on ajoute la ligne a notre historique de ligne */
-		if (!parsing(line))
-			printf("problems");		
+		if (!parsing(line, &shell))
+			printf("problems");	
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/14 14:14:45 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/15 14:02:04 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ typedef struct s_shell
 	int				exit_status;
 }	t_shell;
 
-int	parsing(char *line);
+int	parsing(char *line, t_shell *shell);
 
 #endif
