@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_space.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:43:59 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/15 12:05:20 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/17 11:07:20 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,47 +23,83 @@ static int	count_words(char *str)
 {
 	int	i;
 	int	count;
+	int	in_quotes;
 
 	i = 0;
 	count = 0;
+	in_quotes = 0;
 	if (!str || !str[0])
 		return (0);
-	if (!white_space(str[0]))
-	{
-		count += 1;
-	}
-	i++;
 	while (str[i])
 	{
-		if (!white_space(str[i]) && white_space(str[i - 1]))
+		if (str[i] == '"')
+			in_quotes = !in_quotes;
+		if (!white_space(str[i]) &&
+			(i == 0 || (white_space(str[i - 1]) && !in_quotes)))
 			count++;
 		i++;
 	}
 	return (count);
 }
 
+static int	word_len(char *str)
+{
+	int	i;
+	int	in_quotes;
+
+	i = 0;
+	in_quotes = 0;
+	while (str[i])
+	{
+		if (str[i] == '"')
+			in_quotes = !in_quotes;
+		else if (white_space(str[i]) && !in_quotes)
+			break ;
+		i++;
+	}
+	return (i);
+}
+
 static char	*duplicate_wrd(char *str)
 {
 	char	*dup;
-	int		word_len;
 	int		i;
+	int		j;
+	int		in_quotes;
 
-	word_len = 0;
-	while (!white_space(str[word_len]) && str[word_len])
-		word_len++;
-	if (!str)
-		return (NULL);
-	dup = malloc(sizeof(char) * (word_len + 1));
+	i = 0;
+	j = 0;
+	in_quotes = 0;
+	dup = malloc(word_len(str) + 1);
 	if (!dup)
 		return (NULL);
-	i = 0;
-	while (i < word_len)
+	while (str[i])
 	{
-		dup[i] = str[i];
+		if (str[i] == '"')
+			in_quotes = !in_quotes;
+		else if (white_space(str[i]) && !in_quotes)
+			break ;
+		else
+			dup[j++] = str[i];
 		i++;
 	}
-	dup[i] = '\0';
+	dup[j] = '\0';
 	return (dup);
+}
+
+static void	skip_word(char *str, int *i)
+{
+	int	in_quotes;
+
+	in_quotes = 0;
+	while (str[*i])
+	{
+		if (str[*i] == '"')
+			in_quotes = !in_quotes;
+		else if (!in_quotes && white_space(str[*i]))
+			break ;
+		(*i)++;
+	}
 }
 
 static int	fill_tab(char *str, char **tab)
@@ -75,18 +111,18 @@ static int	fill_tab(char *str, char **tab)
 	j = 0;
 	while (str[i])
 	{
-		if ((i == 0 && !white_space(str[i]))
-			|| (i > 0 && !white_space(str[i]) && white_space(str[i - 1])))
+		while (str[i] && white_space(str[i]))
+			i++;
+		if (!str[i])
+			break ;
+		tab[j] = duplicate_wrd(str + i);
+		if (!tab[j])
 		{
-			tab[j] = duplicate_wrd(str + i);
-			if (!tab[j])
-			{
-				ft_free_tab(tab);
-				return (0);
-			}
-			j++;
+			ft_free_tab(tab);
+			return (0);
 		}
-		i++;
+		j++;
+		skip_word(str, &i);
 	}
 	tab[j] = 0;
 	return (1);
