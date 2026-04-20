@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/20 10:29:51 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:07:29 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ if (split [i] == > ou >>)
 	le +1 = outfile
 sinon c bon finito pipeau
 */
+
+
 
 
 
