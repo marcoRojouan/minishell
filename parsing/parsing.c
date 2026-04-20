@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/15 15:43:12 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/16 14:55:14 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ if (split [i] == > ou >>)
 	if (>>)
 		insert = 1 
 	le +1 = outfile
-faire pointer next sur la prochaine cmd;
 sinon c bon finito pipeau
 */
+
+
 
 static int	count_cmds(char **split_line)
 {
@@ -54,8 +55,9 @@ int	parsing(char *line, t_shell *shell)
 	if (!split_line)
 		return (0);
 	cmd_count = count_cmds(split_line);
-	shell->cmds = malloc(sizeof(t_cmd) * cmd_count);
+	shell->cmds = malloc(sizeof(t_cmd) * (cmd_count + 1));
 	if (!shell->cmds)
 		return (0);
+	
 	return (1);
 }
