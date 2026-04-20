@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/20 16:40:46 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/20 16:44:52 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ static void sort_line(char **split_line, t_shell *shell)
 			shell->cmds[j]->outfile = split_line[++i];
 		else
 		{
-			/* changer cette partie ca ne s'arrete pas si la commande est finie*/
+			// changer cette partie ca ne s'arrete pas si la commande est finie
+			// meilleur com = si "echo -e |" ca ne s'arrete pas au "|" par exemple
 			shell->cmds[j]->args = malloc(sizeof(char *) * 3);
 			shell->cmds[j]->args[k] = split_line[i++];
 			k++;
