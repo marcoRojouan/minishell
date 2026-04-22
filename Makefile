@@ -6,7 +6,8 @@ NAME = minishell
 LIBFT = libft/libft.a
 
 SRCS =	minishell.c \
-		parsing/parsing.c
+		parsing/parsing.c \
+		built_in/cd.c
 		
 OBJS = $(SRCS:.c=.o)
 
