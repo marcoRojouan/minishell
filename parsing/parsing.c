@@ -3,47 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/21 18:46:35 by loup             ###   ########.fr       */
+/*   Updated: 2026/04/22 12:00:58 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/*
-if (1er element du split == <)
-	le +1 = infile
-// if (1er element du split == <<)
-// 	heredoc = 1;
-shell->cmds[i]->args = {cat, -e}
-if (split[i] == '|')
-	on peut continuer et passer a la commande suivante
-shell->cmds[i]->args = {grep, v}
-if (split [i] == > ou >>)
-	if (>>)
-		insert = 1 
-	le +1 = outfile
-sinon c bon finito pipeau
-*/
+int is_operator(const char *token)
+{
+    if (!token)
+        return (0);
+    if (!ft_strcmp(token, "|"))
+        return (1);
+    if (!ft_strcmp(token, ">"))
+        return (1);
+    if (!ft_strcmp(token, ">>"))
+        return (1);
+    if (!ft_strcmp(token, "<"))
+        return (1);
+    if (!ft_strcmp(token, "<<"))
+        return (1);
+    return (0);
+}
 
+int is_word(const char *token)
+{
+    return (!is_operator(token));
+}
 
 static void sort_line(char **split_line, t_shell *shell)
 {
 	int i;
 	int j;
 	int k;
+	int arg_count;
 
 	j = 0;
 	i = 0;
 	k = 0;
+	arg_count = 0;
 	shell->cmds[j] = malloc(sizeof(t_cmd));
 	if (!shell->cmds[j])
 		return ;
 	while (split_line[i])
 	{
-		if (!ft_strncmp(split_line[i], "|", 1))
+		if (!ft_strcmp(split_line[i], "|"))
 		{
 			j++;
 			shell->cmds[j] = malloc(sizeof(t_cmd));
@@ -51,28 +58,32 @@ static void sort_line(char **split_line, t_shell *shell)
 				return ;
 			k = 0;
 		}
-		else if (!ft_strncmp(split_line[i], "<<", 2))
+		else if (!ft_strcmp(split_line[i], "<<"))
 			shell->cmds[j]->delimiter = split_line[++i];
-		else if (!ft_strncmp(split_line[i], ">>", 2))
+		else if (!ft_strcmp(split_line[i], ">>"))
 			shell->cmds[j]->insert = 1;
-		else if (!ft_strncmp(split_line[i], "<", 1))
+		else if (!ft_strcmp(split_line[i], "<"))
 			shell->cmds[j]->infile = split_line[++i];
-		else if (!ft_strncmp(split_line[i], ">", 1))
+		else if (!ft_strcmp(split_line[i], ">"))
 			shell->cmds[j]->outfile = split_line[++i];
 		else
 		{
-			while (split_line[i] && ft_strncmp(split_line[i], "|", 1))
+			arg_count = 0;
+			while (split_line[i + arg_count] && is_word(split_line[i + arg_count]))
+				arg_count++;
+			shell->cmds[j]->args = malloc(sizeof(char *) * (arg_count + 1));
+			while (split_line[i] && is_word(split_line[i]))
 			{
-				shell->cmds[j]->args = malloc(sizeof(char *) * 3);
-				shell->cmds[j]->args[k] = split_line[i];
+				shell->cmds[j]->args[k] = ft_strdup(split_line[i]);
 				k++;
 				i++;
-			}	
+			}
+			shell->cmds[j]->args[k] = NULL;
+			continue ;
 		}
 		i++;
 	}
 }
-
 
 static int	count_cmds(char **split_line)
 {
