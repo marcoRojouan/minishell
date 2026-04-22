@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/17 11:17:28 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/22 11:51:29 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	main(int ac, char **av, char **envp)
 		prompt = prompt_making(); /* on cree notre ligne fixe "minishell >$"*/
 		line = readline(prompt); /* on affiche la ligne fixe et on attend une commande*/
 		free(prompt);
-		// if (*line)
-		// 	add_history(line); /* on ajoute la ligne a notre historique de ligne */
+		if (*line)
+			add_history(line); /* on ajoute la ligne a notre historique de ligne */
 		if (!parsing(line, &shell))
 			printf("problems");	
 	}

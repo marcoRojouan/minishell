@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_space.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:43:59 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/17 11:07:20 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/21 18:47:41 by loup             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 int	white_space(char c)
 {

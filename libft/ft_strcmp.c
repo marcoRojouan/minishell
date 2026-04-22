@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_tab.c                                      :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/15 11:58:49 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/21 18:48:14 by loup             ###   ########.fr       */
+/*   Created: 2026/04/22 11:58:20 by mrojouan          #+#    #+#             */
+/*   Updated: 2026/04/22 12:04:01 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_tab(char **tab)
+int    ft_strcmp(const char *s1, const char *s2)
 {
-	int	i;
+    int    i;
 
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
+    i = 0;
+    while (s1[i] == s2[i] && s1[i] != '\0')
+        i++;
+    return (s1[i] - s2[i]);
 }

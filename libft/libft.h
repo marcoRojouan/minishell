@@ -30,6 +30,7 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
+int    				ft_strcmp(const char *s1, const char *s2);
 size_t				ft_strlen(const char *str);
 void				ft_free_tab(char **tab);
 void				ft_bzero(void *s, size_t n);

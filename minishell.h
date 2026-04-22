@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/15 15:41:58 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/20 16:01:31 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ typedef struct s_cmd
 	char			*infile;
 	char			*outfile;
 	char			*delimiter;
-	
-	int 			heredoc;
+
 	int				insert;
 	
 	struct s_cmd	*next;
@@ -35,7 +34,7 @@ typedef struct s_cmd
 
 typedef struct s_shell
 {
-	t_cmd			*cmds;
+	t_cmd			**cmds;
 	
 	char			**env;
 	int				exit_status;
