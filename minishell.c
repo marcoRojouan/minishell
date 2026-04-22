@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/22 11:51:29 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/22 15:49:56 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	main(int ac, char **av, char **envp)
 		if (*line)
 			add_history(line); /* on ajoute la ligne a notre historique de ligne */
 		if (!parsing(line, &shell))
-			printf("problems");	
+			printf("problems");
 	}
 }
+
