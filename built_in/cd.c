@@ -6,9 +6,17 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:30:37 by malavaud          #+#    #+#             */
-/*   Updated: 2026/04/22 16:30:51 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/23 10:44:07 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+int	ft_cd(char **args)
+{
+	char	*path;
+	char	*new_pwd;
+	char	*old_pwd;
+
+	
+}
