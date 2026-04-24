@@ -6,11 +6,34 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:45:37 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/24 14:58:27 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/24 15:09:10 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.c>
+
+
+static char	*get_var_value(char *start, int len, char**env)
+{
+	char	*var_name;
+	int		i;
+
+	var_name = ft_substr(start, 0, len);
+	if (!var_name)
+		return (NULL);
+	i = 0;
+	while (env[i])
+	{
+		if (!ft_strncmp(env[i], var_name, len) && env[i][len] == '=')
+		{
+			free(var_name);
+			return (env[i] + len + 1);
+		}
+		i++;
+	}
+	free(var_name);
+	return ("");
+}
 
 static void expand_var(char *elem, char *res, int *i, int *j, t_shell *shell)
 {
