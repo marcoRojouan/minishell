@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/22 12:00:58 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/23 11:49:08 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int	parsing(char *line, t_shell *shell)
 	char	**split_line;
 	int		cmd_count;
 	
-	split_line = ft_split_space(line);
+	split_line = ft_split_args(line);
 	if (!split_line)
 		return (0);
 	cmd_count = count_cmds(split_line);

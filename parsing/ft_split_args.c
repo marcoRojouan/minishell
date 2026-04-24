@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_space.c                                   :+:      :+:    :+:   */
+/*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:43:59 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/22 15:17:32 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/24 15:00:57 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <minishell.h>
 
 int	white_space(char c)
 {
@@ -60,31 +60,17 @@ static int	word_len(char *str)
 	return (i);
 }
 
-static char	*duplicate_wrd(char *str)
+static char *duplicate_wrd(char *str)
 {
-	char	*dup;
-	int		i;
-	int		j;
-	int		in_quotes;
+    char    *dup;
+    int     len;
 
-	i = 0;
-	j = 0;
-	in_quotes = 0;
-	dup = malloc(word_len(str) + 1);
-	if (!dup)
-		return (NULL);
-	while (str[i])
-	{
-		if (str[i] == '"' || str[i] == '\'')
-			in_quotes = !in_quotes;
-		else if (white_space(str[i]) && !in_quotes)
-			break ;
-		else
-			dup[j++] = str[i];
-		i++;
-	}
-	dup[j] = '\0';
-	return (dup);
+    len = word_len(str);
+    dup = malloc(len + 1);
+    if (!dup)
+        return (NULL);
+    ft_strlcpy(dup, str, len + 1);
+    return (dup);
 }
 
 static void	skip_word(char *str, int *i)
@@ -121,6 +107,7 @@ static int	fill_tab(char *str, char **tab)
 			ft_free_tab(tab);
 			return (0);
 		}
+		/* inclure expand ici et les parametres necessaires */
 		j++;
 		skip_word(str, &i);
 	}
@@ -128,7 +115,7 @@ static int	fill_tab(char *str, char **tab)
 	return (1);
 }
 
-char	**ft_split_space(char *str)
+char	**ft_split_args(char *str)
 {
 	char	**tab;
 	int		word_count;

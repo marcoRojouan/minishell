@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/20 16:01:31 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/23 11:43:53 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_shell
 	int				exit_status;
 }	t_shell;
 
-int	parsing(char *line, t_shell *shell);
+int		parsing(char *line, t_shell *shell);
+
+char	**ft_split_args(char *str);
 
 #endif
