@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/22 13:38:29 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/24 15:01:38 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,6 @@ int	parsing(char *line, t_shell *shell)
 	if (!shell->cmds)
 		return (0);
 	sort_line(split_line, shell);
-	print_cmds(shell, cmd_count);
+	//print_cmds(shell, cmd_count);
 	return (1);
 }
