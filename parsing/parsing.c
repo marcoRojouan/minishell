@@ -6,40 +6,40 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/22 13:38:29 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/27 16:51:15 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int is_operator(const char *token)
+int	is_operator(const char *token)
 {
-    if (!token)
-        return (0);
-    if (!ft_strcmp(token, "|"))
-        return (1);
-    if (!ft_strcmp(token, ">"))
-        return (1);
-    if (!ft_strcmp(token, ">>"))
-        return (1);
-    if (!ft_strcmp(token, "<"))
-        return (1);
-    if (!ft_strcmp(token, "<<"))
-        return (1);
-    return (0);
+	if (!token)
+		return (0);
+	if (!ft_strcmp(token, "|"))
+		return (1);
+	if (!ft_strcmp(token, ">"))
+		return (1);
+	if (!ft_strcmp(token, ">>"))
+		return (1);
+	if (!ft_strcmp(token, "<"))
+		return (1);
+	if (!ft_strcmp(token, "<<"))
+		return (1);
+	return (0);
 }
 
-int is_word(const char *token)
+int	is_word(const char *token)
 {
-    return (!is_operator(token));
+	return (!is_operator(token));
 }
 
-static void sort_line(char **split_line, t_shell *shell)
+static void	sort_line(char **split_line, t_shell *shell)
 {
-	int i;
-	int j;
-	int k;
-	int arg_count;
+	int	i;
+	int	j;
+	int	k;
+	int	arg_count;
 
 	j = 0;
 	i = 0;
@@ -103,32 +103,32 @@ static int	count_cmds(char **split_line)
 
 void    print_cmds(t_shell *shell, int cmd_count)
 {
-    int i;
-    int k;
+	int i;
+	int k;
 
-    i = 0;
-    while (i < cmd_count)
-    {
-        printf("=== CMD %d ===\n", i);
-        k = 0;
-        if (shell->cmds[i]->args)
-        {
-            while (shell->cmds[i]->args[k])
-            {
-                printf("  args[%d] = %s\n", k, shell->cmds[i]->args[k]);
-                k++;
-            }
-        }
-        if (shell->cmds[i]->infile)
-            printf("  infile    = %s\n", shell->cmds[i]->infile);
-        if (shell->cmds[i]->outfile)
-           	printf("  outfile   = %s\n", shell->cmds[i]->outfile);
-        if (shell->cmds[i]->delimiter)
-            printf("  delimiter = %s\n", shell->cmds[i]->delimiter);
-        if (shell->cmds[i]->insert)
-            printf("  append    = yes\n");
-        i++;
-    }
+	i = 0;
+	while (i < cmd_count)
+	{
+		printf("=== CMD %d ===\n", i);
+		k = 0;
+		if (shell->cmds[i]->args)
+		{
+			while (shell->cmds[i]->args[k])
+			{
+				printf("  args[%d] = %s\n", k, shell->cmds[i]->args[k]);
+				k++;
+			}
+		}
+		if (shell->cmds[i]->infile)
+			printf("  infile    = %s\n", shell->cmds[i]->infile);
+		if (shell->cmds[i]->outfile)
+		   	printf("  outfile   = %s\n", shell->cmds[i]->outfile);
+		if (shell->cmds[i]->delimiter)
+			printf("  delimiter = %s\n", shell->cmds[i]->delimiter);
+		if (shell->cmds[i]->insert)
+			printf("  append    = yes\n");
+		i++;
+	}
 }
 
 int	parsing(char *line, t_shell *shell)
