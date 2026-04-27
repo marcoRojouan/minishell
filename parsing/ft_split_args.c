@@ -6,61 +6,13 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:43:59 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/24 15:00:57 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:50:01 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	white_space(char c)
-{
-	if ((c >= 9 && c <= 13) || c == ' ')
-		return (1);
-	return (0);
-}
-
-static int	count_words(char *str)
-{
-	int	i;
-	int	count;
-	int	in_quotes;
-
-	i = 0;
-	count = 0;
-	in_quotes = 0;
-	if (!str || !str[0])
-		return (0);
-	while (str[i])
-	{
-		if (!white_space(str[i]) &&
-			(i == 0 || (white_space(str[i - 1]) && !in_quotes)))
-			count++;
-		if (str[i] == '"' || str[i] == '\'')
-			in_quotes = !in_quotes;
-		i++;
-	}
-	return (count);
-}
-
-static int	word_len(char *str)
-{
-	int	i;
-	int	in_quotes;
-
-	i = 0;
-	in_quotes = 0;
-	while (str[i])
-	{
-		if (str[i] == '"' || str[i] == '\'')
-			in_quotes = !in_quotes;
-		else if (white_space(str[i]) && !in_quotes)
-			break ;
-		i++;
-	}
-	return (i);
-}
-
-static char *duplicate_wrd(char *str)
+static char	*duplicate_wrd(char *str)
 {
     char    *dup;
     int     len;
@@ -88,7 +40,19 @@ static void	skip_word(char *str, int *i)
 	}
 }
 
-static int	fill_tab(char *str, char **tab)
+static int	process_word(char *str, char **tab, int *i, int j, t_shell *shell)
+{
+	tab[j] = duplicate_wrd(str + *i);
+	if (!tab[j])
+		return (0);
+	tab[j] = expand(tab[j], shell);
+	if (!tab[j])
+		return (0);
+	skip_word(str, i);
+	return (1);
+}
+
+static int	fill_tab(char *str, char **tab, t_shell *shell)
 {
 	int	i;
 	int	j;
@@ -101,21 +65,18 @@ static int	fill_tab(char *str, char **tab)
 			i++;
 		if (!str[i])
 			break ;
-		tab[j] = duplicate_wrd(str + i);
-		if (!tab[j])
+		if (!process_word(str, tab, &i, j, shell))
 		{
 			ft_free_tab(tab);
 			return (0);
 		}
-		/* inclure expand ici et les parametres necessaires */
 		j++;
-		skip_word(str, &i);
 	}
 	tab[j] = 0;
 	return (1);
 }
 
-char	**ft_split_args(char *str)
+char	**ft_split_args(char *str, t_shell *shell)
 {
 	char	**tab;
 	int		word_count;
@@ -126,7 +87,7 @@ char	**ft_split_args(char *str)
 	tab = malloc(sizeof(char *) * (word_count + 1));
 	if (!tab)
 		return (NULL);
-	if (!fill_tab(str, tab))
+	if (!fill_tab(str, tab, shell))
 		return (0);
 	return (tab);
 }
