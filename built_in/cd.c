@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:30:37 by malavaud          #+#    #+#             */
-/*   Updated: 2026/04/24 15:08:51 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/27 13:55:53 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ static void	set_env(char **env, char *key, char *value)
 			new = malloc(len + ft_strlen(value) + 2);
 			if (!new)
 				return ;
-			strcpy(new, key);
-			strcat(new, "=");
-			strcat(new, value);
+			ft_strcpy(new, key);
+			ft_strcat(new, "=");
+			ft_strcat(new, value);
+			free(env[i]);
 			env[i] = new;
 			return ;
 		}
