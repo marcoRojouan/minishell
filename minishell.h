@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/27 14:27:44 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/28 12:05:40 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ typedef struct s_cmd
 	char			*delimiter;
 
 	int				insert;
-	
+
 	struct s_cmd	*next;
 }	t_cmd;
 
 typedef struct s_shell
 {
 	t_cmd			**cmds;
-	
+
 	char			**env;
 	int				exit_status;
 }	t_shell;
@@ -53,5 +53,11 @@ void	handle_quotes(char *elem, int *i, int *in_single, int *in_double);
 
 // A ENLEVER A LA FIN
 void    print_cmds(t_shell *shell, int cmd_count);
+char	**copy_env(char **envp);
+
+int	ft_echo(char **args);
+int	ft_pwd(void);
+
+int	ft_cd(char **args, char **env);
 
 #endif
