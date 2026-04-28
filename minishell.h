@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/28 11:52:42 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/28 12:00:03 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ char	**copy_env(char **envp);
 
 int	ft_echo(char **args);
 int	ft_pwd(void);
+
+int	ft_cd(char **args, char **env);
 
 #endif
