@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/28 12:05:40 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/28 14:26:20 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,27 @@ int		parsing(char *line, t_shell *shell);
 int		is_operator(const char *token);
 int		is_word(const char *token);
 
+int		white_space(char c);
+int		count_words(char *str);
+int		word_len(char *str);
+
+int		ft_cd(char **args, char **env);
+int		ft_echo(char **args);
+int		ft_pwd(void);
+
 char	*expand(char *elem, t_shell *shell);
 char	**ft_split_args(char *str, t_shell *shell);
+char	**copy_env(char **envp);
 
 void	expand_var(char *elem, char *res, int *i, int *j, t_shell *shell);
 void	expand_status(char *res, int *i, int *j, t_shell *shell);
 void	handle_quotes(char *elem, int *i, int *in_single, int *in_double);
+void	sort_line(char **split_line, t_shell *shell);
 
 // A ENLEVER A LA FIN
 void    print_cmds(t_shell *shell, int cmd_count);
-char	**copy_env(char **envp);
 
-int	ft_echo(char **args);
-int	ft_pwd(void);
 
-int	ft_cd(char **args, char **env);
+
 
 #endif

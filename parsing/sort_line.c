@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:14:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/28 12:07:17 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/28 15:04:54 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,24 @@ static void	pipe_handler(t_shell *shell, int *j, int *k)
 	*k = 0;
 }
 
-static void	args_handler(char **split_line, t_shell *shell,
-	 int *i, int j, int *k)
+static int  args_handler(char **split_line, t_shell *shell, int i, int j, int *k)
 {
-	int	arg_count;
+    int arg_count;
 
-	arg_count = 0;
-	while (split_line[*i + arg_count] && is_word(split_line[*i + arg_count]))
-		arg_count++;
-	shell->cmds[j]->args = malloc(sizeof(char *) * (arg_count + 1));
-	if (!shell->cmds[j]->args)
-		return ;
-	while (split_line[*i] && is_word(split_line[*i]))
-	{
-		shell->cmds[j]->args[*k] = ft_strdup(split_line[*i]);
-		(*k)++;
-		(*i)++;
-	}
-	shell->cmds[j]->args[*k] = NULL;
+    arg_count = 0;
+    while (split_line[i + arg_count] && is_word(split_line[i + arg_count]))
+        arg_count++;
+    shell->cmds[j]->args = malloc(sizeof(char *) * (arg_count + 1));
+    if (!shell->cmds[j]->args)
+        return (0);
+    while (split_line[i] && is_word(split_line[i]))
+    {
+        shell->cmds[j]->args[*k] = ft_strdup(split_line[i]);
+        (*k)++;
+        i++;
+    }
+    shell->cmds[j]->args[*k] = NULL;
+    return (arg_count);
 }
 
 static void	redirect_handler(char **split_line, t_shell *shell, int *i, int j)
@@ -83,11 +83,11 @@ void	sort_line(char **split_line, t_shell *shell)
 	while (split_line[i])
 	{
 		if (!ft_strcmp(split_line[i], "|"))
-			pipe_handler(shell, &j, &k);
-		else if (is_word(split_line[i]))
-			args_handler(split_line, shell, &i, j, &k);
-		else
-			redirect_handler(split_line, shell, &i, j);
-		i++;
+        	pipe_handler(shell, &j, &k);
+    	else if (is_word(split_line[i]))
+        	i += args_handler(split_line, shell, i, j, &k) - 1;
+    	else
+        	redirect_handler(split_line, shell, &i, j);
+    	i++;
 	}
 }

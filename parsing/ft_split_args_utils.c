@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:48:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/27 15:49:46 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/28 14:25:57 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	white_space(char c)
 	return (0);
 }
 
-static int	count_words(char *str)
+int	count_words(char *str)
 {
 	int	i;
 	int	count;

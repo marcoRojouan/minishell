@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 LDFLAGS = -L./libft -lft -lreadline
 
 NAME = minishell
@@ -7,7 +7,10 @@ LIBFT = libft/libft.a
 
 SRCS =	minishell.c \
 		parsing/parsing.c \
+		parsing/parsing_utils.c \
 		parsing/ft_split_args.c \
+		parsing/ft_split_args_utils.c \
+		parsing/sort_line.c \
 		parsing/expand.c \
 		parsing/expand_utils.c \
 		built_in/ft_echo.c \
