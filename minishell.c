@@ -6,7 +6,11 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/04/27 16:49:37 by malavaud         ###   ########.fr       */
+=======
+/*   Updated: 2026/04/22 15:49:56 by malavaud         ###   ########.fr       */
+>>>>>>> 8ae562372bc1c22abdf325f0ad784c64d87994b0
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +78,7 @@ int	main(int ac, char **av, char **envp)
 		if (*line)
 			add_history(line); /* on ajoute la ligne a notre historique de ligne */
 		if (!parsing(line, &shell))
-			printf("problems");	
+			printf("problems");
 	}
 }
+
