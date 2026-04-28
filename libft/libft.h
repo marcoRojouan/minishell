@@ -55,7 +55,6 @@ char				*ft_strcat(char *dest, char *src);
 char				*ft_strcpy(char *dest, char *src);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
 char				**ft_split(char const *s, char c);
-char				**ft_split_space(char *str);
 int					ft_atoi(const char *str);
 char				*ft_itoa(int nbr);
 char				*ft_strnstr(const char *str, const char *to_find,
