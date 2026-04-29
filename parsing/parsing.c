@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/28 15:06:09 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/29 15:16:33 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ static int	count_cmds(char **split_line)
 int	parsing(char *line, t_shell *shell)
 {
 	char	**split_line;
-	int		cmd_count;
 	
+	is_quote_closed(line);
 	split_line = ft_split_args(line, shell);
 	if (!split_line)
 		return (0);
-	cmd_count = count_cmds(split_line);
-	shell->cmds = malloc(sizeof(t_cmd) * (cmd_count + 1));
+	shell->cmd_count = count_cmds(split_line);
+	shell->cmds = malloc(sizeof(t_cmd) * (shell->cmd_count + 1));
 	if (!shell->cmds)
 		return (0);
 	sort_line(split_line, shell);

@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 14:25:25 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/27 14:26:40 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/29 15:15:55 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,31 @@ int is_operator(const char *token)
 int is_word(const char *token)
 {
     return (!is_operator(token));
+}
+
+int is_quote_closed(char *line)
+{
+    int i;
+    int in_single;
+    int in_double;
+
+    in_single = 0;
+    in_double = 0;
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] == '\'')
+            in_single = !in_single;
+        else if (line[i] == '"')
+            in_double = !in_double;
+        i++;
+    }
+    if (in_single || in_double)
+    {
+        perror("minishell : quotes error");
+        return (0);
+    }
+    return (1);
 }
 
 void    print_cmds(t_shell *shell, int cmd_count)
