@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -I. -I./libft
+CFLAGS = -Wall -Wextra -Werror -g
 LDFLAGS = -L./libft -lft -lreadline
 
 NAME = minishell
@@ -16,7 +16,8 @@ SRCS =	minishell.c \
 		built_in/ft_echo.c \
 		built_in/ft_pwd.c \
 		built_in/ft_cd.c \
-		built_in/ft_export.c
+		built_in/ft_export.c \
+		built_in/ft_env.c
 		
 OBJS = $(SRCS:.c=.o)
 
