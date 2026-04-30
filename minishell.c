@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/28 15:05:53 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/04/30 19:34:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,17 @@ int	main(int ac, char **av, char **envp)
 			printf("problems");
 		if (ft_strcmp(shell.cmds[0]->args[0], "pwd") == 0)
 			ft_pwd();
+		if (ft_strcmp(shell.cmds[0]->args[0], "export") == 0)
+		{
+			if (ft_export(shell.cmds[0]->args, shell.env) == 0)
+			{
+				int i = 0;
+				while (shell.env[i])
+				{
+					printf("%s\n", shell.env[i]);
+					i++;
+				}
+			}
+		}
 	}
 }

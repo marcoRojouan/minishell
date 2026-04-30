@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:30:37 by malavaud          #+#    #+#             */
-/*   Updated: 2026/04/27 13:55:53 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/04/30 19:22:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ HOME = dossier personnel
 OLDPWD = ancienr dossier
 */
 
-static char	*get_env(char **env, char *key)
+char	*get_env(char **env, char *key)
 {
 	int	i;
 	int	len;
@@ -36,7 +36,7 @@ static char	*get_env(char **env, char *key)
 	return (NULL);
 }
 
-static void	set_env(char **env, char *key, char *value)
+void	set_env(char **env, char *key, char *value)
 {
 	int		i;
 	int		len;
