@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/29 14:56:30 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/01 12:18:19 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	main(int ac, char **av, char **envp)
 		if (*line)
 			add_history(line); /* on ajoute la ligne a notre historique de ligne */
 		if (!parsing(line, &shell))
-			printf("problems");
+			printf("problems\n");
 		if (ft_strcmp(shell.cmds[0]->args[0], "pwd") == 0)
 			ft_pwd();
 	}

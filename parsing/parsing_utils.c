@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 14:25:25 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/29 15:15:55 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/01 12:16:22 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@ int is_operator(const char *token)
         return (0);
     if (!ft_strcmp(token, "|"))
         return (1);
+    if (!ft_strcmp(token, ">"))
+        return (1);
+    if (!ft_strcmp(token, ">>"))
+        return (1);
+    if (!ft_strcmp(token, "<"))
+        return (1);
+    if (!ft_strcmp(token, "<<"))
+        return (1);
+    return (0);
+}
+
+static int is_redir(const char *token)
+{
+    if (!token)
+        return (0);
     if (!ft_strcmp(token, ">"))
         return (1);
     if (!ft_strcmp(token, ">>"))
@@ -55,6 +70,30 @@ int is_quote_closed(char *line)
     {
         perror("minishell : quotes error");
         return (0);
+    }
+    return (1);
+}
+
+int is_in_order(char **split_line)
+{
+    int i;
+    
+    i = 0;
+    if (!ft_strcmp(split_line[i], "|"))
+        return (0);
+    while (split_line[i])
+    {
+        if (!ft_strcmp(split_line[i], "|"))
+        {
+            if (!split_line[i + 1] || !is_word(split_line[i + 1]))
+                return (0);
+        }
+        if (is_redir(split_line[i]))
+        {
+             if (!split_line[i + 1] || !is_word(split_line[i + 1]))
+                return (0);
+        }
+        i++;
     }
     return (1);
 }

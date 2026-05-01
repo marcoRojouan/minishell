@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/29 15:16:33 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/01 12:16:11 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ int	parsing(char *line, t_shell *shell)
 {
 	char	**split_line;
 	
-	is_quote_closed(line);
+	if (!is_quote_closed(line))
+		return (0);
 	split_line = ft_split_args(line, shell);
 	if (!split_line)
+		return (0);
+	if (!is_in_order(split_line))
 		return (0);
 	shell->cmd_count = count_cmds(split_line);
 	shell->cmds = malloc(sizeof(t_cmd) * (shell->cmd_count + 1));
