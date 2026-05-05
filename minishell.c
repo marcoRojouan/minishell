@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/01 12:17:58 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/05 10:24:11 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,17 @@ int	main(int ac, char **av, char **envp)
 			printf("problems");
 		if (ft_strcmp(shell.cmds[0]->args[0], "pwd") == 0)
 			ft_pwd();
-		if (ft_strcmp(shell.cmds[0]->args[0], "env") == 0)
-			ft_env(shell.env);
+		if (ft_strcmp(shell.cmds[0]->args[0], "export") == 0)
+		{
+			if (ft_export(shell.cmds[0]->args, &shell.env) == 0)
+			{
+				int i = 0;
+				while (shell.env[i])
+				{
+					printf("%s\n", shell.env[i]);
+					i++;
+				}
+			}
+		}
 	}
 }

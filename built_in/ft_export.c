@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 10:48:48 by malavaud          #+#    #+#             */
-/*   Updated: 2026/05/01 12:17:25 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/05 10:22:08 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	valid_key(char *key)
 	return (1);
 }
  
-static int	handle_plus(char **args, char **env)
+static int	handle_plus(char **args, char ***env)
 {
 	char	*ptr;
 	char	*key;
@@ -48,12 +48,12 @@ static int	handle_plus(char **args, char **env)
 	ptr = ft_strnstr(args[1], "+=", ft_strlen(args[1]));
 	if (!ptr)
 		return (0);
-	*ptr = '\0';
-	key = args[1];
+	key = ft_substr(args[1], 0, ptr - args[1]);
+	value = ptr + 2;
 	value = ptr + 2;
 	if (!valid_key(key))
 		return (printf("export: `%s': not a valid identifier\n", key), 1);
-	old = get_env(env, key);
+	old = get_env(*env, key);
 	if (old)
 	{
 		tmp = ft_strjoin(old, value);
@@ -65,7 +65,7 @@ static int	handle_plus(char **args, char **env)
 	return (1);
 }
 
-int	ft_export(char **args, char **env)
+int	ft_export(char **args, char ***env)
 {
 	char	*ptr;
 	char	*key;
@@ -78,8 +78,8 @@ int	ft_export(char **args, char **env)
 	ptr = ft_strchr(args[1], '=');
 	if (ptr)
 	{
-		*ptr = '\0';
-		key = args[1];
+		key = ft_substr(args[1], 0, ptr - args[1]);
+		value = ptr + 2;
 		value = ptr + 1;
 		if (!valid_key(key))
 			return (printf("export: `%s': not a valid identifier\n", key), 1);

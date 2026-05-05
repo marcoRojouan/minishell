@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:30:37 by malavaud          #+#    #+#             */
-/*   Updated: 2026/04/30 19:22:03 by marvin           ###   ########.fr       */
+/*   Updated: 2026/05/05 10:22:40 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ ENV = environnement du programme, KEY=VALUE, mémoire du shell
 HOME = dossier personnel
 OLDPWD = ancienr dossier
 */
+
 
 char	*get_env(char **env, char *key)
 {
@@ -36,7 +37,33 @@ char	*get_env(char **env, char *key)
 	return (NULL);
 }
 
-void	set_env(char **env, char *key, char *value)
+static void	add_env(char ***env, char *key, char *value, int i)
+{
+	char	**new_env;
+	char	*new;
+
+	new_env = malloc(sizeof(char *) * (i + 2));
+	if (!new_env)
+		return ;
+	i = 0;
+	while ((*env)[i])
+	{
+		new_env[i] = (*env)[i];
+		i++;
+	}
+	new = malloc(ft_strlen(key) + ft_strlen(value) + 2);
+	if (!new)
+		return ;
+	ft_strcpy(new, key);
+	ft_strcat(new, "=");
+	ft_strcat(new, value);
+	new_env[i] = new;
+	new_env[i + 1] = NULL;
+	free(*env);
+	*env = new_env;
+}
+
+void	set_env(char ***env, char *key, char *value)
 {
 	int		i;
 	int		len;
@@ -44,10 +71,10 @@ void	set_env(char **env, char *key, char *value)
 
 	i = 0;
 	len = ft_strlen(key);
-
-	while (env[i])
+	while ((*env)[i])
 	{
-		if (ft_strncmp(env[i], key, len) == 0 && env[i][len] == '=')
+		if (ft_strncmp((*env)[i], key, len) == 0
+			&& (*env)[i][len] == '=')
 		{
 			new = malloc(len + ft_strlen(value) + 2);
 			if (!new)
@@ -55,12 +82,13 @@ void	set_env(char **env, char *key, char *value)
 			ft_strcpy(new, key);
 			ft_strcat(new, "=");
 			ft_strcat(new, value);
-			free(env[i]);
-			env[i] = new;
+			free((*env)[i]);
+			(*env)[i] = new;
 			return ;
 		}
 		i++;
 	}
+	add_env(env, key, value, i);
 }
 
 int	ft_cd(char **args, char **env)
@@ -86,8 +114,8 @@ int	ft_cd(char **args, char **env)
 		return (1);
 	}
 	new_pwd = getcwd(NULL, 0);
-	set_env(env, "OLDPWD", old_pwd);
-	set_env(env, "PWD", new_pwd);
+	set_env(&env, "OLDPWD", old_pwd);
+	set_env(&env, "PWD", new_pwd);
 	free(old_pwd);
 	free(new_pwd);
 	return (0);
