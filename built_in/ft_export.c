@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 10:48:48 by malavaud          #+#    #+#             */
-/*   Updated: 2026/05/05 10:22:08 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/05 11:27:52 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ export A = variable vide exportee
 export A+=1 = concatene
 */
 
-static int	valid_key(char *key)
+int	valid_key(char *key)
 {
 	int	i;
 
@@ -72,7 +72,10 @@ int	ft_export(char **args, char ***env)
 	char	*value;
 
 	if (!args[1])
+	{
+		ft_env(*env);
 		return (0);
+	}
 	if (handle_plus(args, env))
 		return (0);
 	ptr = ft_strchr(args[1], '=');
