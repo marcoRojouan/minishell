@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/05/05 14:30:52 by mrojouan         ###   ########.fr       */
+=======
+/*   Updated: 2026/05/05 14:47:52 by malavaud         ###   ########.fr       */
+>>>>>>> 70e79ce0c062702999e31d6844347a71fc2081c1
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +36,7 @@ char	**copy_env(char **envp)
 	char	**new_env;
 
 	i = 0;
-	while (envp[i]) /*compter les variables*/
+	while (envp[i])
 		i++;
 	new_env = malloc(sizeof(char *) * (i + 1));
 	if (!new_env)
@@ -40,7 +44,7 @@ char	**copy_env(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		new_env[i] = ft_strdup(envp[i]);/*copie du tableau*/
+		new_env[i] = ft_strdup(envp[i]);
 		if (!new_env[i])
 			return (NULL);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/05 15:19:45 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:34:09 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_shell
 	t_cmd			**cmds;
 
 	char			**env;
-	
+
 	int				cmd_count;
 	int				exit_status;
 }	t_shell;
@@ -52,7 +52,7 @@ typedef struct s_context
 int		parsing(char *line, t_shell *shell);
 int		is_operator(const char *token);
 int		is_word(const char *token);
-int 	is_quote_closed(char *line);
+int		is_quote_closed(char *line);
 int		is_in_order(char **split_line);
 
 int		white_space(char c);
@@ -79,9 +79,6 @@ void	handle_quotes(char *elem, int *i, int *in_single, int *in_double);
 void	sort_line(char **split_line, t_shell *shell);
 
 // A ENLEVER A LA FIN
-void    print_cmds(t_shell *shell, int cmd_count);
-
-
-
+void	print_cmds(t_shell *shell, int cmd_count);
 
 #endif

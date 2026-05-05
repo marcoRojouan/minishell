@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:14:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/05 15:29:49 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:33:28 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	pipe_handler(t_context *ctx, t_shell *shell)
 
 static int  args_handler(t_context *ctx, char **split_line, t_shell *shell)
 {
-    int arg_count;
+	int	arg_count;
 
     arg_count = 0;
     while (split_line[ctx->i + arg_count] 

@@ -6,18 +6,11 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 10:48:48 by malavaud          #+#    #+#             */
-/*   Updated: 2026/05/05 11:27:52 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:09:55 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-/*
-export A=1 = ajoute/midifie
-export = affiche env
-export A = variable vide exportee
-export A+=1 = concatene
-*/
 
 int	valid_key(char *key)
 {
@@ -36,7 +29,7 @@ int	valid_key(char *key)
 	}
 	return (1);
 }
- 
+
 static int	handle_plus(char **args, char ***env)
 {
 	char	*ptr;
@@ -82,7 +75,6 @@ int	ft_export(char **args, char ***env)
 	if (ptr)
 	{
 		key = ft_substr(args[1], 0, ptr - args[1]);
-		value = ptr + 2;
 		value = ptr + 1;
 		if (!valid_key(key))
 			return (printf("export: `%s': not a valid identifier\n", key), 1);
