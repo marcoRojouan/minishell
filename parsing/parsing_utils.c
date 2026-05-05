@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 14:25:25 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/04 12:11:28 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:57:03 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int is_operator(const char *token)
+int	is_operator(const char *token)
 {
 	if (!token)
 		return (0);
@@ -29,7 +29,7 @@ int is_operator(const char *token)
 	return (0);
 }
 
-static int is_redir(const char *token)
+static int	is_redir(const char *token)
 {
 	if (!token)
 		return (0);
@@ -44,16 +44,16 @@ static int is_redir(const char *token)
 	return (0);
 }
 
-int is_word(const char *token)
+int	is_word(const char *token)
 {
 	return (!is_operator(token));
 }
 
-int is_quote_closed(char *line)
+int	is_quote_closed(char *line)
 {
-	int i;
-	int in_single;
-	int in_double;
+	int	i;
+	int	in_single;
+	int	in_double;
 
 	in_single = 0;
 	in_double = 0;
@@ -71,10 +71,10 @@ int is_quote_closed(char *line)
 	return (1);
 }
 
-int is_in_order(char **split_line)
+int	is_in_order(char **split_line)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	if (!ft_strcmp(split_line[i], "|"))
 		return (0);
@@ -87,7 +87,7 @@ int is_in_order(char **split_line)
 		}
 		if (is_redir(split_line[i]))
 		{
-			 if (!split_line[i + 1] || !is_word(split_line[i + 1]))
+			if (!split_line[i + 1] || !is_word(split_line[i + 1]))
 				return (0);
 		}
 		i++;
@@ -95,10 +95,10 @@ int is_in_order(char **split_line)
 	return (1);
 }
 
-void    print_cmds(t_shell *shell, int cmd_count)
+void	print_cmds(t_shell *shell, int cmd_count)
 {
-	int i;
-	int k;
+	int	i;
+	int	k;
 
 	i = 0;
 	while (i < cmd_count)
@@ -116,7 +116,7 @@ void    print_cmds(t_shell *shell, int cmd_count)
 		if (shell->cmds[i]->infile)
 			printf("  infile    = %s\n", shell->cmds[i]->infile);
 		if (shell->cmds[i]->outfile)
-		   	printf("  outfile   = %s\n", shell->cmds[i]->outfile);
+			printf("  outfile   = %s\n", shell->cmds[i]->outfile);
 		if (shell->cmds[i]->delimiter)
 			printf("  delimiter = %s\n", shell->cmds[i]->delimiter);
 		if (shell->cmds[i]->insert)

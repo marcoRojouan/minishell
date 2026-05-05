@@ -6,20 +6,11 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:30:37 by malavaud          #+#    #+#             */
-/*   Updated: 2026/05/05 10:22:40 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:08:51 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-/*
-PWD = le dossier actuel,  variable d'enviroonement
-PATH = la liste des chemins,  trouver les commandes
-ENV = environnement du programme, KEY=VALUE, mémoire du shell
-HOME = dossier personnel
-OLDPWD = ancienr dossier
-*/
-
 
 char	*get_env(char **env, char *key)
 {
@@ -27,7 +18,7 @@ char	*get_env(char **env, char *key)
 	int	len;
 
 	i = 0;
-	len = ft_strlen(key); /*le home etc*/
+	len = ft_strlen(key);
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], key, len) == 0 && env[i][len] == '=')/*verifie len de home et que = soit la*/

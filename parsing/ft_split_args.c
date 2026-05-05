@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:43:59 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/27 15:50:01 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:59:12 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static char	*duplicate_wrd(char *str)
 {
-    char    *dup;
-    int     len;
+	char	*dup;
+	int		len;
 
-    len = word_len(str);
-    dup = malloc(len + 1);
-    if (!dup)
-        return (NULL);
-    ft_strlcpy(dup, str, len + 1);
-    return (dup);
+	len = word_len(str);
+	dup = malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	ft_strlcpy(dup, str, len + 1);
+	return (dup);
 }
 
 static void	skip_word(char *str, int *i)

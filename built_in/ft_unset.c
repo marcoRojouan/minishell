@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 10:27:35 by malavaud          #+#    #+#             */
-/*   Updated: 2026/05/05 11:27:24 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:03:16 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	unset_env(char ***env, char *key)
 			&& (*env)[i][len] == '=')
 		{
 			free((*env)[i]);
-
 			j = i;
 			while ((*env)[j])
 			{
@@ -52,7 +51,6 @@ int	ft_unset(char **args, char ***env)
 			i++;
 			continue ;
 		}
-
 		unset_env(env, args[i]);
 		i++;
 	}

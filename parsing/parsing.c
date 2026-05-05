@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/05 14:12:28 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:57:44 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	count_cmds(char **split_line)
 int	parsing(char *line, t_shell *shell)
 {
 	char	**split_line;
-	
+
 	if (!is_quote_closed(line))
 		return (0);
 	split_line = ft_split_args(line, shell);

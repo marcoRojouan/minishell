@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:45:37 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/27 14:23:57 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:50:00 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	expand_loop(char *elem, char *res, t_shell *shell)
 	res[j] = '\0';
 }
 
-char *expand(char *elem, t_shell *shell)
+char	*expand(char *elem, t_shell *shell)
 {
 	char	*res;
 
@@ -49,4 +49,4 @@ char *expand(char *elem, t_shell *shell)
 		return (NULL);
 	expand_loop(elem, res, shell);
 	return (res);
-}	
+}
