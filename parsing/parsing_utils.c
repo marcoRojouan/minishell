@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 14:25:25 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/04 12:11:28 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:52:30 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int is_in_order(char **split_line)
 		return (0);
 	while (split_line[i])
 	{
+		if (split_line[i][0] == '|' && split_line[i][1] != '\0')
+            return (0);
 		if (!ft_strcmp(split_line[i], "|"))
 		{
 			if (!split_line[i + 1] || !is_word(split_line[i + 1]))
