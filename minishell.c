@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/04 13:34:32 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:12:03 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,20 @@ int	main(int ac, char **av, char **envp)
 			add_history(line);
 			if (!parsing(line, &shell))
 				ft_putstr_fd("minishell : parsing error\n", 2);
+			if (shell.cmds[0]->args[0])
+			{
+				if (ft_strcmp(shell.cmds[0]->args[0], "pwd") == 0)
+					ft_pwd();
+				if (ft_strcmp(shell.cmds[0]->args[0], "env") == 0)
+					ft_env(shell.env);
+				if (ft_strcmp(shell.cmds[0]->args[0], "export") == 0)
+					ft_export(shell.cmds[0]->args, &shell.env);
+				if (ft_strcmp(shell.cmds[0]->args[0], "unset") == 0)
+					ft_unset(shell.cmds[0]->args, &shell.env);
+				if (ft_strcmp(shell.cmds[0]->args[0], "echo") == 0)
+					ft_echo(shell.cmds[0]->args);
+			}
 		}
 		free(line);
-
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/01 12:16:44 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:12:20 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ int		word_len(char *str);
 int		ft_cd(char **args, char **env);
 int		ft_echo(char **args);
 int		ft_pwd(void);
+int		ft_export(char **args, char ***env);
+void	ft_env(char **env);
+void	set_env(char ***env, char *key, char *value);
+char	*get_env(char **env, char *key);
+int		valid_key(char *key);
+int		ft_unset(char **args, char ***env);
 
 char	*expand(char *elem, t_shell *shell);
 char	**ft_split_args(char *str, t_shell *shell);
