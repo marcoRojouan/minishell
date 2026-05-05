@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/05 11:30:36 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:12:03 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static int	init_shell(t_shell *shell, char **envp)
 	shell->cmds = NULL;
 	shell->env = copy_env(envp);
 	shell->exit_status = 0;
+	shell->cmd_count = 0;
 	return (0);
 }
 
@@ -68,22 +69,29 @@ int	main(int ac, char **av, char **envp)
 	init_shell(&shell, envp);
 	while (1)
 	{
-		prompt = prompt_making(); /* on cree notre ligne fixe "minishell >$"*/
-		line = readline(prompt); /* on affiche la ligne fixe et on attend une commande*/
-		free(prompt);
+		prompt = prompt_making();
+		line = readline(prompt);
+		if (!line)
+			break ;
 		if (*line)
-			add_history(line); /* on ajoute la ligne a notre historique de ligne */
-		if (!parsing(line, &shell))
-			printf("problems");
-		if (ft_strcmp(shell.cmds[0]->args[0], "pwd") == 0)
-			ft_pwd();
-		if (ft_strcmp(shell.cmds[0]->args[0], "env") == 0)
-			ft_env(shell.env);
-		if (ft_strcmp(shell.cmds[0]->args[0], "export") == 0)
-			ft_export(shell.cmds[0]->args, &shell.env);
-		if (ft_strcmp(shell.cmds[0]->args[0], "unset") == 0)
-			ft_unset(shell.cmds[0]->args, &shell.env);
-		if (ft_strcmp(shell.cmds[0]->args[0], "echo") == 0)
-			ft_echo(shell.cmds[0]->args);
+		{
+			add_history(line);
+			if (!parsing(line, &shell))
+				ft_putstr_fd("minishell : parsing error\n", 2);
+			if (shell.cmds[0]->args[0])
+			{
+				if (ft_strcmp(shell.cmds[0]->args[0], "pwd") == 0)
+					ft_pwd();
+				if (ft_strcmp(shell.cmds[0]->args[0], "env") == 0)
+					ft_env(shell.env);
+				if (ft_strcmp(shell.cmds[0]->args[0], "export") == 0)
+					ft_export(shell.cmds[0]->args, &shell.env);
+				if (ft_strcmp(shell.cmds[0]->args[0], "unset") == 0)
+					ft_unset(shell.cmds[0]->args, &shell.env);
+				if (ft_strcmp(shell.cmds[0]->args[0], "echo") == 0)
+					ft_echo(shell.cmds[0]->args);
+			}
+		}
+		free(line);
 	}
 }

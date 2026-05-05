@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:14:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/28 15:04:54 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/04 12:06:13 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ void	sort_line(char **split_line, t_shell *shell)
 		if (!ft_strcmp(split_line[i], "|"))
         	pipe_handler(shell, &j, &k);
     	else if (is_word(split_line[i]))
+		{
         	i += args_handler(split_line, shell, i, j, &k) - 1;
+		}
     	else
         	redirect_handler(split_line, shell, &i, j);
     	i++;

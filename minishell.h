@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/05 11:28:44 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:12:20 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,16 @@ typedef struct s_shell
 	t_cmd			**cmds;
 
 	char			**env;
+	
+	int				cmd_count;
 	int				exit_status;
 }	t_shell;
 
 int		parsing(char *line, t_shell *shell);
 int		is_operator(const char *token);
 int		is_word(const char *token);
+int 	is_quote_closed(char *line);
+int		is_in_order(char **split_line);
 
 int		white_space(char c);
 int		count_words(char *str);
