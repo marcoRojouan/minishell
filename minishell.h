@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/05 14:12:20 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:19:45 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ typedef struct s_shell
 	int				cmd_count;
 	int				exit_status;
 }	t_shell;
+
+typedef struct s_context
+{
+    int     i;
+    int     j;
+    int     k;
+}   t_context;
 
 int		parsing(char *line, t_shell *shell);
 int		is_operator(const char *token);
