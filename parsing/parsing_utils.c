@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 14:25:25 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/05 15:33:56 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/06 14:20:57 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	is_in_order(char **split_line)
 	while (split_line[i])
 	{
 		if (split_line[i][0] == '|' && split_line[i][1] != '\0')
-            return (0);
+			return (0);
 		if (!ft_strcmp(split_line[i], "|"))
 		{
 			if (!split_line[i + 1] || !is_word(split_line[i + 1]))
@@ -97,32 +97,32 @@ int	is_in_order(char **split_line)
 	return (1);
 }
 
-void	print_cmds(t_shell *shell, int cmd_count)
-{
-	int	i;
-	int	k;
+// void	print_cmds(t_shell *shell, int cmd_count)
+// {
+// 	int	i;
+// 	int	k;
 
-	i = 0;
-	while (i < cmd_count)
-	{
-		printf("=== CMD %d ===\n", i);
-		k = 0;
-		if (shell->cmds[i]->args)
-		{
-			while (shell->cmds[i]->args[k])
-			{
-				printf("  args[%d] = %s\n", k, shell->cmds[i]->args[k]);
-				k++;
-			}
-		}
-		if (shell->cmds[i]->infile)
-			printf("  infile    = %s\n", shell->cmds[i]->infile);
-		if (shell->cmds[i]->outfile)
-			printf("  outfile   = %s\n", shell->cmds[i]->outfile);
-		if (shell->cmds[i]->delimiter)
-			printf("  delimiter = %s\n", shell->cmds[i]->delimiter);
-		if (shell->cmds[i]->insert)
-			printf("  append    = yes\n");
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < cmd_count)
+// 	{
+// 		printf("=== CMD %d ===\n", i);
+// 		k = 0;
+// 		if (shell->cmds[i]->args)
+// 		{
+// 			while (shell->cmds[i]->args[k])
+// 			{
+// 				printf("  args[%d] = %s\n", k, shell->cmds[i]->args[k]);
+// 				k++;
+// 			}
+// 		}
+// 		if (shell->cmds[i]->infile)
+// 			printf("  infile    = %s\n", shell->cmds[i]->infile);
+// 		if (shell->cmds[i]->outfile)
+// 			printf("  outfile   = %s\n", shell->cmds[i]->outfile);
+// 		if (shell->cmds[i]->delimiter)
+// 			printf("  delimiter = %s\n", shell->cmds[i]->delimiter);
+// 		if (shell->cmds[i]->insert)
+// 			printf("  append    = yes\n");
+// 		i++;
+// 	}
+// }

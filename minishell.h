@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/05 15:34:09 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/06 14:15:45 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ typedef struct s_context
     int     k;
 }   t_context;
 
+typedef struct s_idx
+{
+    int     i;
+    int     j;
+}   t_idx;
+
+
 int		parsing(char *line, t_shell *shell);
 int		is_operator(const char *token);
 int		is_word(const char *token);
@@ -73,9 +80,9 @@ char	*expand(char *elem, t_shell *shell);
 char	**ft_split_args(char *str, t_shell *shell);
 char	**copy_env(char **envp);
 
-void	expand_var(char *elem, char *res, int *i, int *j, t_shell *shell);
-void	expand_status(char *res, int *i, int *j, t_shell *shell);
-void	handle_quotes(char *elem, int *i, int *in_single, int *in_double);
+void	expand_var(char *elem, char *res, t_idx *ctx, t_shell *shell);
+void	expand_status(char *res, t_idx *ctx, t_shell *shell);
+void	handle_quotes(char *elem, t_idx *ctx, int *in_single, int *in_double);
 void	sort_line(char **split_line, t_shell *shell);
 
 // A ENLEVER A LA FIN
