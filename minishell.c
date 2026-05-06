@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/05 14:47:52 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/06 14:33:08 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	main(int ac, char **av, char **envp)
 			add_history(line);
 			if (!parsing(line, &shell))
 				ft_putstr_fd("minishell : parsing error\n", 2);
-			if (shell.cmds[0]->args[0])
+			else if (shell.cmds[0]->args)
 			{
 				if (ft_strcmp(shell.cmds[0]->args[0], "pwd") == 0)
 					ft_pwd();
@@ -90,6 +90,8 @@ int	main(int ac, char **av, char **envp)
 					ft_unset(shell.cmds[0]->args, &shell.env);
 				if (ft_strcmp(shell.cmds[0]->args[0], "echo") == 0)
 					ft_echo(shell.cmds[0]->args);
+				if (ft_strcmp(shell.cmds[0]->args[0], "cd") == 0)
+					ft_cd(shell.cmds[0]->args, shell.env);
 			}
 		}
 		free(line);

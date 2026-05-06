@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 14:09:11 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/05 14:50:17 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/06 14:15:31 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,31 @@ static char	*get_var_value(char *start, int len, char**env)
 	return ("");
 }
 
-void	handle_quotes(char *elem, int *i, int *in_single, int *in_double)
+void	handle_quotes(
+	char *elem, t_idx *ctx, int *in_single, int *in_double)
 {
-	if (elem[*i] == '\'' && !(*in_double))
+	if (elem[ctx->i] == '\'' && !(*in_double))
 		*in_single = !(*in_single);
-	else if (elem[*i] == '"' && !(*in_single))
+	else if (elem[ctx->i] == '"' && !(*in_single))
 		*in_double = !(*in_double);
-	(*i)++;
+	ctx->i++;
 }
 
-void	expand_var(char *elem, char *res, int *i, int *j, t_shell *shell)
+void	expand_var(char *elem, char *res, t_idx *ctx, t_shell *shell)
 {
 	char	*value;
 	int		var_start;
 
-	(*i)++;
-	var_start = *i;
-	while (elem[*i] && (ft_isalnum(elem[*i]) || elem[*i] == '_'))
-		(*i)++;
-	value = get_var_value(elem + var_start, *i - var_start, shell->env);
+	ctx->i++;
+	var_start = ctx->i;
+	while (elem[ctx->i] && (ft_isalnum(elem[ctx->i]) || elem[ctx->i] == '_'))
+		ctx->i++;
+	value = get_var_value(elem + var_start, ctx->i - var_start, shell->env);
 	while (value && *value)
-		res[(*j)++] = *value++;
+		res[ctx->j++] = *value++;
 }
 
-void	expand_status(char *res, int *i, int *j, t_shell *shell)
+void	expand_status(char *res, t_idx *ctx, t_shell *shell)
 {
 	char	*status;
 	int		k;
@@ -66,9 +67,9 @@ void	expand_status(char *res, int *i, int *j, t_shell *shell)
 	status = ft_itoa(shell->exit_status);
 	while (status[k])
 	{
-		res[(*j)] = status[k];
-		j++;
+		res[ctx->j] = status[k];
+		ctx->j++;
 		k++;
 	}
-	*i += 2;
+	ctx->i += 2;
 }

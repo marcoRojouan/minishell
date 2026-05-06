@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:48:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/04/28 14:25:57 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:36:38 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	count_words(char *str)
 		return (0);
 	while (str[i])
 	{
-		if (!white_space(str[i]) &&
-			(i == 0 || (white_space(str[i - 1]) && !in_quotes)))
+		if (!white_space(str[i])
+			&& (i == 0 || (white_space(str[i - 1]) && !in_quotes)))
 			count++;
 		if (str[i] == '"' || str[i] == '\'')
 			in_quotes = !in_quotes;
