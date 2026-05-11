@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:43:59 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/06 14:19:18 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/11 12:07:19 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ static char	*duplicate_wrd(char *str)
 	return (dup);
 }
 
-static void	skip_word(char *str, int *i)
+static void	skip_word(char *str, t_idx *idx)
 {
 	int	in_quotes;
 
 	in_quotes = 0;
-	while (str[*i])
+	while (str[idx->i])
 	{
-		if (str[*i] == '"' || str[*i] == '\'')
+		if (str[idx->i] == '"' || str[idx->i] == '\'')
 			in_quotes = !in_quotes;
-		else if (!in_quotes && white_space(str[*i]))
+		else if (!in_quotes && white_space(str[idx->i]))
 			break ;
-		(*i)++;
+		idx->i++;
 	}
 }
 
@@ -48,7 +48,7 @@ static int	process_word(char *str, char **tab, t_idx *idx, t_shell *shell)
 	tab[idx->j] = expand(tab[idx->j], shell);
 	if (!tab[idx->j])
 		return (0);
-	skip_word(str, idx->i);
+	skip_word(str, idx);
 	return (1);
 }
 
