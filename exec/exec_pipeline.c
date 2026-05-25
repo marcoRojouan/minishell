@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 14:45:36 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/24 15:20:09 by loup             ###   ########.fr       */
+/*   Updated: 2026/05/25 14:01:27 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	init_pipes(int **pipes, int cmd_count)
 	{
 		pipes[i] = malloc(sizeof(int) * 2);
 		if (!pipes[i])
-		return (0);
+			return (0);
 		pipe(pipes[i]);
 		i++;
 	}
