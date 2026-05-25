@@ -18,7 +18,11 @@ SRCS =	minishell.c \
 		built_in/ft_cd.c \
 		built_in/ft_export.c \
 		built_in/ft_env.c \
-		built_in/ft_unset.c
+		built_in/ft_unset.c \
+		exec/exec_pipeline.c \
+		exec/fd_gestion.c \
+		exec/execution.c \
+		exec/path_finder.c
 		
 OBJS = $(SRCS:.c=.o)
 

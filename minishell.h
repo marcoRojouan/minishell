@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/06 14:15:45 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/25 13:35:14 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <libft.h>
 
 typedef struct s_cmd
@@ -62,6 +64,9 @@ int		is_word(const char *token);
 int		is_quote_closed(char *line);
 int		is_in_order(char **split_line);
 
+int		exec_pipeline(t_shell *shell);
+int		fd_gestion(t_shell *shell, int **pipes, int i);
+
 int		white_space(char c);
 int		count_words(char *str);
 int		word_len(char *str);
@@ -84,6 +89,7 @@ void	expand_var(char *elem, char *res, t_idx *ctx, t_shell *shell);
 void	expand_status(char *res, t_idx *ctx, t_shell *shell);
 void	handle_quotes(char *elem, t_idx *ctx, int *in_single, int *in_double);
 void	sort_line(char **split_line, t_shell *shell);
+
 
 // A ENLEVER A LA FIN
 void	print_cmds(t_shell *shell, int cmd_count);
