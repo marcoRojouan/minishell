@@ -6,7 +6,11 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:48:46 by mrojouan          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/05/06 13:31:50 by malavaud         ###   ########.fr       */
+=======
+/*   Updated: 2026/05/05 15:36:38 by mrojouan         ###   ########.fr       */
+>>>>>>> 95617388628850e32804878b73cb5e1b20d6b9ed
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +36,8 @@ int	count_words(char *str)
 		return (0);
 	while (str[i])
 	{
-		if (!white_space(str[i]) &&
-			(i == 0 || (white_space(str[i - 1]) && !in_quotes)))
+		if (!white_space(str[i])
+			&& (i == 0 || (white_space(str[i - 1]) && !in_quotes)))
 			count++;
 		if (str[i] == '"' || str[i] == '\'')
 			in_quotes = !in_quotes;

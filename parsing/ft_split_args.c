@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:43:59 by mrojouan          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/05/06 13:31:58 by malavaud         ###   ########.fr       */
+=======
+/*   Updated: 2026/05/11 12:07:19 by mrojouan         ###   ########.fr       */
+>>>>>>> 95617388628850e32804878b73cb5e1b20d6b9ed
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,54 +29,53 @@ static char	*duplicate_wrd(char *str)
 	return (dup);
 }
 
-static void	skip_word(char *str, int *i)
+static void	skip_word(char *str, t_idx *idx)
 {
 	int	in_quotes;
 
 	in_quotes = 0;
-	while (str[*i])
+	while (str[idx->i])
 	{
-		if (str[*i] == '"' || str[*i] == '\'')
+		if (str[idx->i] == '"' || str[idx->i] == '\'')
 			in_quotes = !in_quotes;
-		else if (!in_quotes && white_space(str[*i]))
+		else if (!in_quotes && white_space(str[idx->i]))
 			break ;
-		(*i)++;
+		idx->i++;
 	}
 }
 
-static int	process_word(char *str, char **tab, int *i, int j, t_shell *shell)
+static int	process_word(char *str, char **tab, t_idx *idx, t_shell *shell)
 {
-	tab[j] = duplicate_wrd(str + *i);
-	if (!tab[j])
+	tab[idx->j] = duplicate_wrd(str + idx->i);
+	if (!tab[idx->j])
 		return (0);
-	tab[j] = expand(tab[j], shell);
-	if (!tab[j])
+	tab[idx->j] = expand(tab[idx->j], shell);
+	if (!tab[idx->j])
 		return (0);
-	skip_word(str, i);
+	skip_word(str, idx);
 	return (1);
 }
 
 static int	fill_tab(char *str, char **tab, t_shell *shell)
 {
-	int	i;
-	int	j;
+	t_idx	idx;
 
-	i = 0;
-	j = 0;
-	while (str[i])
+	idx.i = 0;
+	idx.j = 0;
+	while (str[idx.i])
 	{
-		while (str[i] && white_space(str[i]))
-			i++;
-		if (!str[i])
+		while (str[idx.i] && white_space(str[idx.i]))
+			idx.i++;
+		if (!str[idx.i])
 			break ;
-		if (!process_word(str, tab, &i, j, shell))
+		if (!process_word(str, tab, &idx, shell))
 		{
 			ft_free_tab(tab);
 			return (0);
 		}
-		j++;
+		idx.j++;
 	}
-	tab[j] = 0;
+	tab[idx.j] = 0;
 	return (1);
 }
 
