@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/12 11:32:00 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:59:21 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 int exec_caller(t_shell *shell)
 {
+	
 	if (shell->cmd_count == 1)
 	{
 		if (ft_strcmp(shell->cmds[0]->args[0], "pwd") == 0)
@@ -34,7 +35,10 @@ int exec_caller(t_shell *shell)
 			ft_cd(shell->cmds[0]->args, shell->env);
 		// si jamais la commande correspond a aucun builtin on envoi a l'exec d'1 commande
 	}
-	// si plusieurs commande on envoi a exec pipeline
-
+	else 
+	{
+		exec_pipeline(shell);
+	}
 	// on essai a chaque step de recuperer le STATUT
+	return (1);
 }
