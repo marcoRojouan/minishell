@@ -6,19 +6,14 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/26 15:03:16 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/26 16:05:08 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-// variable globale pour le statut, on sait pas mais peut etre
-
-// int exec_builtin
-
-int exec_caller(t_shell *shell)
+int	exec_caller(t_shell *shell)
 {
-	
 	if (shell->cmd_count == 1)
 	{
 		if (ft_strcmp(shell->cmds[0]->args[0], "pwd") == 0)
@@ -35,7 +30,7 @@ int exec_caller(t_shell *shell)
 			ft_cd(shell->cmds[0]->args, shell->env);
 		// si jamais la commande correspond a aucun builtin on envoi a l'exec d'1 commande
 	}
-	else 
+	else
 	{
 		exec_pipeline(shell);
 	}

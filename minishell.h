@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/26 15:11:24 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/26 15:15:52 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,16 @@ typedef struct s_shell
 
 typedef struct s_context
 {
-    int     i;
-    int     j;
-    int     k;
-}   t_context;
+	int	i;
+	int	j;
+	int	k;
+}	t_context;
 
 typedef struct s_idx
 {
-    int     i;
-    int     j;
-}   t_idx;
-
+	int	i;
+	int	j;
+}	t_idx;
 
 int		parsing(char *line, t_shell *shell);
 int		is_operator(const char *token);
@@ -66,7 +65,7 @@ int		is_in_order(char **split_line);
 
 int		exec_pipeline(t_shell *shell);
 void	fd_gestion(t_shell *shell, int **pipes, int i);
-int 	exec_caller(t_shell *shell);
+int		exec_caller(t_shell *shell);
 
 int		white_space(char c);
 int		count_words(char *str);

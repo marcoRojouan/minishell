@@ -6,19 +6,18 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:39:26 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/26 15:05:13 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/26 16:09:08 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int find_path_index(char **envp, char *value)
+int	find_path_index(char **envp, char *value)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
-
 	while (envp[i])
 	{
 		j = 0;
@@ -31,10 +30,10 @@ int find_path_index(char **envp, char *value)
 	return (-1);
 }
 
-static char *join_path(char *dir, char *cmd)
+static char	*join_path(char *dir, char *cmd)
 {
-	char *tmp;
-	char *final;
+	char	*tmp;
+	char	*final;
 
 	tmp = ft_strjoin(dir, "/");
 	if (!tmp)
@@ -46,10 +45,10 @@ static char *join_path(char *dir, char *cmd)
 	return (final);
 }
 
-static char **get_env_path(char *env_path)
+static char	**get_env_path(char *env_path)
 {
-	int i;
-	char **paths;
+	int		i;
+	char	**paths;
 
 	i = 0;
 	while (env_path[i] != '=')
@@ -62,13 +61,13 @@ static char **get_env_path(char *env_path)
 	return (paths);
 }
 
-char *find_path(char *cmd, char **envp)
+char	*find_path(char *cmd, char **envp)
 {
-	char **paths;
-	char *path;
-	int path_index;
-	int i;
-	
+	char	**paths;
+	char	*path;
+	int		path_index;
+	int		i;
+
 	if (!cmd)
 		return (NULL);
 	if (ft_strchr(cmd, '/'))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/11 12:10:01 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/26 15:16:10 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,5 @@ int	parsing(char *line, t_shell *shell)
 	shell->cmds = malloc(sizeof(t_cmd *) * (shell->cmd_count + 1));
 	if (!shell->cmds)
 		return (0);
-	sort_line(split_line, shell);
-	// print_cmds(shell, shell->cmd_count);
 	return (1);
 }
