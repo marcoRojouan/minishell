@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:39:26 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/12 16:02:25 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/26 12:10:23 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,11 @@ static char **get_env_path(char *env_path)
 	return (paths);
 }
 
-char *find_path(char *cmd, char **envp)
+static char	*find_path_in_dirs(char *cmd, char **paths)
 {
-	char **paths;
-	char *path;
-	int path_index;
-	int i;
-	
-	if (!cmd)
-		return (NULL);
-	if (ft_strchr(cmd, '/'))
-	{
-		if (access(cmd, X_OK) == 0)
-			return (ft_strdup(cmd));
-		return (NULL);
-	}
-	path_index = find_path_index(envp, "PATH=");
-	if (path_index == -1)
-		return (NULL);
-	paths = get_env_path(envp[path_index]);
+	char	*path;
+	int		i;
+
 	i = 0;
 	while (paths[i])
 	{
@@ -95,4 +81,26 @@ char *find_path(char *cmd, char **envp)
 	}
 	free_all(paths);
 	return (NULL);
+}
+
+char	*find_path(char *cmd, char **envp)
+{
+	char	**paths;
+	int		path_index;
+	char	*result;
+
+	if (!cmd)
+		return (NULL);
+	if (ft_strchr(cmd, '/'))
+	{
+		if (access(cmd, X_OK) == 0)
+			return (ft_strdup(cmd));
+		return (NULL);
+	}
+	path_index = find_path_index(envp, "PATH=");
+	if (path_index == -1)
+		return (NULL);
+	paths = get_env_path(envp[path_index]);
+	result = find_path_in_dirs(cmd, paths);
+	return (result);
 }

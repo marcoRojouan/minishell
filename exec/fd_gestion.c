@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fd_gestion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 15:03:40 by loup              #+#    #+#             */
-/*   Updated: 2026/05/24 15:10:45 by loup             ###   ########.fr       */
+/*   Updated: 2026/05/26 14:07:21 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int fd_gestion(t_shell *shell, int **pipes, int i)
+void	fd_gestion(t_shell *shell, int **pipes, int i)
 {
     int	j;
 

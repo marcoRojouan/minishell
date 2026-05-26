@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/25 13:35:14 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/26 15:15:40 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ typedef struct s_shell
 
 typedef struct s_context
 {
-    int     i;
-    int     j;
-    int     k;
-}   t_context;
+    int	i;
+    int	j;
+    int	k;
+}	t_context;
 
 typedef struct s_idx
 {
-    int     i;
-    int     j;
-}   t_idx;
+    int	i;
+    int	j;
+}	t_idx;
 
 
 int		parsing(char *line, t_shell *shell);
