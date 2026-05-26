@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/25 13:35:14 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/26 15:11:24 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int		is_quote_closed(char *line);
 int		is_in_order(char **split_line);
 
 int		exec_pipeline(t_shell *shell);
-int		fd_gestion(t_shell *shell, int **pipes, int i);
+void	fd_gestion(t_shell *shell, int **pipes, int i);
+int 	exec_caller(t_shell *shell);
 
 int		white_space(char c);
 int		count_words(char *str);
@@ -74,12 +75,12 @@ int		word_len(char *str);
 int		ft_cd(char **args, char **env);
 int		ft_echo(char **args);
 int		ft_pwd(void);
-int		ft_export(char **args, char ***env);
+char	**ft_export(char **args, char **env);
 void	ft_env(char **env);
-void	set_env(char ***env, char *key, char *value);
+char	**set_env(char **env, char *key, char *value);
 char	*get_env(char **env, char *key);
 int		valid_key(char *key);
-int		ft_unset(char **args, char ***env);
+int		ft_unset(char **args, char **env);
 
 char	*expand(char *elem, t_shell *shell);
 char	**ft_split_args(char *str, t_shell *shell);
@@ -89,9 +90,5 @@ void	expand_var(char *elem, char *res, t_idx *ctx, t_shell *shell);
 void	expand_status(char *res, t_idx *ctx, t_shell *shell);
 void	handle_quotes(char *elem, t_idx *ctx, int *in_single, int *in_double);
 void	sort_line(char **split_line, t_shell *shell);
-
-
-// A ENLEVER A LA FIN
-void	print_cmds(t_shell *shell, int cmd_count);
 
 #endif

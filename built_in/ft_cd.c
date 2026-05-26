@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:30:37 by malavaud          #+#    #+#             */
-/*   Updated: 2026/05/05 15:08:51 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/26 15:01:48 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,33 @@ char	*get_env(char **env, char *key)
 	return (NULL);
 }
 
-static void	add_env(char ***env, char *key, char *value, int i)
+static char	**add_env(char **env, char *key, char *value, int i)
 {
 	char	**new_env;
 	char	*new;
 
 	new_env = malloc(sizeof(char *) * (i + 2));
 	if (!new_env)
-		return ;
+		return (NULL);
 	i = 0;
-	while ((*env)[i])
+	while (env[i])
 	{
-		new_env[i] = (*env)[i];
+		new_env[i] = env[i];
 		i++;
 	}
 	new = malloc(ft_strlen(key) + ft_strlen(value) + 2);
 	if (!new)
-		return ;
+		return (NULL);
 	ft_strcpy(new, key);
 	ft_strcat(new, "=");
 	ft_strcat(new, value);
 	new_env[i] = new;
 	new_env[i + 1] = NULL;
-	free(*env);
-	*env = new_env;
+	free(env);
+	return (new_env);
 }
 
-void	set_env(char ***env, char *key, char *value)
+char	**set_env(char **env, char *key, char *value)
 {
 	int		i;
 	int		len;
@@ -62,24 +62,24 @@ void	set_env(char ***env, char *key, char *value)
 
 	i = 0;
 	len = ft_strlen(key);
-	while ((*env)[i])
+	while (env[i])
 	{
-		if (ft_strncmp((*env)[i], key, len) == 0
-			&& (*env)[i][len] == '=')
+		if (ft_strncmp(env[i], key, len) == 0
+			&& env[i][len] == '=')
 		{
 			new = malloc(len + ft_strlen(value) + 2);
 			if (!new)
-				return ;
+				return (NULL);
 			ft_strcpy(new, key);
 			ft_strcat(new, "=");
 			ft_strcat(new, value);
-			free((*env)[i]);
-			(*env)[i] = new;
-			return ;
+			free(env[i]);
+			env[i] = new;
+			return (env);
 		}
 		i++;
 	}
-	add_env(env, key, value, i);
+	return (add_env(env, key, value, i));
 }
 
 int	ft_cd(char **args, char **env)
@@ -105,8 +105,8 @@ int	ft_cd(char **args, char **env)
 		return (1);
 	}
 	new_pwd = getcwd(NULL, 0);
-	set_env(&env, "OLDPWD", old_pwd);
-	set_env(&env, "PWD", new_pwd);
+	env = set_env(env, "OLDPWD", old_pwd);
+	env = set_env(env, "PWD", new_pwd);
 	free(old_pwd);
 	free(new_pwd);
 	return (0);
