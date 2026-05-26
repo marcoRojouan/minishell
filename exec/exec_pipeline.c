@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 14:45:36 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/25 14:01:27 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/26 16:09:39 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ static void	wait_all(pid_t *pids, int cmd_count, t_shell *shell)
 	}
 	shell->exit_status = WEXITSTATUS(status);
 }
+
 static int	init_pipes(int **pipes, int cmd_count)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < cmd_count - 1)
 	{
@@ -40,6 +41,7 @@ static int	init_pipes(int **pipes, int cmd_count)
 	}
 	return (1);
 }
+
 static void	close_pipes(int **pipes, int cmd_count)
 {
 	int	i;
@@ -52,6 +54,7 @@ static void	close_pipes(int **pipes, int cmd_count)
 		i++;
 	}
 }
+
 static void	fork_cmds(t_shell *shell, int **pipes, pid_t *pids)
 {
 	int	i;
@@ -63,7 +66,7 @@ static void	fork_cmds(t_shell *shell, int **pipes, pid_t *pids)
 		if (pids[i] == 0)
 		{
 			fd_gestion(shell, pipes, i);
-			exec_cmd(shell->cmds[i], shell);
+			//exec_cmd(shell->cmds[i], shell);
 		}
 		i++;
 	}

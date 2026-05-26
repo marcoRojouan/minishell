@@ -6,13 +6,13 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 10:27:35 by malavaud          #+#    #+#             */
-/*   Updated: 2026/05/05 15:03:16 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/26 14:59:25 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	unset_env(char ***env, char *key)
+static void	unset_env(char **env, char *key)
 {
 	int		i;
 	int		j;
@@ -20,16 +20,16 @@ static void	unset_env(char ***env, char *key)
 
 	i = 0;
 	len = ft_strlen(key);
-	while ((*env)[i])
+	while (env[i])
 	{
-		if (ft_strncmp((*env)[i], key, len) == 0
-			&& (*env)[i][len] == '=')
+		if (ft_strncmp(env[i], key, len) == 0
+			&& env[i][len] == '=')
 		{
-			free((*env)[i]);
+			free(env[i]);
 			j = i;
-			while ((*env)[j])
+			while (env[j])
 			{
-				(*env)[j] = (*env)[j + 1];
+				env[j] = env[j + 1];
 				j++;
 			}
 			return ;
@@ -38,7 +38,7 @@ static void	unset_env(char ***env, char *key)
 	}
 }
 
-int	ft_unset(char **args, char ***env)
+int	ft_unset(char **args, char **env)
 {
 	int	i;
 
