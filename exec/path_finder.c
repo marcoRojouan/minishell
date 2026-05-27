@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:39:26 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/26 16:29:50 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/27 16:32:53 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,33 +53,17 @@ static char	**get_env_path(char *env_path)
 	i = 0;
 	while (env_path[i] != '=')
 		i++;
-	paths = ft_split(env_path + i, ':'); /* peut etre + 1*/
+	paths = ft_split(env_path + i, ':');
 	if (!paths)
 		return (NULL);
 	return (paths);
 }
 
-char	*find_path(char *cmd, char **envp)
+static char	*find_path_in_dirs(char *cmd, char **paths)
 {
-	char	**paths;
 	char	*path;
-	int		path_index;
 	int		i;
 
-	if (!cmd)
-		return (NULL);
-	if (ft_strchr(cmd, '/'))
-	{
-		if (access(cmd, X_OK) == 0)
-			return (ft_strdup(cmd));
-		return (NULL);
-	}
-	path_index = find_path_index(envp, "PATH=");
-	if (path_index == -1)
-		return (NULL);
-	paths = get_env_path(envp[path_index]);
-	//if (!path)
-	//	return (NULL);
 	i = 0;
 	while (paths[i])
 	{
@@ -94,4 +78,26 @@ char	*find_path(char *cmd, char **envp)
 	}
 	ft_free_tab(paths);
 	return (NULL);
+}
+
+char	*find_path(char *cmd, char **envp)
+{
+	char	**paths;
+	int		path_index;
+	char	*result;
+
+	if (!cmd)
+		return (NULL);
+	if (ft_strchr(cmd, '/'))
+	{
+		if (access(cmd, X_OK) == 0)
+			return (ft_strdup(cmd));
+		return (NULL);
+	}
+	path_index = find_path_index(envp, "PATH=");
+	if (path_index == -1)
+		return (NULL);
+	paths = get_env_path(envp[path_index]);
+	result = find_path_in_dirs(cmd, paths);
+	return (result);
 }

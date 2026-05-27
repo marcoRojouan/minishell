@@ -22,7 +22,8 @@ SRCS =	minishell.c \
 		exec/exec_pipeline.c \
 		exec/fd_gestion.c \
 		exec/execution.c \
-		exec/path_finder.c
+		exec/path_finder.c \
+		exec/exec_cmd.c
 		
 OBJS = $(SRCS:.c=.o)
 

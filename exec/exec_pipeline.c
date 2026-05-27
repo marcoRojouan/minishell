@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 14:45:36 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/26 16:09:39 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/27 15:50:59 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	fork_cmds(t_shell *shell, int **pipes, pid_t *pids)
 		if (pids[i] == 0)
 		{
 			fd_gestion(shell, pipes, i);
-			//exec_cmd(shell->cmds[i], shell);
+			exec_cmd(shell->cmds[i], shell);
 		}
 		i++;
 	}

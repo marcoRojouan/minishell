@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/26 15:09:56 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/27 15:53:26 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	main(int ac, char **av, char **envp)
 			add_history(line);
 			if (!parsing(line, &shell))
 				ft_putstr_fd("minishell : parsing error\n", 2);
-			exec_caller(&shell);
+			execution(&shell);
 		}
 		free(line);
 	}
