@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/26 16:13:58 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/27 15:52:08 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		is_in_order(char **split_line);
 
 int		exec_pipeline(t_shell *shell);
 void	fd_gestion(t_shell *shell, int **pipes, int i);
-int		exec_caller(t_shell *shell);
+int		execution(t_shell *shell);
 
 int		white_space(char c);
 int		count_words(char *str);
