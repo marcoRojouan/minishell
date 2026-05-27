@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:39:26 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/26 16:09:08 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/26 16:29:50 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ static char	**get_env_path(char *env_path)
 		i++;
 	paths = ft_split(env_path + i, ':'); /* peut etre + 1*/
 	if (!paths)
-	{
 		return (NULL);
-	}
 	return (paths);
 }
 
