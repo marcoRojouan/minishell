@@ -6,13 +6,44 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/28 11:57:37 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/28 12:22:13 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 // variable globale pour le statut, on sait pas mais peut etre
+
+// static int  is_heredoc(t_shell *shell)
+// {
+//     int     i;
+    
+//     i = 0;
+//     while (i < shell->cmd_count)
+//     {
+//         if (shell->cmds[i]->delimiter)
+//             return (1);
+//         i++;
+//     }
+//     return (0);
+// }
+
+// Parent-only builtins
+
+// Doivent rester dans le parent :
+
+// cd
+// export
+// unset
+// exit
+
+// Builtins “safe”
+
+// Peuvent tourner dans un child :
+
+// echo
+// pwd
+// env
 
 static int     exec_builtin(t_shell *shell)
 {
@@ -37,7 +68,7 @@ static int     exec_builtin(t_shell *shell)
 
 int	execution(t_shell *shell)
 {
-    
+    prepare_heredoc(shell);
 	if (shell->cmd_count == 1)
 	{
 		if (!exec_builtin(shell))
