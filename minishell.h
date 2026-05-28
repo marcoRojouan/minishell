@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/28 11:57:50 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/28 12:00:22 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,8 @@ int		is_in_order(char **split_line);
 int		exec_pipeline(t_shell *shell);
 void	fd_gestion(t_shell *shell, int **pipes, int i);
 int		execution(t_shell *shell);
-<<<<<<< HEAD
-=======
 void	exec_cmd(t_cmd *cmd, t_shell *shell);
 char	*find_path(char *cmd, char **envp);
->>>>>>> ab5d2bd8a430547bcba5590992f0ef850d8c4c69
 
 int		white_space(char c);
 int		count_words(char *str);
