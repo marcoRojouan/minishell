@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_finder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:39:26 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/26 16:14:50 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/27 16:32:53 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,9 @@ static char	**get_env_path(char *env_path)
 	i = 0;
 	while (env_path[i] != '=')
 		i++;
-	paths = ft_split(env_path + i, ':'); /* peut etre + 1*/
+	paths = ft_split(env_path + i, ':');
 	if (!paths)
-	{
 		return (NULL);
-	}
 	return (paths);
 }
 

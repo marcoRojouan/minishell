@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/28 11:54:30 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/28 11:57:37 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int     exec_builtin(t_shell *shell)
     char    *cmd;
 
     cmd = shell->cmds[0]->args[0];
+    printf("%s", cmd);
     if (ft_strcmp(cmd, "pwd") == 0)
         return (ft_pwd());
     else if (ft_strcmp(cmd, "env") == 0)
