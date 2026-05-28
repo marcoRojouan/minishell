@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:05:10 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/27 16:35:10 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/28 12:25:37 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,36 @@
 //	// dup2 le read end sur stdin
 //}
 
-// c la Maeva
+static void	setup_redirections(t_cmd *cmd)
+{
+	int	fd;
 
-// tu prend la commande et le shell et
-// tu l' execute avec execve mais d'abord il faut trouver le chemin de la commande.
-// voila
-// hesite pas a me demander si t'as besoin d'aide
-
-//surtout pour les infile outfile et tout
+	if (cmd->outfile) /*si la cmd contient > >>*/
+	{
+		if (cmd->insert)/*cas avec >> o_append ecrit a la fin du ficher*/
+			fd = open(cmd->outfile, O_CREAT | O_WRONLY | O_APPEND, 0644);
+		else /*cas avc > o_trunc ecrase le contenu du fichier avant d'ecrire*/
+			fd = open(cmd->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (fd < 0)
+		{
+			perror(cmd->outfile);
+			exit(1);
+		}
+		dup2(fd, STDOUT_FILENO);/*remplace stout par le fichier*/
+		close(fd);
+	}
+	if (cmd->infile)
+	{
+		fd = open(cmd->infile, O_RDONLY);/*ouvre le fichier en lecture*/
+		if (fd < 0)
+		{
+			perror(cmd->infile);
+			exit(1);
+		}
+		dup2(fd, STDIN_FILENO);/*remplace stdin par le fichier */
+		close(fd);
+	}
+}
 
 void	exec_cmd(t_cmd *cmd, t_shell *shell)
 {
@@ -34,6 +56,7 @@ void	exec_cmd(t_cmd *cmd, t_shell *shell)
 
 	if (!cmd->args || !cmd->args[0])
 		exit(1);
+	setup_redirections(cmd);
 	path = find_path(cmd->args[0], shell->env);
 	if (!path)
 	{

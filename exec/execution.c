@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/27 16:31:58 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/05/28 12:18:36 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int     exec_builtin(t_shell *shell)
     char    *cmd;
 
     cmd = shell->cmds[0]->args[0];
-    printf("%s", cmd);
     if (ft_strcmp(cmd, "pwd") == 0)
         return (ft_pwd());
     else if (ft_strcmp(cmd, "env") == 0)
@@ -43,9 +42,7 @@ int	execution(t_shell *shell)
             exec_cmd(shell->cmds[0], shell);
 	}
 	else
-	{
 		exec_pipeline(shell);
-	}
 	// on essai a chaque step de recuperer le STATUT;
 	return (1);
 }
