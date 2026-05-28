@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/27 16:37:44 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/28 11:54:30 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,14 @@ static int     exec_builtin(t_shell *shell)
 
 int	execution(t_shell *shell)
 {
+    
 	if (shell->cmd_count == 1)
 	{
 		if (!exec_builtin(shell))
-        {
-            printf("\n");
-            // exec_one_cmd(shell);
-        }
+            exec_one_cmd(shell);
 	}
-	// else
-	// {
-	// 	exec_pipeline(shell);
-	// }
+	else
+		exec_pipeline(shell);
 	// // on essai a chaque step de recuperer le STATUT;
 	return (1);
 }
