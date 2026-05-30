@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 15:46:32 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/27 16:12:13 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/30 14:02:42 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	exec_one_cmd(t_shell *shell)
 	if (pid == -1)
 	{
 		perror("fork");
-		return;
+		return (0);
 	}
 	if (pid == 0)
 	{
 		exec_cmd(cmd, shell);
-		exit(127);
 	}
 	waitpid(pid, &status, 0);
 	shell->exit_status = WEXITSTATUS(status);
+	return (1);
 }

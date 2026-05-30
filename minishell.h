@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/30 13:58:30 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/30 14:01:50 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char	*find_path(char *cmd, char **envp);
 int		is_parent_builtin(char *cmd);
 int		exec_parent_builtin(t_shell *shell);
 int		exec_child_builtin(t_cmd *cmd, t_shell *shell);
+int		exec_one_cmd(t_shell *shell);
 
 int		white_space(char c);
 int		count_words(char *str);

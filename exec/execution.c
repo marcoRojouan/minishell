@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/30 13:58:19 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/30 14:01:15 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	execution(t_shell *shell)
 		if (is_parent_builtin(cmd))
 			exec_parent_builtin(shell);
 		else
-            exec_cmd(shell->cmds[0], shell);
+            exec_one_cmd(shell);
 	}
 	else
 		exec_pipeline(shell);

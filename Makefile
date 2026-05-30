@@ -24,6 +24,7 @@ SRCS =	minishell.c \
 		exec/execution.c \
 		exec/path_finder.c \
 		exec/exec_builtins.c \
+		exec/exec_one_cmd.c \
 		exec/exec_cmd.c
 		
 OBJS = $(SRCS:.c=.o)
