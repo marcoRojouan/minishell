@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/30 14:01:15 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/30 15:23:34 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ int	execution(t_shell *shell)
 	char	*cmd;
 
 	cmd = shell->cmds[0]->args[0];
-
+    
+    if (prepare_heredoc(shell))
+    {
+        return (1);   
+    }
 	if (shell->cmd_count == 1)
 	{
 		if (is_parent_builtin(cmd))
