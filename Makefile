@@ -23,6 +23,8 @@ SRCS =	minishell.c \
 		exec/fd_gestion.c \
 		exec/execution.c \
 		exec/path_finder.c \
+		exec/exec_builtins.c \
+		exec/exec_one_cmd.c \
 		exec/exec_cmd.c
 		
 OBJS = $(SRCS:.c=.o)
@@ -36,7 +38,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS)
 
 %.o: %.c minishell.h
-	$(CC) $(CFLAGS) -I./libft -c $< -o $@
+	$(CC) $(CFLAGS) -I./libft -I. -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

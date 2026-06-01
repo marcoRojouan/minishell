@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:05:10 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/28 12:25:37 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/01 13:42:45 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	exec_cmd(t_cmd *cmd, t_shell *shell)
 	if (!cmd->args || !cmd->args[0])
 		exit(1);
 	setup_redirections(cmd);
+	if (exec_child_builtin(cmd, shell))
+		exit(0); 	
 	path = find_path(cmd->args[0], shell->env);
 	if (!path)
 	{
@@ -67,7 +69,4 @@ void	exec_cmd(t_cmd *cmd, t_shell *shell)
 	perror("execve");
 	free(path);
 	exit (1);
-	// appelle setup_redirections
-	// cherche le path
-	// appelle execve
 }

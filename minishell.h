@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/28 11:51:53 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/01 12:14:38 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ void	fd_gestion(t_shell *shell, int **pipes, int i);
 int		execution(t_shell *shell);
 void	exec_cmd(t_cmd *cmd, t_shell *shell);
 char	*find_path(char *cmd, char **envp);
+int		is_parent_builtin(char *cmd);
+int		exec_parent_builtin(t_shell *shell);
+int		exec_child_builtin(t_cmd *cmd, t_shell *shell);
+int		exec_one_cmd(t_shell *shell);
 
 int		white_space(char c);
 int		count_words(char *str);

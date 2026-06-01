@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   exec_one_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/01 12:14:32 by malavaud         ###   ########.fr       */
+/*   Created: 2026/05/27 15:46:32 by mrojouan          #+#    #+#             */
+/*   Updated: 2026/05/30 14:02:42 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	execution(t_shell *shell)
+int	exec_one_cmd(t_shell *shell)
 {
-	char	*cmd;
+	t_cmd	*cmd;
+	pid_t	pid;
+	int		status;
 
-	cmd = shell->cmds[0]->args[0];
-
-	if (shell->cmd_count == 1)
+	cmd = shell->cmds[0];
+	pid = fork();
+	if (pid == -1)
 	{
-		if (is_parent_builtin(cmd))
-			exec_parent_builtin(shell);
-		else
-            exec_one_cmd(shell);
+		perror("fork");
+		return (0);
 	}
-	else
-		exec_pipeline(shell);
+	if (pid == 0)
+	{
+		exec_cmd(cmd, shell);
+	}
+	waitpid(pid, &status, 0);
+	shell->exit_status = WEXITSTATUS(status);
 	return (1);
 }
