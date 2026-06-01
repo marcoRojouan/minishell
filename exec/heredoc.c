@@ -6,30 +6,11 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 12:04:49 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/30 16:05:57 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/01 11:08:39 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-// static int heredoc_counter(t_shell *shell)
-// {
-// 	int	i;
-// 	int	count;
-
-// 	count = 0;
-// 	i = 0;
-	
-// 	while (i < shell->cmd_count)
-// 	{
-// 		if (shell->cmds[i]->delimiter)
-// 			count++;
-// 		i++;
-// 	}
-
-// 	return (count);
-// }
-
 
 int	prepare_heredoc(t_shell *shell)
 {
