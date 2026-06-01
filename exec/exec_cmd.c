@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:05:10 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/28 17:01:55 by loup             ###   ########.fr       */
+/*   Updated: 2026/06/01 12:09:38 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,10 @@ void	exec_cmd(t_cmd *cmd, t_shell *shell)
 
 	if (!cmd->args || !cmd->args[0])
 		exit(1);
-	
 	//ici on peut choisir entre un builtin (exec_child_builtin)
 	//ou bien continuer avec findpath et execve si ca n'est pas un builtin
 	if (exec_child_builtin(cmd, shell))
 		exit(0); 
-		
 	path = find_path(cmd->args[0], shell->env);
 	if (!path)
 	{
