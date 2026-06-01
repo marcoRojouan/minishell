@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:05:10 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/01 13:42:45 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/01 13:51:52 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	setup_redirections(t_cmd *cmd)
 {
 	int	fd;
 
+	if (cmd->fd_heredoc != -1)
+		dup2(cmd->fd_heredoc, STDIN_FILENO);
 	if (cmd->outfile) /*si la cmd contient > >>*/
 	{
 		if (cmd->insert)/*cas avec >> o_append ecrit a la fin du ficher*/

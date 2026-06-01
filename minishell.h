@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/01 12:14:38 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/01 13:50:54 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_cmd
 	char			*outfile;
 	char			*delimiter;
 
+	int				fd_heredoc;
 	int				insert;
 
 	struct s_cmd	*next;
@@ -73,6 +74,8 @@ int		is_parent_builtin(char *cmd);
 int		exec_parent_builtin(t_shell *shell);
 int		exec_child_builtin(t_cmd *cmd, t_shell *shell);
 int		exec_one_cmd(t_shell *shell);
+
+int		prepare_heredoc(t_shell *shell);
 
 int		white_space(char c);
 int		count_words(char *str);

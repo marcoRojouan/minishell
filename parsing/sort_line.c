@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:14:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/06 14:22:01 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/05/30 15:13:33 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	pipe_handler(t_context *ctx, t_shell *shell)
 	if (!shell->cmds[ctx->j])
 		return ;
 	ft_bzero(shell->cmds[ctx->j], sizeof(t_cmd));
+	shell->cmds[ctx->j]->fd_heredoc = -1;
 	ctx->k = 0;
 }
 
@@ -79,6 +80,7 @@ void	sort_line(char **split_line, t_shell *shell)
 	if (!shell->cmds[0])
 		return ;
 	ft_bzero(shell->cmds[0], sizeof(t_cmd));
+	shell->cmds[0]->fd_heredoc = -1;
 	while (split_line[ctx.i])
 	{
 		if (!ft_strcmp(split_line[ctx.i], "|"))
