@@ -6,23 +6,18 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:05:10 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/01 13:56:26 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:04:56 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-//void    handle_heredoc(t_cmd *cmd)
-//{
-//	// lit les lignes jusqu'au délimiteur
-//	// écrit dans un pipe
-//	// dup2 le read end sur stdin
-//}
-
 static void	setup_redirections(t_cmd *cmd)
 {
 	int	fd;
 
+	if (cmd->fd_heredoc != -1)
+		dup2(cmd->fd_heredoc, STDIN_FILENO);
 	if (cmd->outfile) /*si la cmd contient > >>*/
 	{
 		if (cmd->insert)/*cas avec >> o_append ecrit a la fin du ficher*/
@@ -58,7 +53,7 @@ void	exec_cmd(t_cmd *cmd, t_shell *shell)
 		exit(1);
 	setup_redirections(cmd);
 	if (exec_child_builtin(cmd, shell))
-		exit(0); 	
+		exit(0);
 	path = find_path(cmd->args[0], shell->env);
 	if (!path)
 	{
