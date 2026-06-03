@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:43:59 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/26 14:35:57 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:00:22 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,13 @@ static void	skip_word(char *str, t_idx *idx)
 
 static int	process_word(char *str, char **tab, t_idx *idx, t_shell *shell)
 {
-	tab[idx->j] = duplicate_wrd(str + idx->i);
-	if (!tab[idx->j])
+	char	*tmp;
+
+	tmp = duplicate_wrd(str + idx->i);
+	if (!tmp)
 		return (0);
-	tab[idx->j] = expand(tab[idx->j], shell);
+	tab[idx->j] = expand(tmp, shell);
+	free(tmp);
 	if (!tab[idx->j])
 		return (0);
 	skip_word(str, idx);

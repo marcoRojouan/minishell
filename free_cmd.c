@@ -1,31 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   free_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/01 12:14:32 by malavaud         ###   ########.fr       */
+/*   Created: 2026/06/01 14:14:37 by malavaud          #+#    #+#             */
+/*   Updated: 2026/06/03 12:03:28 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	execution(t_shell *shell)
+static void	free_cmd(t_cmd *cmd)
 {
-	char	*cmd;
+	int	i;
 
-	cmd = shell->cmds[0]->args[0];
-
-	if (shell->cmd_count == 1)
+	if (!cmd)
+		return ;
+	if (cmd->args)
 	{
-		if (is_parent_builtin(cmd))
-			exec_parent_builtin(shell);
-		else
-            exec_one_cmd(shell);
+		i = 0;
+		while (cmd->args[i])
+		{
+			free(cmd->args[i]);
+			i++;
+		}
+		free(cmd->args);
 	}
-	else
-		exec_pipeline(shell);
-	return (1);
+	free(cmd);
+}
+
+void	free_cmds(t_shell *shell)
+{
+	int	i;
+
+	i = 0;
+	while (i < shell->cmd_count)
+	{
+		free_cmd(shell->cmds[i]);
+		i++;
+	}
+	free(shell->cmds);
+	shell->cmds = NULL;
+	shell->cmd_count = 0;
 }

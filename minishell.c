@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/28 11:57:43 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/03 12:06:19 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,13 @@ int	main(int ac, char **av, char **envp)
 			add_history(line);
 			if (!parsing(line, &shell))
 				ft_putstr_fd("minishell : parsing error\n", 2);
-			execution(&shell);
+			else
+			{
+				execution(&shell);
+				free_cmds(&shell);
+			}
 		}
 		free(line);
+		free(prompt);
 	}
 }

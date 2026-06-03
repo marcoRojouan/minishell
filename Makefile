@@ -6,6 +6,7 @@ NAME = minishell
 LIBFT = libft/libft.a
 
 SRCS =	minishell.c \
+		free_cmd.c \
 		parsing/parsing.c \
 		parsing/parsing_utils.c \
 		parsing/ft_split_args.c \
