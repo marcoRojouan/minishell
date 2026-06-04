@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 10:48:48 by malavaud          #+#    #+#             */
-/*   Updated: 2026/05/26 16:02:54 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:22:51 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ char	**ft_export(char **args, char **env)
 		ft_env(env);
 		return (env);
 	}
-	env = handle_plus(args, env);
+	if (ft_strnstr(args[1], "+=", ft_strlen(args[1])))
+		return (handle_plus(args, env));
 	ptr = ft_strchr(args[1], '=');
 	if (ptr)
 	{
