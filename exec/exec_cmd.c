@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:05:10 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/03 14:04:56 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/04 11:49:17 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	exec_cmd(t_cmd *cmd, t_shell *shell)
 	path = find_path(cmd->args[0], shell->env);
 	if (!path)
 	{
-		printf("%s: command not found\n", cmd->args[0]);
+		printf("minishell: command not found: %s\n", cmd->args[0]);
 		exit(127);
 	}
 	execve(path, cmd->args, shell->env);
