@@ -4,6 +4,7 @@ LDFLAGS = -L./libft -lft -lreadline
 
 NAME = minishell
 LIBFT = libft/libft.a
+OBJ_DIR = obj
 
 SRCS =	minishell.c \
 		free_cmd.c \
@@ -29,8 +30,8 @@ SRCS =	minishell.c \
 		exec/exec_one_cmd.c \
 		exec/heredoc.c \
 		exec/exec_cmd.c
-		
-OBJS = $(SRCS:.c=.o)
+
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 all: $(LIBFT) $(NAME)
 
@@ -40,11 +41,12 @@ $(LIBFT):
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS)
 
-%.o: %.c minishell.h
+$(OBJ_DIR)/%.o: %.c minishell.h
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -I./libft -I. -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 	make -C libft clean
 
 fclean: clean
