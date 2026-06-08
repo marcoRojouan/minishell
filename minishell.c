@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/03 12:06:19 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 10:52:46 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,17 @@ static char	*prompt_making(void)
 	char	*cwd;
 	char	*tmp;
 	char	*prompt;
-
 	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		return NULL;
 	tmp = ft_strjoin(cwd, " >");
-	prompt = ft_strjoin(tmp, "$ ");
 	free(cwd);
+	if (!tmp)
+		return NULL;
+	prompt = ft_strjoin(tmp, "$ ");
 	free(tmp);
+	if (!prompt)
+		return NULL;
 	return (prompt);
 }
 
@@ -42,7 +47,12 @@ char	**copy_env(char **envp)
 	{
 		new_env[i] = ft_strdup(envp[i]);
 		if (!new_env[i])
-			return (NULL);
+		{
+			while (i--)
+				free(new_env[i]);
+			free(new_env);
+			return NULL;
+		}
 		i++;
 	}
 	new_env[i] = NULL;
@@ -58,33 +68,34 @@ static int	init_shell(t_shell *shell, char **envp)
 	return (0);
 }
 
-int	main(int ac, char **av, char **envp)
+int main(int ac, char **av, char **envp)
 {
-	char		*prompt;
-	char		*line;
-	t_shell		shell;
+	char        *prompt;
+	char        *line;
+	t_shell     shell;
 
 	(void)ac;
 	(void)av;
+	ft_bzero(&shell, sizeof(t_shell));
 	init_shell(&shell, envp);
 	while (1)
 	{
 		prompt = prompt_making();
 		line = readline(prompt);
+		free(prompt);
 		if (!line)
-			break ;
+			break;
 		if (*line)
 		{
 			add_history(line);
 			if (!parsing(line, &shell))
 				ft_putstr_fd("minishell : parsing error\n", 2);
 			else
-			{
 				execution(&shell);
-				free_cmds(&shell);
-			}
+			free_cmds(&shell);
 		}
 		free(line);
-		free(prompt);
 	}
+	ft_free_tab(shell.env);
+	return (0);
 }
