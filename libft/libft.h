@@ -45,7 +45,7 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memchr(const void *str, int occ, size_t n);
 char				*ft_strchr(const char *str, int occ);
 char				*ft_strrchr(const char *str, int occ);
-char				*ft_strdup(const char *s);
+char				*ft_strdup(const char *src);
 char				*ft_substr(const char *src, unsigned int start,
 						size_t size);
 char				*ft_strtrim(const char *s1, const char *set);
