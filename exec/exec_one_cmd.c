@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_one_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 15:46:32 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/30 14:02:42 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/07 21:58:08 by loup             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,14 @@ int	exec_one_cmd(t_shell *shell)
 		return (0);
 	}
 	if (pid == 0)
-	{
 		exec_cmd(cmd, shell);
-	}
 	waitpid(pid, &status, 0);
-	shell->exit_status = WEXITSTATUS(status);
+	if (WIFEXITED(status))
+		shell->exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		write(1, "\n", 1);
+		shell->exit_status = 128 + WTERMSIG(status);
+	}
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 10:52:46 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 13:54:21 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,13 @@ static int	init_shell(t_shell *shell, char **envp)
 	return (0);
 }
 
-int main(int ac, char **av, char **envp)
+static void	update_status(t_shell *shell)
+{
+	shell->exit_status = signal_g;
+	signal_g = 0;
+}
+
+int	main(int ac, char **av, char **envp)
 {
 	char        *prompt;
 	char        *line;
@@ -80,14 +86,21 @@ int main(int ac, char **av, char **envp)
 	init_shell(&shell, envp);
 	while (1)
 	{
+		init_signals();
 		prompt = prompt_making();
 		line = readline(prompt);
 		free(prompt);
 		if (!line)
-			break;
+		{
+			write(1, "exit\n", 5);
+			break ;
+		}
 		if (*line)
 		{
 			add_history(line);
+			if (signal_g != 0)
+				update_status(&shell);
+			signal(SIGINT, SIG_IGN);
 			if (!parsing(line, &shell))
 				ft_putstr_fd("minishell : parsing error\n", 2);
 			else

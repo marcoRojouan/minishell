@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:14:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 11:20:07 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 13:54:04 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,18 @@ static int	args_handler(t_context *ctx, char **split_line, t_shell *shell)
 		arg_count++;
 	shell->cmds[ctx->j]->args = malloc(sizeof(char *) * (arg_count + 1));
 	if (!shell->cmds[ctx->j]->args)
+	{
+		ft_free_tab(split_line);
 		return (0);
+	}
 	while (split_line[ctx->i] && is_word(split_line[ctx->i]))
 	{
 		shell->cmds[ctx->j]->args[ctx->k] = ft_strdup(split_line[ctx->i]);
+		if (!shell->cmds[ctx->j]->args[ctx->k])
+		{
+			ft_free_tab(split_line);
+			return(0);
+		}
 		ctx->k++;
 		ctx->i++;
 	}
@@ -81,7 +89,10 @@ void	sort_line(char **split_line, t_shell *shell)
 	ctx.k = 0;
 	shell->cmds[0] = malloc(sizeof(t_cmd));
 	if (!shell->cmds[0])
+	{
+		ft_free_tab(split_line);
 		return ;
+	}
 	ft_bzero(shell->cmds[0], sizeof(t_cmd));
 	shell->cmds[0]->fd_heredoc = -1;
 	while (split_line[ctx.i])

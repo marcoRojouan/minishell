@@ -8,6 +8,7 @@ OBJ_DIR = obj
 
 SRCS =	minishell.c \
 		free_cmd.c \
+		signal.c \
 		parsing/parsing.c \
 		parsing/parsing_utils.c \
 		parsing/ft_split_args.c \

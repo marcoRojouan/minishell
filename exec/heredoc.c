@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 12:04:49 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 11:56:55 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 13:53:33 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ int	prepare_heredoc(t_shell *shell)
 			while (1)
 			{
 				line = readline("> ");
-				if (!line)
-					break ;
-				if (!ft_strcmp(line, shell->cmds[i]->delimiter))
+				if (!line || !ft_strcmp(line, shell->cmds[i]->delimiter))
 				{
 					free(line);
 					break ;

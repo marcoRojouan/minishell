@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 12:02:54 by mrojouan         ###   ########.fr       */
+/*   Created: 2026/06/02 16:14:49 by mrojouan          #+#    #+#             */
+/*   Updated: 2026/06/08 10:03:29 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	execution(t_shell *shell)
+volatile sig_atomic_t signal_g = 0;
+
+void	sigint_handler(int sig)
 {
-	signal(SIGPIPE, SIG_IGN);
-	if (!prepare_heredoc(shell))
-		return (1);
-	if (!shell->cmds[0]->args || !shell->cmds[0]->args[0])
-		return (1);
-	if (shell->cmd_count == 1)
-	{
-		if (is_parent_builtin(shell->cmds[0]->args[0]))
-			exec_parent_builtin(shell);
-		else
-			exec_one_cmd(shell);
-	}
-	else
-		exec_pipeline(shell);
-	if (signal_g == SIGINT)
-		signal_g = 0;
-	return (1);
+	(void)sig;
+	signal_g = SIGINT;
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	init_signals(void)
+{
+	signal(SIGINT, sigint_handler);
+    signal(SIGQUIT, SIG_IGN);
 }
