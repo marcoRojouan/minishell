@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 16:40:13 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:59:19 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ typedef struct s_shell
 	int				cmd_count;
 	int				exit_status;
 }	t_shell;
+
+typedef struct s_pipeline
+{
+    pid_t   *pids;
+    int     **pipes;
+    int     cmd_count;
+}   t_pipeline;
 
 typedef struct s_context
 {
@@ -105,7 +112,8 @@ void	handle_quotes(char *elem, t_idx *ctx, int *in_single, int *in_double);
 void	sort_line(char **split_line, t_shell *shell);
 
 void	free_cmds(t_shell *shell);
-void	free_pipes(int **pipes, t_shell *shell);
+void    free_pipeline(t_pipeline *pipeline);
+void    free_pipes(t_pipeline *pipeline);
 void    cleanup_child(t_shell *shell, char *path);
 
 void	init_signals(void);

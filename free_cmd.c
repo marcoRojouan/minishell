@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 14:14:37 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/08 15:20:02 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:58:08 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,24 @@ void	free_cmds(t_shell *shell)
 	shell->cmds = NULL;
 	shell->cmd_count = 0;
 }
-
-void	free_pipes(int **pipes, t_shell *shell)
+void    free_pipeline(t_pipeline *pipeline)
 {
-	int	i;
+    free_pipes(pipeline);
+    free(pipeline->pids);
+}
 
-	if (!pipes)
-		return ;
-	i = 0;
-	while (i < shell->cmd_count - 1)
-	{
-		free(pipes[i]);
-		i++;
-	}
-	free(pipes);
+void    free_pipes(t_pipeline *pipeline)
+{
+    int i;
+
+    i = 0;
+    while (i < pipeline->cmd_count - 1)
+    {
+        free(pipeline->pipes[i]);
+        i++;
+    }
+    free(pipeline->pipes);
+	
 }
 
 void	cleanup_child(t_shell *shell, char *path)
