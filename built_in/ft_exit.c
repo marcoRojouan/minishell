@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:41:35 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/08 11:09:48 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 15:50:22 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ static int	is_numeric(char *str)
 
 int ft_exit(char **args, t_shell *shell)
 {
-	printf("exit\n");
+	int	status;
 
+	status = 0;
+	printf("exit\n");
 	if (!args[1])
 	{
 		ft_free_tab(shell->env);
@@ -53,7 +55,8 @@ int ft_exit(char **args, t_shell *shell)
 		shell->exit_status = 1;
 		return (1);
 	}
+	status = ft_atoi(args[1]) % 256;
 	ft_free_tab(shell->env);
 	free_cmds(shell);
-	exit(ft_atoi(args[1]) % 256);
+	exit(status);
 }

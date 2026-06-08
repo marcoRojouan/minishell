@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/07 17:25:14 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 14:49:59 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int	parsing(char *line, t_shell *shell)
 	char	**split_line;
 
 	if (!is_quote_closed(line))
+	{
+		ft_putstr_fd("minishell : parsing error\n", 2);
 		return (0);
+	}
 	split_line = ft_split_args(line, shell);
 	if (!split_line)
 		return (0);

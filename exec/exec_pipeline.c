@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 14:45:36 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/07 22:08:41 by loup             ###   ########.fr       */
+/*   Updated: 2026/06/08 16:34:02 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,22 @@ static void	wait_all(pid_t *pids, int cmd_count, t_shell *shell)
 static int	init_pipes(int **pipes, int cmd_count)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (i < cmd_count - 1)
 	{
 		pipes[i] = malloc(sizeof(int) * 2);
 		if (!pipes[i])
+		{
+			j = 0;
+			while (j < i)
+			{
+				free(pipes[j]);
+				j++;
+			}
 			return (0);
+		}
 		pipe(pipes[i]);
 		i++;
 	}
@@ -85,7 +94,6 @@ static void	fork_cmds(t_shell *shell, int **pipes, pid_t *pids)
 		i++;
 	}
 }
-
 int	exec_pipeline(t_shell *shell)
 {
 	pid_t	*pids;
@@ -94,13 +102,25 @@ int	exec_pipeline(t_shell *shell)
 	pids = malloc(sizeof(pid_t) * shell->cmd_count);
 	if (!pids)
 		return (0);
+
 	pipes = malloc(sizeof(int *) * (shell->cmd_count - 1));
 	if (!pipes)
+	{
+		free(pids);
 		return (0);
+	}
+
 	if (!init_pipes(pipes, shell->cmd_count))
+	{
+		free(pipes);
+		free(pids);
 		return (0);
+	}
+
 	fork_cmds(shell, pipes, pids);
 	close_pipes(pipes, shell->cmd_count);
+	free_pipes(pipes, shell);
 	wait_all(pids, shell->cmd_count, shell);
+	free(pids);
 	return (1);
 }

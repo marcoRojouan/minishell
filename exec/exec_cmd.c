@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:05:10 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 13:54:45 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/08 16:08:43 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ void	exec_cmd(t_cmd *cmd, t_shell *shell)
 	path = find_path(cmd->args[0], shell->env);
 	if (!path)
 	{
-		printf("minishell: command not found: %s\n", cmd->args[0]);
+		write(STDERR_FILENO, "minishell: command not found: ", 31);
+		write(STDERR_FILENO, cmd->args[0], strlen(cmd->args[0]));
+		write(STDERR_FILENO, "\n", 1);
 		cleanup_child(shell, NULL);
 		exit(127);
 	}

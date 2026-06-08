@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:48:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/27 16:15:06 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 15:43:03 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,19 @@ int	count_words(char *str)
 int	word_len(char *str)
 {
 	int	i;
-	int	in_quotes;
+	int	in_single;
+	int	in_double;
 
 	i = 0;
-	in_quotes = 0;
+	in_single = 0;
+	in_double = 0;
 	while (str[i])
 	{
-		if (str[i] == '"' || str[i] == '\'')
-			in_quotes = !in_quotes;
-		else if (white_space(str[i]) && !in_quotes)
+		if (str[i] == '\'' && !in_double)
+			in_single = !in_single;
+		else if (str[i] == '"' && !in_single)
+			in_double = !in_double;
+		else if (white_space(str[i]) && !in_single && !in_double)
 			break ;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 13:54:09 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/08 15:17:36 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	handle_quotes(char *elem, t_idx *ctx, int *in_single, int *in_double);
 void	sort_line(char **split_line, t_shell *shell);
 
 void	free_cmds(t_shell *shell);
+void	free_pipes(int **pipes, t_shell *shell);
 void    cleanup_child(t_shell *shell, char *path);
 
 void	init_signals(void);

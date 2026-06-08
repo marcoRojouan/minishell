@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 14:14:37 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/08 12:02:14 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 15:20:02 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ static void	free_cmd(t_cmd *cmd)
 			i++;
 		}
 		free(cmd->args);
+		if (cmd->infile)
+			free(cmd->infile);
+		if (cmd->outfile)
+			free(cmd->outfile);
+		if (cmd->delimiter)
+			free(cmd->delimiter);
 	}
 	free(cmd);
 }
@@ -48,6 +54,21 @@ void	free_cmds(t_shell *shell)
 	free(shell->cmds);
 	shell->cmds = NULL;
 	shell->cmd_count = 0;
+}
+
+void	free_pipes(int **pipes, t_shell *shell)
+{
+	int	i;
+
+	if (!pipes)
+		return ;
+	i = 0;
+	while (i < shell->cmd_count - 1)
+	{
+		free(pipes[i]);
+		i++;
+	}
+	free(pipes);
 }
 
 void	cleanup_child(t_shell *shell, char *path)

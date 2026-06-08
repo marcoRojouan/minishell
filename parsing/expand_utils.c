@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 14:09:11 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/06 14:15:31 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/08 15:46:33 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,5 @@ void	expand_status(char *res, t_idx *ctx, t_shell *shell)
 		k++;
 	}
 	ctx->i += 2;
+	free(status);
 }

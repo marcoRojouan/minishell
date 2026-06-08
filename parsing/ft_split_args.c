@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:43:59 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/03 14:00:22 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 15:45:59 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,19 @@ static char	*duplicate_wrd(char *str)
 
 static void	skip_word(char *str, t_idx *idx)
 {
-	int	in_quotes;
+	int	in_single;
+	int	in_double;
 
-	in_quotes = 0;
+	in_single = 0;
+	in_double = 0;
 	while (str[idx->i])
 	{
-		if (str[idx->i] == '"' || str[idx->i] == '\'')
-			in_quotes = !in_quotes;
-		else if (!in_quotes && white_space(str[idx->i]))
+		if (str[idx->i] == '\'' && !in_double)
+			in_single = !in_single;
+		else if (str[idx->i] == '"' && !in_single)
+			in_double = !in_double;
+		else if (white_space(str[idx->i])
+			&& !in_single && !in_double)
 			break ;
 		idx->i++;
 	}
@@ -83,8 +88,10 @@ char	**ft_split_args(char *str, t_shell *shell)
 	char	**tab;
 	int		word_count;
 
-	word_count = count_words(str);
 	if (!str)
+		return (NULL);
+	word_count = count_words(str);
+	if (word_count == 0)
 		return (NULL);
 	tab = malloc(sizeof(char *) * (word_count + 1));
 	if (!tab)
