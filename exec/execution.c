@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/07 21:44:55 by loup             ###   ########.fr       */
+/*   Updated: 2026/06/08 12:02:54 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ int	execution(t_shell *shell)
 {
 	signal(SIGPIPE, SIG_IGN);
 	if (!prepare_heredoc(shell))
-	{
 		return (1);
-	}
 	if (!shell->cmds[0]->args || !shell->cmds[0]->args[0])
 		return (1);
 	if (shell->cmd_count == 1)
