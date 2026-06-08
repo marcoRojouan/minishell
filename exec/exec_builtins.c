@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 16:45:23 by loup              #+#    #+#             */
-/*   Updated: 2026/06/04 11:19:22 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 14:12:07 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,53 @@ int	is_parent_builtin(char *cmd)
 	return (0);
 }
 
-int	exec_parent_builtin(t_shell *shell)
+//int	exec_parent_builtin(t_shell *shell)
+//{
+//	char	*cmd;
+
+//	cmd = shell->cmds[0]->args[0];
+//	if (!cmd)
+//		return (0);
+//	if (ft_strcmp(cmd, "cd") == 0)
+//		return (ft_cd(shell->cmds[0]->args, shell->env), 1);
+//	else if (ft_strcmp(cmd, "export") == 0)
+//		return (ft_export(shell->cmds[0]->args, shell->env), 1);
+//	else if (ft_strcmp(cmd, "unset") == 0)
+//		return (ft_unset(shell->cmds[0]->args, shell->env), 1);
+//	else if (ft_strcmp(cmd, "exit") == 0)
+//		return (ft_exit(shell->cmds[0]->args, shell), 1);
+//	return (0);
+//}
+int exec_parent_builtin(t_shell *shell)
 {
-	char	*cmd;
+	char *cmd;
 
 	cmd = shell->cmds[0]->args[0];
 	if (!cmd)
 		return (0);
+
 	if (ft_strcmp(cmd, "cd") == 0)
-		return (ft_cd(shell->cmds[0]->args, shell->env), 1);
+	{
+		shell->env = ft_cd(shell->cmds[0]->args, shell->env);
+		return (1);
+	}
 	else if (ft_strcmp(cmd, "export") == 0)
-		return (ft_export(shell->cmds[0]->args, shell->env), 1);
+	{
+		shell->env = ft_export(shell->cmds[0]->args, shell->env);
+		return (1);
+	}
 	else if (ft_strcmp(cmd, "unset") == 0)
-		return (ft_unset(shell->cmds[0]->args, shell->env), 1);
+	{
+		shell->env = ft_unset(shell->cmds[0]->args, shell->env);
+		return (1);
+	}
 	else if (ft_strcmp(cmd, "exit") == 0)
-		return (ft_exit(shell->cmds[0]->args, shell), 1);
+	{
+		ft_exit(shell->cmds[0]->args, shell);
+		return (1);
+	}
 	return (0);
 }
-
 int	exec_child_builtin(t_cmd *cmd, t_shell *shell)
 {
 	if (!cmd || !cmd->args || !cmd->args[0])

@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 10:27:35 by malavaud          #+#    #+#             */
-/*   Updated: 2026/05/26 14:59:25 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 16:32:13 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static void	unset_env(char **env, char *key)
 	}
 }
 
-int	ft_unset(char **args, char **env)
+char **ft_unset(char **args, char **env)
 {
-	int	i;
+	int i;
 
 	i = 1;
 	while (args[i])
@@ -49,10 +49,10 @@ int	ft_unset(char **args, char **env)
 		{
 			printf("unset: `%s': not a valid identifier\n", args[i]);
 			i++;
-			continue ;
+			continue;
 		}
 		unset_env(env, args[i]);
 		i++;
 	}
-	return (0);
+	return (env);
 }
