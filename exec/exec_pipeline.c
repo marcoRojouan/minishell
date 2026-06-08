@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 14:45:36 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/27 15:50:59 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/07 22:08:41 by loup             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,18 @@ static void	wait_all(pid_t *pids, int cmd_count, t_shell *shell)
 	while (i < cmd_count)
 	{
 		waitpid(pids[i], &status, 0);
+		if (i == cmd_count - 1)
+		{
+			if (WIFEXITED(status))
+				shell->exit_status = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+			{
+				write(1, "\n", 1);
+				shell->exit_status = 128 + WTERMSIG(status);
+			}
+		}
 		i++;
 	}
-	shell->exit_status = WEXITSTATUS(status);
 }
 
 static int	init_pipes(int **pipes, int cmd_count)
@@ -63,6 +72,11 @@ static void	fork_cmds(t_shell *shell, int **pipes, pid_t *pids)
 	while (i < shell->cmd_count)
 	{
 		pids[i] = fork();
+		if (pids[i] == -1)
+		{
+			perror("fork");
+			exit(1);
+		}
 		if (pids[i] == 0)
 		{
 			fd_gestion(shell, pipes, i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 12:04:49 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/01 11:08:39 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/07 21:25:55 by loup             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	prepare_heredoc(t_shell *shell)
 {
-	int	i;
-	int pipefd[2];
-	char *line;
+	int		i;
+	int		pipefd[2];
+	char	*line;
 
 	i = 0;
 	while (i < shell->cmd_count)

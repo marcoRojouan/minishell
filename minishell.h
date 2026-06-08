@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/02 16:17:20 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/07 20:32:58 by loup             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ char	**set_env(char **env, char *key, char *value);
 char	*get_env(char **env, char *key);
 int		valid_key(char *key);
 int		ft_unset(char **args, char **env);
+int		ft_exit(char **args, t_shell *shell);
 
 char	*expand(char *elem, t_shell *shell);
 char	**ft_split_args(char *str, t_shell *shell);
@@ -102,5 +103,11 @@ void	expand_var(char *elem, char *res, t_idx *ctx, t_shell *shell);
 void	expand_status(char *res, t_idx *ctx, t_shell *shell);
 void	handle_quotes(char *elem, t_idx *ctx, int *in_single, int *in_double);
 void	sort_line(char **split_line, t_shell *shell);
+
+void	free_cmds(t_shell *shell);
+
+void	init_signals(void);
+void	sigint_heredoc_handler(int sig);
+void	sigint_handler(int sig);
 
 #endif

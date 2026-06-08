@@ -6,15 +6,26 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:14:49 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/03 11:14:31 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/08 10:03:29 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-volatile sig_atomic_t g_signal = 0;
+volatile sig_atomic_t signal_g = 0;
 
-void	signal_handler(int sig)
+void	sigint_handler(int sig)
 {
-	g_signal = sig;
+	(void)sig;
+	signal_g = SIGINT;
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	init_signals(void)
+{
+	signal(SIGINT, sigint_handler);
+    signal(SIGQUIT, SIG_IGN);
 }
