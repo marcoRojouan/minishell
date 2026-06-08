@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 10:48:48 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/08 14:26:09 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:42:02 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	valid_key(char *key)
 	return (1);
 }
 
-static char	**handle_plus(char **args, char **env)
+static char **handle_plus(char *arg, char **env)
 {
 	char	*ptr;
 	char	*key;
@@ -38,10 +38,10 @@ static char	**handle_plus(char **args, char **env)
 	char	*old;
 	char	*tmp;
 
-	ptr = ft_strnstr(args[1], "+=", ft_strlen(args[1]));
+	ptr = ft_strnstr(arg, "+=", ft_strlen(arg));
 	if (!ptr)
 		return (env);
-	key = ft_substr(args[1], 0, ptr - args[1]);
+	key = ft_substr(arg, 0, ptr - arg);
 	value = ptr + 2;
 	if (!valid_key(key))
 	{
@@ -62,27 +62,23 @@ static char	**handle_plus(char **args, char **env)
 	return (env);
 }
 
-char	**ft_export(char **args, char **env)
+static char **export_one_arg(char *arg, char **env)
 {
 	char	*ptr;
 	char	*key;
 	char	*value;
 
-	if (!args[1])
-	{
-		ft_env(env);
-		return (env);
-	}
-	if (ft_strnstr(args[1], "+=", ft_strlen(args[1])))
-		return (handle_plus(args, env));
-	ptr = ft_strchr(args[1], '=');
+	if (ft_strnstr(arg, "+=", ft_strlen(arg)))
+		return (handle_plus(arg, env));
+
+	ptr = ft_strchr(arg, '=');
 	if (ptr)
 	{
-		key = ft_substr(args[1], 0, ptr - args[1]);
+		key = ft_substr(arg, 0, ptr - arg);
 		value = ptr + 1;
 		if (!valid_key(key))
 		{
-			return (printf("export: `%s': not a valid identifier\n", key), env);
+			printf("export: `%s': not a valid identifier\n", key);
 			free(key);
 			return (env);
 		}
@@ -90,9 +86,28 @@ char	**ft_export(char **args, char **env)
 		free(key);
 		return (env);
 	}
-	key = args[1];
-	if (!valid_key(key))
-		return (printf("export: `%s': not a valid identifier\n", key), env);
-	env = set_env(env, key, "");
+	if (!valid_key(arg))
+	{
+		printf("export: `%s': not a valid identifier\n", arg);
+		return (env);
+	}
+	return (env);
+}
+
+char	**ft_export(char **args, char **env)
+{
+	int	i;
+
+	if (!args[1])
+	{
+		ft_env(env);
+		return (env);
+	}
+	i = 1;
+	while (args[i])
+	{
+		env = export_one_arg(args[i], env);
+		i++;
+	}
 	return (env);
 }
