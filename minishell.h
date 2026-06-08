@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 17:59:19 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/08 18:03:44 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void    free_pipes(t_pipeline *pipeline);
 void    cleanup_child(t_shell *shell, char *path);
 
 void	init_signals(void);
-void	sigint_heredoc_handler(int sig);
+// void	sigint_heredoc_handler(int sig);
 void	sigint_handler(int sig);
 
 #endif
