@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:14:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/07 17:25:25 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 11:20:07 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,32 @@ static int	args_handler(t_context *ctx, char **split_line, t_shell *shell)
 	return (arg_count);
 }
 
-static void	redirect_handler(t_context *ctx, char **split_line, t_shell *shell)
+static int    redirect_handler(t_context *ctx, char **split_line, t_shell *shell)
 {
+	if (!split_line[ctx->i + 1])
+		return (0);
 	if (!ft_strcmp(split_line[ctx->i], "<<"))
 	{
-		ctx->i++;
-		shell->cmds[ctx->j]->delimiter = split_line[ctx->i];
+		shell->cmds[ctx->j]->delimiter = ft_strdup(split_line[++ctx->i]);
+		if (!shell->cmds[ctx->j]->delimiter)
+			return (0);
 	}
-	else if (!ft_strcmp(split_line[ctx->i], ">>"))
+	else if (!ft_strcmp(split_line[ctx->i], ">>") 
+				|| !ft_strcmp(split_line[ctx->i], ">"))
 	{
-		ctx->i++;
-		shell->cmds[ctx->j]->insert = 1;
-		shell->cmds[ctx->j]->outfile = split_line[ctx->i];
+		if (!ft_strcmp(split_line[ctx->i], ">>"))
+			shell->cmds[ctx->j]->insert = 1;
+		shell->cmds[ctx->j]->outfile = ft_strdup(split_line[++ctx->i]);
+		if (!shell->cmds[ctx->j]->outfile)
+			return (0);
 	}
 	else if (!ft_strcmp(split_line[ctx->i], "<"))
 	{
-		ctx->i++;
-		shell->cmds[ctx->j]->infile = split_line[ctx->i];
+		shell->cmds[ctx->j]->infile = ft_strdup(split_line[++ctx->i]);
+		if (!shell->cmds[ctx->j]->infile)
+			return (0);
 	}
-	else if (!ft_strcmp(split_line[ctx->i], ">"))
-	{
-		ctx->i++;
-		shell->cmds[ctx->j]->outfile = split_line[ctx->i];
-	}
+	return (1);
 }
 
 void	sort_line(char **split_line, t_shell *shell)

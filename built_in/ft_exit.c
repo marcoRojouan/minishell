@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:41:35 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/08 10:58:28 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 11:09:48 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,51 +30,30 @@ static int	is_numeric(char *str)
 	return (1);
 }
 
-//int	ft_exit(char **args, t_shell *shell)
-//{
-//	printf("exit\n");
-//	if (!args[1])
-//		exit(shell->exit_status);
-//	if (!is_numeric(args[1]))
-//	{
-//		printf("minishell: exit: %s: numeric argument required", args[1]);
-//		exit(2);
-//	}
-//	while (args[2])
-//	{
-//		printf("minishell: exit: too many arguments\n");
-//		shell->exit_status = 1;
-//		return (1);
-//	}
-//	exit(ft_atoi(args[1]) % 256);
-//}
 int ft_exit(char **args, t_shell *shell)
 {
-    printf("exit\n");
+	printf("exit\n");
 
-    if (!args[1])
-    {
-        ft_free_tab(shell->env);
-        free_cmds(shell);
-        exit(shell->exit_status);
-    }
-
-    if (!is_numeric(args[1]))
-    {
-        printf("minishell: exit: %s: numeric argument required\n", args[1]);
-        ft_free_tab(shell->env);
-        free_cmds(shell);
-        exit(2);
-    }
-
-    if (args[2])
-    {
-        printf("minishell: exit: too many arguments\n");
-        shell->exit_status = 1;
-        return (1);
-    }
-
-    ft_free_tab(shell->env);
-    free_cmds(shell);
-    exit(ft_atoi(args[1]) % 256);
+	if (!args[1])
+	{
+		ft_free_tab(shell->env);
+		free_cmds(shell);
+		exit(shell->exit_status);
+	}
+	if (!is_numeric(args[1]))
+	{
+		printf("minishell: exit: %s: numeric argument required\n", args[1]);
+		ft_free_tab(shell->env);
+		free_cmds(shell);
+		exit(2);
+	}
+	if (args[2])
+	{
+		printf("minishell: exit: too many arguments\n");
+		shell->exit_status = 1;
+		return (1);
+	}
+	ft_free_tab(shell->env);
+	free_cmds(shell);
+	exit(ft_atoi(args[1]) % 256);
 }
