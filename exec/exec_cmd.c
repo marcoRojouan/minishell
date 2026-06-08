@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:05:10 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 11:58:36 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/08 13:54:45 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,26 @@ static void	setup_redirections(t_cmd *cmd)
 	}
 }
 
+//void	exec_cmd(t_cmd *cmd, t_shell *shell)
+//{
+//	char	*path;
+
+//	if (!cmd->args || !cmd->args[0])
+//		exit(1);
+//	setup_redirections(cmd);
+//	if (exec_child_builtin(cmd, shell))
+//		exit(0);
+//	path = find_path(cmd->args[0], shell->env);
+//	if (!path)
+//	{
+//		printf("minishell: command not found: %s\n", cmd->args[0]);
+//		exit(127);
+//	}
+//	execve(path, cmd->args, shell->env);
+//	perror("execve");
+//	free(path);
+//	exit (1);
+//}
 void	exec_cmd(t_cmd *cmd, t_shell *shell)
 {
 	char	*path;
@@ -52,19 +72,27 @@ void	exec_cmd(t_cmd *cmd, t_shell *shell)
 	signal(SIGPIPE, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+	path = NULL;
 	if (!cmd->args || !cmd->args[0])
+	{
+		cleanup_child(shell, NULL);
 		exit(1);
+	}
 	setup_redirections(cmd);
 	if (exec_child_builtin(cmd, shell))
+	{
+		cleanup_child(shell, NULL);
 		exit(0);
+	}
 	path = find_path(cmd->args[0], shell->env);
 	if (!path)
 	{
 		printf("minishell: command not found: %s\n", cmd->args[0]);
+		cleanup_child(shell, NULL);
 		exit(127);
 	}
 	execve(path, cmd->args, shell->env);
 	perror("execve");
-	free(path);
-	exit (1);
+	cleanup_child(shell, path);
+	exit(1);
 }

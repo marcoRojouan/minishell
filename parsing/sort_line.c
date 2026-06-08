@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:14:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 11:15:01 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/08 13:54:04 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	args_handler(t_context *ctx, char **split_line, t_shell *shell)
 	return (arg_count);
 }
 
-static int	redirect_handler(t_context *ctx, char **split_line, t_shell *shell)
+static int    redirect_handler(t_context *ctx, char **split_line, t_shell *shell)
 {
 	if (!split_line[ctx->i + 1])
 		return (0);
