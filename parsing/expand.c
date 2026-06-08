@@ -6,7 +6,7 @@
 /*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:45:37 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 22:17:29 by loup             ###   ########.fr       */
+/*   Updated: 2026/06/08 22:25:30 by loup             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ char	*expand(char *elem, t_shell *shell)
 		return (NULL);
 	expand_loop(elem, tmp, shell);
 	res = ft_strdup(tmp);
+	if (!res)
+	{
+		free(tmp);
+		return (NULL);
+	}
 	free(tmp);
 	return (res);
 }
