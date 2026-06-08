@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:30:37 by malavaud          #+#    #+#             */
-/*   Updated: 2026/05/26 15:01:48 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 16:32:31 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	**set_env(char **env, char *key, char *value)
 	return (add_env(env, key, value, i));
 }
 
-int	ft_cd(char **args, char **env)
+char **ft_cd(char **args, char **env)
 {
 	char	*path;
 	char	*old_pwd;
@@ -95,19 +95,19 @@ int	ft_cd(char **args, char **env)
 	if (!path)
 	{
 		printf("HOME not set\n");
-		return (1);
+		return (env);
 	}
 	old_pwd = getcwd(NULL, 0);
 	if (chdir(path) != 0)
 	{
 		perror("cd");
 		free(old_pwd);
-		return (1);
+		return (env);
 	}
 	new_pwd = getcwd(NULL, 0);
 	env = set_env(env, "OLDPWD", old_pwd);
 	env = set_env(env, "PWD", new_pwd);
 	free(old_pwd);
 	free(new_pwd);
-	return (0);
+	return (env);
 }

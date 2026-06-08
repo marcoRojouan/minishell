@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 10:48:48 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/03 14:22:51 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/08 14:26:09 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static char	**handle_plus(char **args, char **env)
 	if (!valid_key(key))
 	{
 		printf("export: `%s': not a valid identifier\n", key);
+		free(key);
 		return (env);
 	}
 	old = get_env(env, key);
@@ -57,6 +58,7 @@ static char	**handle_plus(char **args, char **env)
 	}
 	else
 		env = set_env(env, key, value);
+	free(key);
 	return (env);
 }
 
@@ -79,8 +81,13 @@ char	**ft_export(char **args, char **env)
 		key = ft_substr(args[1], 0, ptr - args[1]);
 		value = ptr + 1;
 		if (!valid_key(key))
+		{
 			return (printf("export: `%s': not a valid identifier\n", key), env);
+			free(key);
+			return (env);
+		}
 		env = set_env(env, key, value);
+		free(key);
 		return (env);
 	}
 	key = args[1];

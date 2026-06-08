@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 13:54:09 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/08 14:16:51 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		white_space(char c);
 int		count_words(char *str);
 int		word_len(char *str);
 
-int		ft_cd(char **args, char **env);
+char	**ft_cd(char **args, char **env);
 int		ft_echo(char **args);
 int		ft_pwd(void);
 char	**ft_export(char **args, char **env);
@@ -92,7 +92,7 @@ void	ft_env(char **env);
 char	**set_env(char **env, char *key, char *value);
 char	*get_env(char **env, char *key);
 int		valid_key(char *key);
-int		ft_unset(char **args, char **env);
+char **ft_unset(char **args, char **env);
 int		ft_exit(char **args, t_shell *shell);
 
 char	*expand(char *elem, t_shell *shell);
