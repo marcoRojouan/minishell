@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 18:03:44 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/09 12:00:56 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ typedef struct s_cmd
 
 	int				fd_heredoc;
 	int				insert;
-
-	struct s_cmd	*next;
 }	t_cmd;
 
 typedef struct s_shell
@@ -99,7 +97,7 @@ void	ft_env(char **env);
 char	**set_env(char **env, char *key, char *value);
 char	*get_env(char **env, char *key);
 int		valid_key(char *key);
-char **ft_unset(char **args, char **env);
+char	**ft_unset(char **args, char **env);
 int		ft_exit(char **args, t_shell *shell);
 
 char	*expand(char *elem, t_shell *shell);

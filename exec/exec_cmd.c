@@ -6,13 +6,13 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:05:10 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 16:08:43 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/09 14:15:09 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	setup_redirections(t_cmd *cmd)
+static void	setup_redirections(t_cmd *cmd, t_shell *shell)
 {
 	int	fd;
 
@@ -38,6 +38,7 @@ static void	setup_redirections(t_cmd *cmd)
 		if (fd < 0)
 		{
 			perror(cmd->infile);
+			cleanup_child(shell, NULL);
 			exit(1);
 		}
 		dup2(fd, STDIN_FILENO);/*remplace stdin par le fichier */
@@ -78,7 +79,7 @@ void	exec_cmd(t_cmd *cmd, t_shell *shell)
 		cleanup_child(shell, NULL);
 		exit(1);
 	}
-	setup_redirections(cmd);
+	setup_redirections(cmd, shell);
 	if (exec_child_builtin(cmd, shell))
 	{
 		cleanup_child(shell, NULL);
