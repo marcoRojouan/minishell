@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 14:45:36 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 10:44:20 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:55:55 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int	exec_pipeline(t_shell *shell)
 	}
 	fork_cmds(shell, &pipeline);
 	close_pipes(pipeline.pipes, shell->cmd_count);
+	close_all_heredocs(shell);
 	free_pipes(&pipeline);
 	wait_all(pipeline.pids, shell->cmd_count, shell);
 	free(pipeline.pids);

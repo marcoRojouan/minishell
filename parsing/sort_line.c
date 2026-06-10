@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:14:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 14:28:26 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:52:09 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	args_handler(t_context *ctx, char **split_line, t_shell *shell)
 		ctx->i++;
 	}
 	shell->cmds[ctx->j]->args[ctx->k] = NULL;
-	return (arg_count);
+	return (1);
 }
 
 static int	redirect_handler(t_context *ctx, char **split_line, t_shell *shell)
