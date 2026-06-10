@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 14:14:37 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/10 10:50:27 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 21:12:33 by loup             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,5 @@ void	cleanup_child(t_shell *shell, char *path)
 		free(path);
 	free_cmds(shell);
 	ft_free_tab(shell->env);
+	free_export_env(shell);
 }

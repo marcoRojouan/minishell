@@ -25,6 +25,7 @@ SRCS =	minishell.c \
 		built_in/ft_env.c \
 		built_in/ft_unset.c \
 		built_in/export_utils.c \
+		built_in/export_utils_bis.c \
 		exec/exec_pipeline.c \
 		exec/fd_gestion.c \
 		exec/execution.c \

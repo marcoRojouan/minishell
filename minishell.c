@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 15:20:50 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 21:05:00 by loup             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,13 @@ static int	init_shell(t_shell *shell, char **envp)
 {
 	shell->cmds = NULL;
 	shell->env = copy_env(envp);
+	if (!shell->env)
+		return (0);
+	if (!init_export_env(shell))
+		return (0);
 	shell->exit_status = 0;
 	shell->cmd_count = 0;
-	return (0);
+	return (1);
 }
 
 static void	process_line(char *line, t_shell *shell)
@@ -86,9 +90,14 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	ft_bzero(&shell, sizeof(t_shell));
-	init_shell(&shell, envp);
+	if (!init_shell(&shell, envp))
+	{
+		ft_free_tab(shell.env);
+		return (1);
+	}
 	shell_loop(&shell);
 	signal(SIGINT, SIG_IGN);
 	ft_free_tab(shell.env);
+	free_export_env(&shell);
 	return (0);
 }
