@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 10:19:48 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 10:34:14 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <sys/wait.h>
 # include <libft.h>
 
-extern volatile sig_atomic_t signal_g;
+extern volatile sig_atomic_t	g_signal;
 
 typedef struct s_cmd
 {
@@ -110,8 +110,8 @@ void	handle_quotes(char *elem, t_idx *ctx, int *in_single, int *in_double);
 void	sort_line(char **split_line, t_shell *shell);
 
 void	free_cmds(t_shell *shell);
-void    free_pipeline(t_pipeline *pipeline);
-void    free_pipes(t_pipeline *pipeline);
+void	free_pipeline(t_pipeline *pipeline);
+void	free_pipes(t_pipeline *pipeline);
 void    cleanup_child(t_shell *shell, char *path);
 
 void	init_signals(void);

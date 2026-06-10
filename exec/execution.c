@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 10:19:36 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 10:24:23 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	execution(t_shell *shell)
 	}
 	else
 		exec_pipeline(shell);
-	if (signal_g == SIGINT)
-		signal_g = 0;
+	if (g_signal == SIGINT)
+		g_signal = 0;
 }
