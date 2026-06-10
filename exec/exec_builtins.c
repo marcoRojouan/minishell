@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 16:45:23 by loup              #+#    #+#             */
-/*   Updated: 2026/06/10 10:44:54 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 11:25:07 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ int	is_parent_builtin(char *cmd)
 	return (0);
 }
 
+static int	exec_env_builtin(char *cmd, t_shell *shell)
+{
+	if (ft_strcmp(cmd, "cd") == 0)
+		shell->env = ft_cd(shell->cmds[0]->args, shell->env);
+	else if (ft_strcmp(cmd, "export") == 0)
+		shell->env = ft_export(shell->cmds[0]->args, shell->env);
+	else if (ft_strcmp(cmd, "unset") == 0)
+		shell->env = ft_unset(shell->cmds[0]->args, shell->env);
+	else
+		return (0);
+	return (1);
+}
+
 int	exec_parent_builtin(t_shell *shell)
 {
 	char	*cmd;
@@ -34,22 +47,9 @@ int	exec_parent_builtin(t_shell *shell)
 	cmd = shell->cmds[0]->args[0];
 	if (!cmd)
 		return (0);
-	if (ft_strcmp(cmd, "cd") == 0)
-	{
-		shell->env = ft_cd(shell->cmds[0]->args, shell->env);
+	if (exec_env_builtin(cmd, shell))
 		return (1);
-	}
-	else if (ft_strcmp(cmd, "export") == 0)
-	{
-		shell->env = ft_export(shell->cmds[0]->args, shell->env);
-		return (1);
-	}
-	else if (ft_strcmp(cmd, "unset") == 0)
-	{
-		shell->env = ft_unset(shell->cmds[0]->args, shell->env);
-		return (1);
-	}
-	else if (ft_strcmp(cmd, "exit") == 0)
+	if (ft_strcmp(cmd, "exit") == 0)
 	{
 		ft_exit(shell->cmds[0]->args, shell);
 		return (1);

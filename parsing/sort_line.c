@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:14:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 10:47:24 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 11:31:06 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,8 @@ static int	redirect_handler(t_context *ctx, char **split_line, t_shell *shell)
 	return (1);
 }
 
-void	sort_line(char **split_line, t_shell *shell)
+static void	init_first_cmd(char **split_line, t_shell *shell)
 {
-	t_context	ctx;
-
-	ctx.i = 0;
-	ctx.j = 0;
-	ctx.k = 0;
 	shell->cmds[0] = malloc(sizeof(t_cmd));
 	if (!shell->cmds[0])
 	{
@@ -95,6 +90,16 @@ void	sort_line(char **split_line, t_shell *shell)
 	}
 	ft_bzero(shell->cmds[0], sizeof(t_cmd));
 	shell->cmds[0]->fd_heredoc = -1;
+}
+
+void	sort_line(char **split_line, t_shell *shell)
+{
+	t_context	ctx;
+
+	ctx.i = 0;
+	ctx.j = 0;
+	ctx.k = 0;
+	init_first_cmd(split_line, shell);
 	while (split_line[ctx.i])
 	{
 		if (!ft_strcmp(split_line[ctx.i], "|"))

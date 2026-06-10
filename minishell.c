@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 10:52:18 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 11:22:52 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,34 +32,6 @@ static char	*prompt_making(void)
 	return (prompt);
 }
 
-char	**copy_env(char **envp)
-{
-	int		i;
-	char	**new_env;
-
-	i = 0;
-	while (envp[i])
-		i++;
-	new_env = malloc(sizeof(char *) * (i + 1));
-	if (!new_env)
-		return (NULL);
-	i = 0;
-	while (envp[i])
-	{
-		new_env[i] = ft_strdup(envp[i]);
-		if (!new_env[i])
-		{
-			while (i--)
-				free(new_env[i]);
-			free(new_env);
-			return (NULL);
-		}
-		i++;
-	}
-	new_env[i] = NULL;
-	return (new_env);
-}
-
 static int	init_shell(t_shell *shell, char **envp)
 {
 	shell->cmds = NULL;
@@ -69,22 +41,26 @@ static int	init_shell(t_shell *shell, char **envp)
 	return (0);
 }
 
-static void	update_status(t_shell *shell)
+static void	process_line(char *line, t_shell *shell)
 {
-	shell->exit_status = g_signal;
-	g_signal = 0;
+	add_history(line);
+	if (g_signal != 0)
+		update_status(shell);
+	signal(SIGINT, SIG_IGN);
+	if (!parsing(line, shell))
+	{
+		free_cmds(shell);
+		return ;
+	}
+	execution(shell);
+	free_cmds(shell);
 }
 
-int	main(int ac, char **av, char **envp)
+static int	shell_loop(t_shell *shell)
 {
 	char	*prompt;
 	char	*line;
-	t_shell	shell;
 
-	(void)ac;
-	(void)av;
-	ft_bzero(&shell, sizeof(t_shell));
-	init_shell(&shell, envp);
 	while (1)
 	{
 		init_signals();
@@ -94,25 +70,24 @@ int	main(int ac, char **av, char **envp)
 		if (!line)
 		{
 			write(1, "exit\n", 5);
-			break ;
+			return (0);
 		}
 		if (*line)
-		{
-			add_history(line);
-			if (g_signal != 0)
-				update_status(&shell);
-			signal(SIGINT, SIG_IGN);
-			if (!parsing(line, &shell))
-			{
-				free_cmds(&shell);
-				continue ;
-			}
-			else
-				execution(&shell);
-			free_cmds(&shell);
-		}
+			process_line(line, shell);
 		free(line);
 	}
+	return (0);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_shell	shell;
+
+	(void)ac;
+	(void)av;
+	ft_bzero(&shell, sizeof(t_shell));
+	init_shell(&shell, envp);
+	shell_loop(&shell);
 	ft_free_tab(shell.env);
 	return (0);
 }
