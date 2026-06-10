@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:41:35 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/10 10:42:26 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 11:35:46 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,24 @@ static int	is_numeric(char *str)
 	return (1);
 }
 
+static void	exit_shell(t_shell *shell, int status)
+{
+	ft_free_tab(shell->env);
+	free_cmds(shell);
+	exit(status);
+}
+
 int	ft_exit(char **args, t_shell *shell)
 {
 	int	status;
 
-	status = 0;
 	printf("exit\n");
 	if (!args[1])
-	{
-		ft_free_tab(shell->env);
-		free_cmds(shell);
-		exit(shell->exit_status);
-	}
+		exit_shell(shell, shell->exit_status);
 	if (!is_numeric(args[1]))
 	{
 		printf("minishell: exit: %s: numeric argument required\n", args[1]);
-		ft_free_tab(shell->env);
-		free_cmds(shell);
-		exit(2);
+		exit_shell(shell, 2);
 	}
 	if (args[2])
 	{
@@ -56,7 +56,6 @@ int	ft_exit(char **args, t_shell *shell)
 		return (1);
 	}
 	status = ft_atoi(args[1]) % 256;
-	ft_free_tab(shell->env);
-	free_cmds(shell);
-	exit(status);
+	exit_shell(shell, status);
+	return (0);
 }

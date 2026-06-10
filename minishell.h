@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 10:55:56 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 11:56:53 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	ft_env(char **env);
 char	**set_env(char **env, char *key, char *value);
 char	*get_env(char **env, char *key);
 int		valid_key(char *key);
+int		check_key(char *key);
 char	**ft_unset(char **args, char **env);
 int		ft_exit(char **args, t_shell *shell);
 
