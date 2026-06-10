@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 11:56:53 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 11:59:42 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,6 @@ void	cleanup_child(t_shell *shell, char *path);
 void	init_signals(void);
 void	heredoc_sigint(int sig);
 void	sigint_handler(int sig);
+void	update_status(t_shell *shell);
 
 #endif

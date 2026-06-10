@@ -6,13 +6,19 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:14:49 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 10:32:58 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 11:08:39 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 volatile sig_atomic_t	g_signal = 0;
+
+void	update_status(t_shell *shell)
+{
+	shell->exit_status = g_signal;
+	g_signal = 0;
+}
 
 void	heredoc_sigint(int sig)
 {
