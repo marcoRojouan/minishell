@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 10:48:52 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 10:52:18 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ static int	init_shell(t_shell *shell, char **envp)
 
 static void	update_status(t_shell *shell)
 {
-	shell->exit_status = signal_g;
-	signal_g = 0;
+	shell->exit_status = g_signal;
+	g_signal = 0;
 }
 
 int	main(int ac, char **av, char **envp)
@@ -99,7 +99,7 @@ int	main(int ac, char **av, char **envp)
 		if (*line)
 		{
 			add_history(line);
-			if (signal_g != 0)
+			if (g_signal != 0)
 				update_status(&shell);
 			signal(SIGINT, SIG_IGN);
 			if (!parsing(line, &shell))

@@ -6,7 +6,11 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 12:04:49 by mrojouan          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/06/10 10:43:40 by malavaud         ###   ########.fr       */
+=======
+/*   Updated: 2026/06/10 10:30:30 by mrojouan         ###   ########.fr       */
+>>>>>>> 68355d1dfc70cd2faf806d39a5be679f99246f1f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +40,11 @@ static void	heredoc_child(t_shell *shell, int *pipefd, int i)
 	close(pipefd[1]);
 	free_cmds(shell);
 	ft_free_tab(shell->env);
+<<<<<<< HEAD
 	if (signal_g == SIGINT)
+=======
+	if (g_signal == SIGINT)
+>>>>>>> 68355d1dfc70cd2faf806d39a5be679f99246f1f
 		exit(130);
 	exit(0);
 }
@@ -52,7 +60,7 @@ static int	heredoc_parent(t_shell *shell, int *pipefd, pid_t pid, int i)
 	{
 		close(pipefd[0]);
 		shell->exit_status = 130;
-		signal_g = SIGINT;
+		g_signal = SIGINT;
 		return (0);
 	}
 	shell->cmds[i]->fd_heredoc = pipefd[0];

@@ -6,7 +6,11 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/06/10 10:37:40 by malavaud         ###   ########.fr       */
+=======
+/*   Updated: 2026/06/10 10:34:14 by mrojouan         ###   ########.fr       */
+>>>>>>> 68355d1dfc70cd2faf806d39a5be679f99246f1f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +28,11 @@
 # include <sys/wait.h>
 # include <libft.h>
 
+<<<<<<< HEAD
 extern volatile sig_atomic_t	signal_g;
+=======
+extern volatile sig_atomic_t	g_signal;
+>>>>>>> 68355d1dfc70cd2faf806d39a5be679f99246f1f
 
 typedef struct s_cmd
 {
