@@ -6,11 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 12:04:49 by mrojouan          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/06/10 10:43:40 by malavaud         ###   ########.fr       */
-=======
-/*   Updated: 2026/06/10 10:30:30 by mrojouan         ###   ########.fr       */
->>>>>>> 68355d1dfc70cd2faf806d39a5be679f99246f1f
+/*   Updated: 2026/06/10 10:55:03 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +36,7 @@ static void	heredoc_child(t_shell *shell, int *pipefd, int i)
 	close(pipefd[1]);
 	free_cmds(shell);
 	ft_free_tab(shell->env);
-<<<<<<< HEAD
-	if (signal_g == SIGINT)
-=======
 	if (g_signal == SIGINT)
->>>>>>> 68355d1dfc70cd2faf806d39a5be679f99246f1f
 		exit(130);
 	exit(0);
 }
