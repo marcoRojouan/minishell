@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:14:49 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 11:08:39 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:21:40 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	heredoc_sigint(int sig)
 	(void)sig;
 	write(1, "\n", 1);
 	close(STDIN_FILENO);
-	g_signal = SIGINT;
+	g_signal = 130;
 }
 
 void	sigint_handler(int sig)
 {
 	(void)sig;
-	g_signal = SIGINT;
+	g_signal = 130;
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);

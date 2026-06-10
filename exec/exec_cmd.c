@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:05:10 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 11:27:55 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:39:08 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ static void	open_infile(t_cmd *cmd, t_shell *shell)
 void	setup_redirections(t_cmd *cmd, t_shell *shell)
 {
 	if (cmd->fd_heredoc != -1)
+	{
 		dup2(cmd->fd_heredoc, STDIN_FILENO);
+		close(cmd->fd_heredoc);
+	}
 	if (cmd->outfile)
 		open_outfile(cmd, shell);
 	if (cmd->infile)

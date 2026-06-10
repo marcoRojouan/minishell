@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 11:22:52 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:20:50 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	process_line(char *line, t_shell *shell)
 	add_history(line);
 	if (g_signal != 0)
 		update_status(shell);
-	signal(SIGINT, SIG_IGN);
 	if (!parsing(line, shell))
 	{
 		free_cmds(shell);
@@ -74,6 +73,7 @@ static int	shell_loop(t_shell *shell)
 		}
 		if (*line)
 			process_line(line, shell);
+		
 		free(line);
 	}
 	return (0);
@@ -88,6 +88,7 @@ int	main(int ac, char **av, char **envp)
 	ft_bzero(&shell, sizeof(t_shell));
 	init_shell(&shell, envp);
 	shell_loop(&shell);
+	signal(SIGINT, SIG_IGN);
 	ft_free_tab(shell.env);
 	return (0);
 }

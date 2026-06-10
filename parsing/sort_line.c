@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:14:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 14:10:32 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 14:28:26 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,3 +116,4 @@ void	sort_line(char **split_line, t_shell *shell)
 		ctx.i++;
 	}
 }
+	
