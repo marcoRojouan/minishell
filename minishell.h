@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 18:03:44 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 10:37:40 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <sys/wait.h>
 # include <libft.h>
 
-extern volatile sig_atomic_t signal_g;
+extern volatile sig_atomic_t	signal_g;
 
 typedef struct s_cmd
 {
@@ -35,8 +35,6 @@ typedef struct s_cmd
 
 	int				fd_heredoc;
 	int				insert;
-
-	struct s_cmd	*next;
 }	t_cmd;
 
 typedef struct s_shell
@@ -51,9 +49,9 @@ typedef struct s_shell
 
 typedef struct s_pipeline
 {
-    pid_t   *pids;
-    int     **pipes;
-    int     cmd_count;
+	pid_t	*pids;
+	int		**pipes;
+	int		cmd_count;
 }   t_pipeline;
 
 typedef struct s_context
@@ -77,7 +75,7 @@ int		is_in_order(char **split_line);
 
 int		exec_pipeline(t_shell *shell);
 void	fd_gestion(t_shell *shell, int **pipes, int i);
-int		execution(t_shell *shell);
+void	execution(t_shell *shell);
 void	exec_cmd(t_cmd *cmd, t_shell *shell);
 char	*find_path(char *cmd, char **envp);
 int		is_parent_builtin(char *cmd);
@@ -99,7 +97,7 @@ void	ft_env(char **env);
 char	**set_env(char **env, char *key, char *value);
 char	*get_env(char **env, char *key);
 int		valid_key(char *key);
-char **ft_unset(char **args, char **env);
+char	**ft_unset(char **args, char **env);
 int		ft_exit(char **args, t_shell *shell);
 
 char	*expand(char *elem, t_shell *shell);
@@ -112,12 +110,12 @@ void	handle_quotes(char *elem, t_idx *ctx, int *in_single, int *in_double);
 void	sort_line(char **split_line, t_shell *shell);
 
 void	free_cmds(t_shell *shell);
-void    free_pipeline(t_pipeline *pipeline);
-void    free_pipes(t_pipeline *pipeline);
-void    cleanup_child(t_shell *shell, char *path);
+void	free_pipeline(t_pipeline *pipeline);
+void	free_pipes(t_pipeline *pipeline);
+void	cleanup_child(t_shell *shell, char *path);
 
 void	init_signals(void);
-// void	sigint_heredoc_handler(int sig);
+void	heredoc_sigint(int sig);
 void	sigint_handler(int sig);
 
 #endif

@@ -6,19 +6,19 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 12:02:54 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 10:19:36 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	execution(t_shell *shell)
+void	execution(t_shell *shell)
 {
 	signal(SIGPIPE, SIG_IGN);
 	if (!prepare_heredoc(shell))
-		return (1);
+		return ;
 	if (!shell->cmds[0]->args || !shell->cmds[0]->args[0])
-		return (1);
+		return ;
 	if (shell->cmd_count == 1)
 	{
 		if (is_parent_builtin(shell->cmds[0]->args[0]))
@@ -30,5 +30,4 @@ int	execution(t_shell *shell)
 		exec_pipeline(shell);
 	if (signal_g == SIGINT)
 		signal_g = 0;
-	return (1);
 }

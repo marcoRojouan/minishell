@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 14:14:37 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/08 17:58:08 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 10:50:27 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,12 @@ static void	free_cmd(t_cmd *cmd)
 	{
 		i = 0;
 		while (cmd->args[i])
-		{
-			free(cmd->args[i]);
-			i++;
-		}
+			free(cmd->args[i++]);
 		free(cmd->args);
-		if (cmd->infile)
-			free(cmd->infile);
-		if (cmd->outfile)
-			free(cmd->outfile);
-		if (cmd->delimiter)
-			free(cmd->delimiter);
 	}
+	free(cmd->infile);
+	free(cmd->outfile);
+	free(cmd->delimiter);
 	free(cmd);
 }
 
@@ -46,33 +40,36 @@ void	free_cmds(t_shell *shell)
 	i = 0;
 	while (i < shell->cmd_count)
 	{
-		if (shell->cmds[i]->fd_heredoc != -1)
-			close(shell->cmds[i]->fd_heredoc);
-		free_cmd(shell->cmds[i]);
+		if (shell->cmds[i])
+		{
+			if (shell->cmds[i]->fd_heredoc != -1)
+				close(shell->cmds[i]->fd_heredoc);
+			free_cmd(shell->cmds[i]);
+		}
 		i++;
 	}
 	free(shell->cmds);
 	shell->cmds = NULL;
 	shell->cmd_count = 0;
 }
-void    free_pipeline(t_pipeline *pipeline)
+
+void	free_pipeline(t_pipeline *pipeline)
 {
-    free_pipes(pipeline);
-    free(pipeline->pids);
+	free_pipes(pipeline);
+	free(pipeline->pids);
 }
 
-void    free_pipes(t_pipeline *pipeline)
+void	free_pipes(t_pipeline *pipeline)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (i < pipeline->cmd_count - 1)
-    {
-        free(pipeline->pipes[i]);
-        i++;
-    }
-    free(pipeline->pipes);
-	
+	i = 0;
+	while (i < pipeline->cmd_count - 1)
+	{
+		free(pipeline->pipes[i]);
+		i++;
+	}
+	free(pipeline->pipes);
 }
 
 void	cleanup_child(t_shell *shell, char *path)

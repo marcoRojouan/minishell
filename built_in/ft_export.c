@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 10:48:48 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/08 17:42:02 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 10:45:43 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	valid_key(char *key)
 	return (1);
 }
 
-static char **handle_plus(char *arg, char **env)
+static char	**handle_plus(char *arg, char **env)
 {
 	char	*ptr;
 	char	*key;
@@ -62,7 +62,7 @@ static char **handle_plus(char *arg, char **env)
 	return (env);
 }
 
-static char **export_one_arg(char *arg, char **env)
+static char	**export_one_arg(char *arg, char **env)
 {
 	char	*ptr;
 	char	*key;
@@ -70,7 +70,6 @@ static char **export_one_arg(char *arg, char **env)
 
 	if (ft_strnstr(arg, "+=", ft_strlen(arg)))
 		return (handle_plus(arg, env));
-
 	ptr = ft_strchr(arg, '=');
 	if (ptr)
 	{

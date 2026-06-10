@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:39:26 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/27 16:32:53 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 10:31:28 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	*join_path(char *dir, char *cmd)
 	if (!tmp)
 		return (NULL);
 	final = ft_strjoin(tmp, cmd);
-	if (!final) /* peut etre free tmp avant*/
+	if (!final)
 		return (NULL);
 	free(tmp);
 	return (final);

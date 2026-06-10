@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:30:37 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/08 16:41:52 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 10:46:00 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ char	*get_env(char **env, char *key)
 	len = ft_strlen(key);
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], key, len) == 0 && env[i][len] == '=')/*verifie len de home et que = soit la*/
-			return (env[i] + len + 1); /* env[i] = HOME=..., + len = '=', +1 = '/home/maeva' */
+		if (ft_strncmp(env[i], key, len) == 0 && env[i][len] == '=')
+			return (env[i] + len + 1);
 		i++;
 	}
 	return (NULL);
@@ -82,7 +82,7 @@ char	**set_env(char **env, char *key, char *value)
 	return (add_env(env, key, value, i));
 }
 
-char **ft_cd(char **args, char **env)
+char	**ft_cd(char **args, char **env)
 {
 	char	*path;
 	char	*old_pwd;

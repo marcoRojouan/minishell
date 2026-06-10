@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/09 11:44:46 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 10:48:52 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static char	*prompt_making(void)
 	char	*cwd;
 	char	*tmp;
 	char	*prompt;
+
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		return (NULL);
@@ -51,7 +52,7 @@ char	**copy_env(char **envp)
 			while (i--)
 				free(new_env[i]);
 			free(new_env);
-			return NULL;
+			return (NULL);
 		}
 		i++;
 	}
@@ -76,9 +77,9 @@ static void	update_status(t_shell *shell)
 
 int	main(int ac, char **av, char **envp)
 {
-	char        *prompt;
-	char        *line;
-	t_shell     shell;
+	char	*prompt;
+	char	*line;
+	t_shell	shell;
 
 	(void)ac;
 	(void)av;
@@ -102,7 +103,10 @@ int	main(int ac, char **av, char **envp)
 				update_status(&shell);
 			signal(SIGINT, SIG_IGN);
 			if (!parsing(line, &shell))
+			{
+				free_cmds(&shell);
 				continue ;
+			}
 			else
 				execution(&shell);
 			free_cmds(&shell);

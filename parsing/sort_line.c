@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:14:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 15:04:30 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 10:47:24 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	args_handler(t_context *ctx, char **split_line, t_shell *shell)
 		if (!shell->cmds[ctx->j]->args[ctx->k])
 		{
 			ft_free_tab(split_line);
-			return(0);
+			return (0);
 		}
 		ctx->k++;
 		ctx->i++;
@@ -52,7 +52,7 @@ static int	args_handler(t_context *ctx, char **split_line, t_shell *shell)
 	return (arg_count);
 }
 
-static int    redirect_handler(t_context *ctx, char **split_line, t_shell *shell)
+static int	redirect_handler(t_context *ctx, char **split_line, t_shell *shell)
 {
 	if (!split_line[ctx->i + 1])
 		return (0);
@@ -62,8 +62,8 @@ static int    redirect_handler(t_context *ctx, char **split_line, t_shell *shell
 		if (!shell->cmds[ctx->j]->delimiter)
 			return (0);
 	}
-	else if (!ft_strcmp(split_line[ctx->i], ">>") 
-				|| !ft_strcmp(split_line[ctx->i], ">"))
+	else if (!ft_strcmp(split_line[ctx->i], ">>")
+		|| !ft_strcmp(split_line[ctx->i], ">"))
 	{
 		if (!ft_strcmp(split_line[ctx->i], ">>"))
 			shell->cmds[ctx->j]->insert = 1;
