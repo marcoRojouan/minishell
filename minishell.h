@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/09 12:00:56 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 10:19:48 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		is_in_order(char **split_line);
 
 int		exec_pipeline(t_shell *shell);
 void	fd_gestion(t_shell *shell, int **pipes, int i);
-int		execution(t_shell *shell);
+void	execution(t_shell *shell);
 void	exec_cmd(t_cmd *cmd, t_shell *shell);
 char	*find_path(char *cmd, char **envp);
 int		is_parent_builtin(char *cmd);
@@ -115,7 +115,7 @@ void    free_pipes(t_pipeline *pipeline);
 void    cleanup_child(t_shell *shell, char *path);
 
 void	init_signals(void);
-// void	sigint_heredoc_handler(int sig);
+void	heredoc_sigint(int sig);
 void	sigint_handler(int sig);
 
 #endif
