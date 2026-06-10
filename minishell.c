@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 14:49:56 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/09 11:44:46 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ static char	*prompt_making(void)
 	char	*prompt;
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-		return NULL;
+		return (NULL);
 	tmp = ft_strjoin(cwd, " >");
 	free(cwd);
 	if (!tmp)
-		return NULL;
+		return (NULL);
 	prompt = ft_strjoin(tmp, "$ ");
 	free(tmp);
 	if (!prompt)
-		return NULL;
+		return (NULL);
 	return (prompt);
 }
 
