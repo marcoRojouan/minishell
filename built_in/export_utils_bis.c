@@ -3,29 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils_bis.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:38:57 by loup              #+#    #+#             */
-/*   Updated: 2026/06/10 21:18:03 by loup             ###   ########.fr       */
+/*   Updated: 2026/06/11 10:46:26 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-
 static void	display_var(t_export var)
 {
 	if (var.value)
-	printf("declare -x %s=\"%s\"\n",
-		var.key, var.value);
-		else
+		printf("declare -x %s=\"%s\"\n", var.key, var.value);
+	else
 		printf("declare -x %s\n", var.key);
-	}
-	
+}
+
 void	display_export(t_shell *shell)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < shell->export_count)
 	{
@@ -51,7 +49,7 @@ void	free_export_env(t_shell *shell)
 	shell->export_env = NULL;
 	shell->export_count = 0;
 }
-	
+
 int	find_export(t_shell *shell, char *key)
 {
 	int	i;

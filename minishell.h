@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 21:18:18 by loup             ###   ########.fr       */
+/*   Updated: 2026/06/11 10:44:34 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_cmd
 	int				insert;
 }	t_cmd;
 
-typedef struct	s_export
+typedef struct s_export
 {
 	char				*key;
 	char				*value;
@@ -54,7 +54,6 @@ typedef struct s_shell
 	int				cmd_count;
 	int				exit_status;
 }	t_shell;
-
 
 typedef struct s_pipeline
 {
