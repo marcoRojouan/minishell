@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:41:35 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/10 11:35:46 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/10 21:05:44 by loup             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static int	is_numeric(char *str)
 static void	exit_shell(t_shell *shell, int status)
 {
 	ft_free_tab(shell->env);
+	free_export_env(shell);
 	free_cmds(shell);
 	exit(status);
 }

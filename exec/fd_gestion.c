@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 15:03:40 by loup              #+#    #+#             */
-/*   Updated: 2026/06/10 15:58:34 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/11 10:45:23 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	close_all_heredocs(t_shell *shell)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (j < shell->cmd_count)
@@ -42,7 +42,7 @@ static void	setup_stdin(t_shell *shell, int **pipes, int i)
 
 void	fd_gestion(t_shell *shell, int **pipes, int i)
 {
-	int j;
+	int	j;
 
 	setup_stdin(shell, pipes, i);
 	if (i < shell->cmd_count - 1)
