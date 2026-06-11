@@ -50,7 +50,7 @@ With Minishell, we traveled back to that era and tackled the same challenges dev
 | `echo` | Supports `-n` option |
 | `cd` | Accepts relative or absolute path only |
 | `pwd` | No options |
-| `export` | No options |
+| `export` | Alone or with variable |
 | `unset` | No options |
 | `env` | No options or arguments |
 | `exit` | No options |
