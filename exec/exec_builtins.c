@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 16:45:23 by loup              #+#    #+#             */
-/*   Updated: 2026/06/10 11:25:07 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/10 20:51:52 by loup             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	exec_env_builtin(char *cmd, t_shell *shell)
 	if (ft_strcmp(cmd, "cd") == 0)
 		shell->env = ft_cd(shell->cmds[0]->args, shell->env);
 	else if (ft_strcmp(cmd, "export") == 0)
-		shell->env = ft_export(shell->cmds[0]->args, shell->env);
+		shell->env = ft_export(shell->cmds[0]->args, shell);
 	else if (ft_strcmp(cmd, "unset") == 0)
 		shell->env = ft_unset(shell->cmds[0]->args, shell->env);
 	else

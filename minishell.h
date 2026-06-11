@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 15:56:20 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/11 10:44:34 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,20 @@ typedef struct s_cmd
 	int				insert;
 }	t_cmd;
 
+typedef struct s_export
+{
+	char				*key;
+	char				*value;
+}	t_export;
+
 typedef struct s_shell
 {
 	t_cmd			**cmds;
+	t_export		*export_env;
 
 	char			**env;
 
+	int				export_count;
 	int				cmd_count;
 	int				exit_status;
 }	t_shell;
@@ -92,7 +100,11 @@ int		word_len(char *str);
 char	**ft_cd(char **args, char **env);
 int		ft_echo(char **args);
 int		ft_pwd(void);
-char	**ft_export(char **args, char **env);
+char	**ft_export(char **args, t_shell *shell);
+int		init_export_env(t_shell *shell);
+int		find_export(t_shell *shell, char *key);
+void	add_export_only(t_shell *shell, char *key);
+void	display_export(t_shell *shell);
 void	ft_env(char **env);
 char	**set_env(char **env, char *key, char *value);
 char	*get_env(char **env, char *key);
@@ -113,6 +125,7 @@ void	sort_line(char **split_line, t_shell *shell);
 void	free_cmds(t_shell *shell);
 void	free_pipeline(t_pipeline *pipeline);
 void	free_pipes(t_pipeline *pipeline);
+void	free_export_env(t_shell *shell);
 void	cleanup_child(t_shell *shell, char *path);
 void	close_all_heredocs(t_shell *shell);
 
