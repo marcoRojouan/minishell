@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/11 10:44:34 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/12 10:55:22 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	**set_env(char **env, char *key, char *value);
 char	*get_env(char **env, char *key);
 int		valid_key(char *key);
 int		check_key(char *key);
-char	**ft_unset(char **args, char **env);
+char	**ft_unset(char **args, char **env, t_shell *shell);
 int		ft_exit(char **args, t_shell *shell);
 
 char	*expand(char *elem, t_shell *shell);
