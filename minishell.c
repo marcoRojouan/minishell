@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/11 10:43:51 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/12 09:31:37 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,11 @@ static char	*prompt_making(void)
 
 static int	init_shell(t_shell *shell, char **envp)
 {
-	shell->cmds = NULL;
 	shell->env = copy_env(envp);
 	if (!shell->env)
 		return (0);
 	if (!init_export_env(shell))
 		return (0);
-	shell->exit_status = 0;
-	shell->cmd_count = 0;
 	return (1);
 }
 
