@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:38:57 by loup              #+#    #+#             */
-/*   Updated: 2026/06/11 10:46:26 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/11 11:55:21 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	display_var(t_export var)
 	if (var.value)
 		printf("declare -x %s=\"%s\"\n", var.key, var.value);
 	else
-		printf("declare -x %s\n", var.key);
+		printf("declare -x %s=''\n", var.key);
 }
 
 void	display_export(t_shell *shell)
