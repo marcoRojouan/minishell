@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 14:25:25 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/05/26 15:11:35 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/13 20:53:10 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	is_operator(const char *token)
 {
 	if (!token)
+		return (0);
+	if ((token[0] == '"' || token[0] == '\''))
 		return (0);
 	if (!ft_strcmp(token, "|"))
 		return (1);

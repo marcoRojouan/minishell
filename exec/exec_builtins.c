@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 16:45:23 by loup              #+#    #+#             */
-/*   Updated: 2026/06/12 10:54:40 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/13 18:42:43 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ int	exec_parent_builtin(t_shell *shell)
 int	exec_child_builtin(t_cmd *cmd, t_shell *shell)
 {
 	if (!cmd || !cmd->args || !cmd->args[0])
-		return (0);
+		return (-1);
 	if (ft_strcmp(cmd->args[0], "echo") == 0)
-		return (ft_echo(cmd->args), 1);
+		return (ft_echo(cmd->args), 0);
 	else if (ft_strcmp(cmd->args[0], "pwd") == 0)
-		return (ft_pwd(), 1);
+		return (ft_pwd(), 0);
 	else if (ft_strcmp(cmd->args[0], "env") == 0)
-		return (ft_env(shell->env), 1);
-	return (0);
+		return (ft_env(shell->env, cmd));
+	return (-1);
 }

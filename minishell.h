@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/12 10:55:22 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/13 20:59:14 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int		init_export_env(t_shell *shell);
 int		find_export(t_shell *shell, char *key);
 void	add_export_only(t_shell *shell, char *key);
 void	display_export(t_shell *shell);
-void	ft_env(char **env);
+int		ft_env(char **env, t_cmd *cmd);
 char	**set_env(char **env, char *key, char *value);
 char	*get_env(char **env, char *key);
 int		valid_key(char *key);
@@ -120,6 +120,7 @@ char	**copy_env(char **envp);
 void	expand_var(char *elem, char *res, t_idx *ctx, t_shell *shell);
 void	expand_status(char *res, t_idx *ctx, t_shell *shell);
 void	handle_quotes(char *elem, t_idx *ctx, int *in_single, int *in_double);
+void	remove_quotes_cmds(t_shell *shell);
 void	sort_line(char **split_line, t_shell *shell);
 
 void	free_cmds(t_shell *shell);

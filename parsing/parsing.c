@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:53:02 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/09 13:44:12 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/13 21:03:07 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	parsing(char *line, t_shell *shell)
 	if (!shell->cmds)
 		return (0);
 	sort_line(split_line, shell);
+	remove_quotes_cmds(shell);
 	ft_free_tab(split_line);
 	return (1);
 }

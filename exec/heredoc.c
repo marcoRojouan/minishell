@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 12:04:49 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 10:55:03 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/13 19:02:17 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	heredoc_child(t_shell *shell, int *pipefd, int i)
 	close(pipefd[1]);
 	free_cmds(shell);
 	ft_free_tab(shell->env);
+	free_export_env(shell);
 	if (g_signal == SIGINT)
 		exit(130);
 	exit(0);
