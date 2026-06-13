@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:45:37 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/13 20:56:14 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/13 21:17:07 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,16 @@ static void	expand_loop(char *elem, char *res, t_shell *shell)
 	in_double = 0;
 	while (elem[ctx.i])
 	{
-		//if (elem[ctx.i] == '\'' && !in_double)
-		//	handle_quotes(elem, &ctx, &in_single, &in_double);
-		//else if (elem[ctx.i] == '"' && !in_single)
 		if (elem[ctx.i] == '\'' && !in_double)
-			handle_quotes(elem, res, &ctx, &in_single, &in_double);
+		{
+			in_single = !in_single;
+			res[ctx.j++] = elem[ctx.i++];
+		}
 		else if (elem[ctx.i] == '"' && !in_single)
-			handle_quotes(elem, res, &ctx, &in_single, &in_double);
-			//handle_quotes(elem, &ctx, &in_single, &in_double);
+		{
+			in_double = !in_double;
+			res[ctx.j++] = elem[ctx.i++];
+		}
 		else if (elem[ctx.i] == '$' && !in_single && elem[ctx.i + 1] == '?')
 			expand_status(res, &ctx, shell);
 		else if (elem[ctx.i] == '$' && !in_single

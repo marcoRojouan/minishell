@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:05:10 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 15:39:08 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/13 18:34:43 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ static void	run_execve(t_cmd *cmd, t_shell *shell)
 
 void	exec_cmd(t_cmd *cmd, t_shell *shell)
 {
+	int	status;
+	
 	signal(SIGPIPE, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
@@ -89,10 +91,11 @@ void	exec_cmd(t_cmd *cmd, t_shell *shell)
 		exit(1);
 	}
 	setup_redirections(cmd, shell);
-	if (exec_child_builtin(cmd, shell))
+	status = exec_child_builtin(cmd, shell);
+	if (status >= 0)
 	{
 		cleanup_child(shell, NULL);
-		exit(0);
+		exit(status);
 	}
 	run_execve(cmd, shell);
 }

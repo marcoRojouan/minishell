@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:14:49 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 15:21:40 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/13 21:44:40 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ void	update_status(t_shell *shell)
 	g_signal = 0;
 }
 
-void	heredoc_sigint(int sig)
+void heredoc_sigint(int sig)
 {
-	(void)sig;
-	write(1, "\n", 1);
-	close(STDIN_FILENO);
-	g_signal = 130;
+    (void)sig;
+    write(1, "\n", 1);
+    close(STDIN_FILENO);
+    g_signal = SIGINT;
 }
-
 void	sigint_handler(int sig)
 {
 	(void)sig;

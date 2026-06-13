@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 12:04:49 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/10 10:55:03 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/13 21:41:24 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ static void	heredoc_child(t_shell *shell, int *pipefd, int i)
 	while (1)
 	{
 		line = readline("> ");
+		//if (g_signal == SIGINT)
+		if (g_signal == 130)
+			break ;
 		if (!line)
 			break ;
 		if (!ft_strcmp(line, shell->cmds[i]->delimiter))
@@ -36,6 +39,7 @@ static void	heredoc_child(t_shell *shell, int *pipefd, int i)
 	close(pipefd[1]);
 	free_cmds(shell);
 	ft_free_tab(shell->env);
+	free_export_env(shell);
 	if (g_signal == SIGINT)
 		exit(130);
 	exit(0);
@@ -52,7 +56,8 @@ static int	heredoc_parent(t_shell *shell, int *pipefd, pid_t pid, int i)
 	{
 		close(pipefd[0]);
 		shell->exit_status = 130;
-		g_signal = SIGINT;
+		//g_signal = SIGINT;
+		g_signal = 130;
 		return (0);
 	}
 	shell->cmds[i]->fd_heredoc = pipefd[0];
