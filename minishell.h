@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/12 10:55:22 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/13 21:05:00 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,10 @@ char	**copy_env(char **envp);
 
 void	expand_var(char *elem, char *res, t_idx *ctx, t_shell *shell);
 void	expand_status(char *res, t_idx *ctx, t_shell *shell);
-void	handle_quotes(char *elem, t_idx *ctx, int *in_single, int *in_double);
+void	remove_cmd_quotes(t_shell *shell);
+
+//void	handle_quotes(char *elem, t_idx *ctx, int *in_single, int *in_double);
+void	handle_quotes(char *elem, char *res, t_idx *ctx, int *in_single, int *in_double);
 void	sort_line(char **split_line, t_shell *shell);
 
 void	free_cmds(t_shell *shell);
