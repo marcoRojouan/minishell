@@ -20,6 +20,7 @@ SRCS =	minishell.c \
 		parsing/remove_quotes.c \
 		built_in/ft_echo.c \
 		built_in/ft_pwd.c \
+		built_in/cd_env_utils.c \
 		built_in/ft_cd.c \
 		built_in/ft_exit.c \
 		built_in/ft_export.c \

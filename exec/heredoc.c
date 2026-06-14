@@ -3,29 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 12:04:49 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/13 22:48:24 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/14 21:06:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	heredoc_child(t_shell *shell, int *pipefd, int i)
+//static void	heredoc_child(t_shell *shell, int *pipefd, int i)
+//{
+//	char	*line;
+
+//	signal(SIGINT, heredoc_sigint);
+//	signal(SIGQUIT, SIG_IGN);
+//	close(pipefd[0]);
+//	while (1)
+//	{
+//		line = readline("> ");
+//		if (g_signal == 130)
+//			break ;
+//		if (!line)
+//			break ;
+//		if (!ft_strcmp(line, shell->cmds[i]->delimiter))
+//		{
+//			free(line);
+//			break ;
+//		}
+//		write(pipefd[1], line, ft_strlen(line));
+//		write(pipefd[1], "\n", 1);
+//		free(line);
+//	}
+//	close(pipefd[1]);
+//	free_cmds(shell);
+//	ft_free_tab(shell->env);
+//	free_export_env(shell);
+//	if (g_signal == SIGINT)
+//		exit(130);
+//	exit(0);
+//}
+
+static void	read_heredoc(t_shell *shell, int *pipefd, int i)
 {
 	char	*line;
 
-	signal(SIGINT, heredoc_sigint);
-	signal(SIGQUIT, SIG_IGN);
-	close(pipefd[0]);
 	while (1)
 	{
 		line = readline("> ");
-		//if (g_signal == SIGINT)
-		if (g_signal == 130)
-			break ;
-		if (!line)
+		if (g_signal == 130 || !line)
 			break ;
 		if (!ft_strcmp(line, shell->cmds[i]->delimiter))
 		{
@@ -36,6 +62,14 @@ static void	heredoc_child(t_shell *shell, int *pipefd, int i)
 		write(pipefd[1], "\n", 1);
 		free(line);
 	}
+}
+
+static void	heredoc_child(t_shell *shell, int *pipefd, int i)
+{
+	signal(SIGINT, heredoc_sigint);
+	signal(SIGQUIT, SIG_IGN);
+	close(pipefd[0]);
+	read_heredoc(shell, pipefd, i);
 	close(pipefd[1]);
 	free_cmds(shell);
 	ft_free_tab(shell->env);
@@ -56,7 +90,6 @@ static int	heredoc_parent(t_shell *shell, int *pipefd, pid_t pid, int i)
 	{
 		close(pipefd[0]);
 		shell->exit_status = 130;
-		//g_signal = SIGINT;
 		g_signal = 130;
 		return (0);
 	}

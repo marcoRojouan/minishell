@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:45:37 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/13 21:17:07 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/14 21:16:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static int	handle_quotes(char *elem, char *res, t_idx *ctx,
+	int *in_single, int *in_double)
+{
+	if (elem[ctx->i] == '\'' && !(*in_double))
+	{
+		*in_single = !(*in_single);
+		res[ctx->j++] = elem[ctx->i++];
+		return (1);
+	}
+	if (elem[ctx->i] == '"' && !(*in_single))
+	{
+		*in_double = !(*in_double);
+		res[ctx->j++] = elem[ctx->i++];
+		return (1);
+	}
+	return (0);
+}
 
 static void	expand_loop(char *elem, char *res, t_shell *shell)
 {
@@ -24,17 +42,10 @@ static void	expand_loop(char *elem, char *res, t_shell *shell)
 	in_double = 0;
 	while (elem[ctx.i])
 	{
-		if (elem[ctx.i] == '\'' && !in_double)
-		{
-			in_single = !in_single;
-			res[ctx.j++] = elem[ctx.i++];
-		}
-		else if (elem[ctx.i] == '"' && !in_single)
-		{
-			in_double = !in_double;
-			res[ctx.j++] = elem[ctx.i++];
-		}
-		else if (elem[ctx.i] == '$' && !in_single && elem[ctx.i + 1] == '?')
+		if (handle_quotes(elem, res, &ctx, &in_single, &in_double))
+			continue ;
+		else if (elem[ctx.i] == '$' && !in_single
+			&& elem[ctx.i + 1] == '?')
 			expand_status(res, &ctx, shell);
 		else if (elem[ctx.i] == '$' && !in_single
 			&& (ft_isalnum(elem[ctx.i + 1])

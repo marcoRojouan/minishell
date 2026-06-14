@@ -3,133 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:30:37 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/13 22:00:44 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/14 21:04:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*get_env(char **env, char *key)
+static char	**update_pwd(char **env, char *old_pwd)
 {
-	int	i;
-	int	len;
+	char	*new_pwd;
 
-	i = 0;
-	len = ft_strlen(key);
-	while (env[i])
+	new_pwd = getcwd(NULL, 0);
+	if (old_pwd)
+		env = set_env(env, "OLDPWD", old_pwd);
+	if (new_pwd)
 	{
-		if (ft_strncmp(env[i], key, len) == 0 && env[i][len] == '=')
-			return (env[i] + len + 1);
-		i++;
+		env = set_env(env, "PWD", new_pwd);
+		free(new_pwd);
 	}
-	return (NULL);
+	return (env);
 }
 
-static char	**add_env(char **env, char *key, char *value, int i)
+static char	*get_cd_path(char **args, char **env, int *need_free)
 {
-	char	**new_env;
-	char	*new;
-
-	new_env = malloc(sizeof(char *) * (i + 2));
-	if (!new_env)
-		return (NULL);
-	i = 0;
-	while (env[i])
-	{
-		new_env[i] = env[i];
-		i++;
-	}
-	new = malloc(ft_strlen(key) + ft_strlen(value) + 2);
-	if (!new)
-		return (NULL);
-	ft_strcpy(new, key);
-	ft_strcat(new, "=");
-	ft_strcat(new, value);
-	new_env[i] = new;
-	new_env[i + 1] = NULL;
-	free(env);
-	return (new_env);
-}
-
-char	**set_env(char **env, char *key, char *value)
-{
-	int		i;
-	int		len;
-	char	*new;
-
-	i = 0;
-	if (!value)
-		return (env);
-	len = ft_strlen(key);
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], key, len) == 0
-			&& env[i][len] == '=')
-		{
-			new = malloc(len + ft_strlen(value) + 2);
-			if (!new)
-				return (NULL);
-			ft_strcpy(new, key);
-			ft_strcat(new, "=");
-			ft_strcat(new, value);
-			free(env[i]);
-			env[i] = new;
-			return (env);
-		}
-		i++;
-	}
-	return (add_env(env, key, value, i));
-}
-
-//static char	**update_pwd(char **env, char *old_pwd)
-//{
-//	char	*new_pwd;
-
-//	new_pwd = getcwd(NULL, 0);
-//	env = set_env(env, "OLDPWD", old_pwd);
-//	env = set_env(env, "PWD", new_pwd);
-//	free(new_pwd);
-//	return (env);
-//}
-static char **update_pwd(char **env, char *old_pwd)
-{
-    char *new_pwd;
-
-    new_pwd = getcwd(NULL, 0);
-    if (old_pwd)
-        env = set_env(env, "OLDPWD", old_pwd);
-    if (new_pwd)
-    {
-        env = set_env(env, "PWD", new_pwd);
-        free(new_pwd);
-    }
-    return (env);
-}
-char	**ft_cd(char **args, char **env)
-{
+	char	*home;
 	char	*path;
-	char	*old_pwd;
 
-	if (!args[1])
+	if (!args[1] || !ft_strcmp(args[1], "~"))
 		path = get_env(env, "HOME");
+	else if (!ft_strcmp(args[1], "-"))
+	{
+		path = get_env(env, "OLDPWD");
+		if (path)
+			printf("%s\n", path);
+	}
+	else if (args[1][0] == '~')
+	{
+		home = get_env(env, "HOME");
+		if (!home)
+			return (NULL);
+		path = ft_strjoin(home, args[1] + 1);
+		*need_free = 1;
+	}
 	else
 		path = args[1];
-	if (!path)
-	{
-		printf("HOME not set\n");
-		return (env);
-	}
+	return (path);
+}
+
+static char	**change_directory(char **env, char *path, int need_free)
+{
+	char	*old_pwd;
+
 	old_pwd = getcwd(NULL, 0);
 	if (chdir(path) != 0)
 	{
 		perror("cd");
 		free(old_pwd);
+		if (need_free)
+			free(path);
 		return (env);
 	}
 	env = update_pwd(env, old_pwd);
 	free(old_pwd);
+	if (need_free)
+		free(path);
 	return (env);
+}
+
+char	**ft_cd(char **args, char **env)
+{
+	char	*path;
+	int		need_free;
+
+	need_free = 0;
+	if (args[1] && args[2])
+	{
+		printf("cd: too many arguments\n");
+		return (env);
+	}
+	path = get_cd_path(args, env, &need_free);
+	if (!path)
+	{
+		if (args[1] && !ft_strcmp(args[1], "-"))
+			printf("cd: OLDPWD not set\n");
+		else
+			printf("cd: HOME not set\n");
+		return (env);
+	}
+	return (change_directory(env, path, need_free));
 }

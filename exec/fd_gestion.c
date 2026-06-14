@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 15:03:40 by loup              #+#    #+#             */
-/*   Updated: 2026/06/14 16:16:31 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/14 20:58:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,20 @@ void	close_all_heredocs(t_shell *shell)
 	}
 }
 
-//static void	setup_stdin(t_shell *shell, int **pipes, int i)
-//{
-//	if (i > 0)
-//		dup2(pipes[i - 1][0], STDIN_FILENO);
-//	else if (shell->cmds[i]->fd_heredoc != -1)
-//	{
-//		dup2(shell->cmds[i]->fd_heredoc, STDIN_FILENO);
-//		close(shell->cmds[i]->fd_heredoc);
-//		shell->cmds[i]->fd_heredoc = -1;
-//	}
-//}
-static void setup_stdin(t_shell *shell, int **pipes, int i)
+static void	setup_stdin(t_shell *shell, int **pipes, int i)
 {
-    if (shell->cmds[i]->fd_heredoc != -1)
-    {
-        dup2(shell->cmds[i]->fd_heredoc, STDIN_FILENO);
-        close(shell->cmds[i]->fd_heredoc);
-        shell->cmds[i]->fd_heredoc = -1;
-    }
-    else if (i > 0)
-    {
-        dup2(pipes[i - 1][0], STDIN_FILENO);
-    }
+	if (shell->cmds[i]->fd_heredoc != -1)
+	{
+		dup2(shell->cmds[i]->fd_heredoc, STDIN_FILENO);
+		close(shell->cmds[i]->fd_heredoc);
+		shell->cmds[i]->fd_heredoc = -1;
+	}
+	else if (i > 0)
+	{
+		dup2(pipes[i - 1][0], STDIN_FILENO);
+	}
 }
+
 void	fd_gestion(t_shell *shell, int **pipes, int i)
 {
 	int	j;

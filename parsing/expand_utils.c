@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 14:09:11 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/13 21:34:24 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/14 21:01:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,16 @@ static char	*get_var_value(char *start, int len, char**env)
 	return ("");
 }
 
-void	handle_quotes(
-	char *elem, char *res, t_idx *ctx,
-	int *in_single, int *in_double)
+void	handle_quotes(char *elem, char *res, t_idx *ctx, t_quote *quote)
 {
 	res[ctx->j++] = elem[ctx->i];
-	if (elem[ctx->i] == '\'' && !(*in_double))
-		*in_single = !(*in_single);
-	else if (elem[ctx->i] == '"' && !(*in_single))
-		*in_double = !(*in_double);
+	if (elem[ctx->i] == '\'' && !quote->in_double)
+		quote->in_single = !quote->in_single;
+	else if (elem[ctx->i] == '"' && !quote->in_single)
+		quote->in_double = !quote->in_double;
 	ctx->i++;
 }
+
 void	expand_var(char *elem, char *res, t_idx *ctx, t_shell *shell)
 {
 	char	*value;

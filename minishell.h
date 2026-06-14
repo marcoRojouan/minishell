@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/13 21:15:25 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/14 21:01:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ typedef struct s_pipeline
 	int		cmd_count;
 }	t_pipeline;
 
+typedef struct s_quote
+{
+	int	in_single;
+	int	in_double;
+}	t_quote;
+
 typedef struct s_context
 {
 	int	i;
@@ -107,6 +113,7 @@ void	add_export_only(t_shell *shell, char *key);
 void	display_export(t_shell *shell);
 int		ft_env(char **env, t_cmd *cmd);
 char	**set_env(char **env, char *key, char *value);
+char	**add_env(char **env, char *key, char *value, int i);
 char	*get_env(char **env, char *key);
 int		valid_key(char *key);
 int		check_key(char *key);

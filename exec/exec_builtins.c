@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 16:45:23 by loup              #+#    #+#             */
-/*   Updated: 2026/06/13 21:13:36 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/14 20:56:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ int	exec_child_builtin(t_cmd *cmd, t_shell *shell)
 		return (ft_pwd(), 0);
 	else if (ft_strcmp(cmd->args[0], "env") == 0)
 		return (ft_env(shell->env, cmd));
+	else if (ft_strcmp(cmd->args[0], "export") == 0)
+		return (ft_export(cmd->args, shell), 0);
 	return (-1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 20:54:44 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/13 21:00:25 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/14 21:09:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,44 +41,83 @@ static char	*remove_quotes(char *str)
 	return (res);
 }
 
+//void	remove_quotes_cmds(t_shell *shell)
+//{
+//	int		i;
+//	int		j;
+//	char	*tmp;
+
+//	i = 0;
+//	while (i < shell->cmd_count)
+//	{
+//		if (shell->cmds[i]->args)
+//		{
+//			j = 0;
+//			while (shell->cmds[i]->args[j])
+//			{
+//				tmp = remove_quotes(shell->cmds[i]->args[j]);
+//				free(shell->cmds[i]->args[j]);
+//				shell->cmds[i]->args[j] = tmp;
+//				j++;
+//			}
+//		}
+//		if (shell->cmds[i]->infile)
+//		{
+//			tmp = remove_quotes(shell->cmds[i]->infile);
+//			free(shell->cmds[i]->infile);
+//			shell->cmds[i]->infile = tmp;
+//		}
+//		if (shell->cmds[i]->outfile)
+//		{
+//			tmp = remove_quotes(shell->cmds[i]->outfile);
+//			free(shell->cmds[i]->outfile);
+//			shell->cmds[i]->outfile = tmp;
+//		}
+//		if (shell->cmds[i]->delimiter)
+//		{
+//			tmp = remove_quotes(shell->cmds[i]->delimiter);
+//			free(shell->cmds[i]->delimiter);
+//			shell->cmds[i]->delimiter = tmp;
+//		}
+//		i++;
+//	}
+//}
+static void	replace_str(char **str)
+{
+	char	*tmp;
+
+	tmp = remove_quotes(*str);
+	free(*str);
+	*str = tmp;
+}
+
+static void	remove_quotes_args(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+	{
+		replace_str(&args[i]);
+		i++;
+	}
+}
+
 void	remove_quotes_cmds(t_shell *shell)
 {
-	int		i;
-	int		j;
-	char	*tmp;
+	int	i;
 
 	i = 0;
 	while (i < shell->cmd_count)
 	{
 		if (shell->cmds[i]->args)
-		{
-			j = 0;
-			while (shell->cmds[i]->args[j])
-			{
-				tmp = remove_quotes(shell->cmds[i]->args[j]);
-				free(shell->cmds[i]->args[j]);
-				shell->cmds[i]->args[j] = tmp;
-				j++;
-			}
-		}
+			remove_quotes_args(shell->cmds[i]->args);
 		if (shell->cmds[i]->infile)
-		{
-			tmp = remove_quotes(shell->cmds[i]->infile);
-			free(shell->cmds[i]->infile);
-			shell->cmds[i]->infile = tmp;
-		}
+			replace_str(&shell->cmds[i]->infile);
 		if (shell->cmds[i]->outfile)
-		{
-			tmp = remove_quotes(shell->cmds[i]->outfile);
-			free(shell->cmds[i]->outfile);
-			shell->cmds[i]->outfile = tmp;
-		}
+			replace_str(&shell->cmds[i]->outfile);
 		if (shell->cmds[i]->delimiter)
-		{
-			tmp = remove_quotes(shell->cmds[i]->delimiter);
-			free(shell->cmds[i]->delimiter);
-			shell->cmds[i]->delimiter = tmp;
-		}
+			replace_str(&shell->cmds[i]->delimiter);
 		i++;
 	}
 }

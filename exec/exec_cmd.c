@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:05:10 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/13 23:05:16 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/14 20:57:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	run_execve(t_cmd *cmd, t_shell *shell)
 void	exec_cmd(t_cmd *cmd, t_shell *shell)
 {
 	int	status;
-	
+
 	signal(SIGPIPE, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);

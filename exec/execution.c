@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:14:27 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/13 22:54:01 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/14 20:55:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void	execution(t_shell *shell)
 	else
 		exec_pipeline(shell);
 	if (g_signal == 130)
-    g_signal = 0;
+		g_signal = 0;
 }
