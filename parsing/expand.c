@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:45:37 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/14 21:16:41 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/14 21:42:14 by loup             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 static int	handle_quotes(char *elem, char *res, t_idx *ctx,
-	int *in_single, int *in_double)
+	t_quote *quote)
 {
-	if (elem[ctx->i] == '\'' && !(*in_double))
+	if (elem[ctx->i] == '\'' && !quote->in_double)
 	{
-		*in_single = !(*in_single);
+		quote->in_single = !quote->in_single;
 		res[ctx->j++] = elem[ctx->i++];
 		return (1);
 	}
-	if (elem[ctx->i] == '"' && !(*in_single))
+	if (elem[ctx->i] == '"' && !quote->in_single)
 	{
-		*in_double = !(*in_double);
+		quote->in_double = !quote->in_double;
 		res[ctx->j++] = elem[ctx->i++];
 		return (1);
 	}
@@ -33,21 +33,20 @@ static int	handle_quotes(char *elem, char *res, t_idx *ctx,
 static void	expand_loop(char *elem, char *res, t_shell *shell)
 {
 	t_idx	ctx;
-	int		in_single;
-	int		in_double;
+	t_quote	quote;
 
 	ctx.i = 0;
 	ctx.j = 0;
-	in_single = 0;
-	in_double = 0;
+	quote.in_single = 0;
+	quote.in_double = 0;
 	while (elem[ctx.i])
 	{
-		if (handle_quotes(elem, res, &ctx, &in_single, &in_double))
+		if (handle_quotes(elem, res, &ctx, &quote))
 			continue ;
-		else if (elem[ctx.i] == '$' && !in_single
+		else if (elem[ctx.i] == '$' && !quote.in_single
 			&& elem[ctx.i + 1] == '?')
 			expand_status(res, &ctx, shell);
-		else if (elem[ctx.i] == '$' && !in_single
+		else if (elem[ctx.i] == '$' && !quote.in_single
 			&& (ft_isalnum(elem[ctx.i + 1])
 				|| elem[ctx.i + 1] == '_'))
 			expand_var(elem, res, &ctx, shell);
