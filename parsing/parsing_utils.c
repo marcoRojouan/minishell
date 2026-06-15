@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 14:25:25 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/13 20:53:10 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/15 14:23:54 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,13 @@ int	is_quote_closed(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == '\'')
+		if (line[i] == '\'' && !in_double)
 			in_single = !in_single;
-		else if (line[i] == '"')
+		else if (line[i] == '"' && !in_single)
 			in_double = !in_double;
 		i++;
 	}
-	if (in_single || in_double)
-		return (0);
-	return (1);
+	return (!in_single && !in_double);
 }
 
 int	is_in_order(char **split_line)
