@@ -3,46 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 12:04:49 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/14 21:06:04 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/15 13:28:55 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-//static void	heredoc_child(t_shell *shell, int *pipefd, int i)
-//{
-//	char	*line;
-
-//	signal(SIGINT, heredoc_sigint);
-//	signal(SIGQUIT, SIG_IGN);
-//	close(pipefd[0]);
-//	while (1)
-//	{
-//		line = readline("> ");
-//		if (g_signal == 130)
-//			break ;
-//		if (!line)
-//			break ;
-//		if (!ft_strcmp(line, shell->cmds[i]->delimiter))
-//		{
-//			free(line);
-//			break ;
-//		}
-//		write(pipefd[1], line, ft_strlen(line));
-//		write(pipefd[1], "\n", 1);
-//		free(line);
-//	}
-//	close(pipefd[1]);
-//	free_cmds(shell);
-//	ft_free_tab(shell->env);
-//	free_export_env(shell);
-//	if (g_signal == SIGINT)
-//		exit(130);
-//	exit(0);
-//}
 
 static void	read_heredoc(t_shell *shell, int *pipefd, int i)
 {
@@ -107,7 +75,9 @@ static int	run_heredoc(t_shell *shell, int i)
 	pid = fork();
 	if (pid == 0)
 		heredoc_child(shell, pipefd, i);
-	return (heredoc_parent(shell, pipefd, pid, i));
+	if (!heredoc_parent(shell, pipefd, pid, i))
+		return (0);
+	return (1);
 }
 
 int	prepare_heredoc(t_shell *shell)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_env_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loup <loup@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/14 21:28:21 by loup              #+#    #+#             */
-/*   Updated: 2026/06/14 21:28:21 by loup             ###   ########.fr       */
+/*   Created: 2026/06/15 13:51:21 by malavaud          #+#    #+#             */
+/*   Updated: 2026/06/15 13:51:21 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ static char	**replace_env(char **env, char *key, char *value, int i)
 
 char	**set_env(char **env, char *key, char *value)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
+	char	**result;
 
 	i = 0;
 	if (!value)
@@ -84,8 +85,12 @@ char	**set_env(char **env, char *key, char *value)
 	{
 		if (ft_strncmp(env[i], key, len) == 0
 			&& env[i][len] == '=')
-			return (replace_env(env, key, value, i));
+		{
+			result = replace_env(env, key, value, i);
+			return (result);
+		}
 		i++;
 	}
-	return (add_env(env, key, value, i));
+	result = add_env(env, key, value, i);
+	return (result);
 }
