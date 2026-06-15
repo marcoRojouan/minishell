@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:43:59 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/08 15:45:59 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/15 14:31:18 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*duplicate_wrd(char *str)
 	return (dup);
 }
 
-static void	skip_word(char *str, t_idx *idx)
+void	skip_word(char *str, t_idx *idx)
 {
 	int	in_single;
 	int	in_double;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/15 13:53:53 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/15 14:31:37 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int		prepare_heredoc(t_shell *shell);
 int		white_space(char c);
 int		count_words(char *str);
 int		word_len(char *str);
+void	skip_word(char *str, t_idx *idx);
 
 char	**ft_cd(char **args, char **env);
 int		ft_echo(char **args);

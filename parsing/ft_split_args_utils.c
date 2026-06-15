@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:48:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/13 23:30:56 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/15 14:30:28 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,44 @@ int	white_space(char c)
 	return (0);
 }
 
+// int	count_words(char *str)
+// {
+// 	int	i;
+// 	int	count;
+// 	int	in_quotes;
+
+// 	i = 0;
+// 	count = 0;
+// 	in_quotes = 0;
+// 	if (!str || !str[0])
+// 		return (0);
+// 	while (str[i])
+// 	{
+// 		if (!white_space(str[i])
+// 			&& (i == 0 || (white_space(str[i - 1]) && !in_quotes)))
+// 			count++;
+// 		if (str[i] == '"' || str[i] == '\'')
+// 			in_quotes = !in_quotes;
+// 		i++;
+// 	}
+// 	return (count);
+// }
+
 int	count_words(char *str)
 {
-	int	i;
-	int	count;
-	int	in_quotes;
+	t_idx	idx;
+	int		count;
 
-	i = 0;
+	idx.i = 0;
 	count = 0;
-	in_quotes = 0;
-	if (!str || !str[0])
-		return (0);
-	while (str[i])
+	while (str[idx.i])
 	{
-		if (!white_space(str[i])
-			&& (i == 0 || (white_space(str[i - 1]) && !in_quotes)))
-			count++;
-		if (str[i] == '"' || str[i] == '\'')
-			in_quotes = !in_quotes;
-		i++;
+		while (str[idx.i] && white_space(str[idx.i]))
+			idx.i++;
+		if (!str[idx.i])
+			break ;
+		count++;
+		skip_word(str, &idx);
 	}
 	return (count);
 }
