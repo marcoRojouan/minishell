@@ -6,7 +6,7 @@
 #    By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/15 13:53:39 by malavaud          #+#    #+#              #
-#    Updated: 2026/06/15 13:53:41 by malavaud         ###   ########.fr        #
+#    Updated: 2026/06/15 17:01:30 by malavaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS =	minishell.c \
 		parsing/expand.c \
 		parsing/expand_utils.c \
 		parsing/copy_env.c \
+		parsing/sort_line_utils.c \
 		parsing/remove_quotes.c \
 		built_in/ft_echo.c \
 		built_in/ft_pwd.c \

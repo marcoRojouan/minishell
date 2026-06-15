@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:14:46 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/13 18:07:42 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/15 17:06:38 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static int	args_handler(t_context *ctx, char **split_line, t_shell *shell)
 	return (1);
 }
 
-static int	redirect_handler(t_context *ctx, char **split_line, t_shell *shell)
+static int	redirect_handler(t_context *ctx, char **split_line,
+		t_shell *shell)
 {
 	if (!split_line[ctx->i + 1])
 		return (0);
@@ -64,13 +65,7 @@ static int	redirect_handler(t_context *ctx, char **split_line, t_shell *shell)
 	}
 	else if (!ft_strcmp(split_line[ctx->i], ">>")
 		|| !ft_strcmp(split_line[ctx->i], ">"))
-	{
-		if (!ft_strcmp(split_line[ctx->i], ">>"))
-			shell->cmds[ctx->j]->insert = 1;
-		shell->cmds[ctx->j]->outfile = ft_strdup(split_line[++ctx->i]);
-		if (!shell->cmds[ctx->j]->outfile)
-			return (0);
-	}
+		return (handle_output_redirect(ctx, split_line, shell));
 	else if (!ft_strcmp(split_line[ctx->i], "<"))
 	{
 		shell->cmds[ctx->j]->infile = ft_strdup(split_line[++ctx->i]);

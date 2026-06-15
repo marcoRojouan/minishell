@@ -6,7 +6,7 @@
 /*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:20:33 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/13 22:53:24 by malavaud         ###   ########.fr       */
+/*   Updated: 2026/06/15 15:26:54 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	process_line(char *line, t_shell *shell)
 	signal(SIGINT, SIG_IGN);
 	if (!parsing(line, shell))
 	{
+		shell->exit_status = 2;
 		free_cmds(shell);
 		return ;
 	}

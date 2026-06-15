@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malavaud <malavaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 11:00:52 by mrojouan          #+#    #+#             */
-/*   Updated: 2026/06/15 14:31:37 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/15 17:05:24 by malavaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int		ft_exit(char **args, t_shell *shell);
 char	*expand(char *elem, t_shell *shell);
 char	**ft_split_args(char *str, t_shell *shell);
 char	**copy_env(char **envp);
+int		handle_output_redirect(t_context *ctx, char **split_line, t_shell *shell);
 
 void	expand_var(char *elem, char *res, t_idx *ctx, t_shell *shell);
 void	expand_status(char *res, t_idx *ctx, t_shell *shell);
