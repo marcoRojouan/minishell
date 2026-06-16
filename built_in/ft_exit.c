@@ -6,7 +6,7 @@
 /*   By: mrojouan <mrojouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 13:51:48 by malavaud          #+#    #+#             */
-/*   Updated: 2026/06/16 10:48:14 by mrojouan         ###   ########.fr       */
+/*   Updated: 2026/06/16 10:54:21 by mrojouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	is_numeric(char *str)
 		i++;
 		if (!str[i])
 			return (0);
-	}	
+	}
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
@@ -72,8 +72,8 @@ static void	exit_shell(t_shell *shell, int status)
 
 int	ft_exit(char **args, t_shell *shell)
 {
-	int	status;
-	long long value;
+	int			status;
+	long long	value;
 
 	printf("exit\n");
 	if (!args[1])
